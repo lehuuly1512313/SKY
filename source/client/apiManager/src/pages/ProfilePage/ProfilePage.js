@@ -19,6 +19,32 @@ class ProfilePage extends Component{
     this.handlenumofbank = this.handlenumofbank.bind(this);
     this.edit = this.edit.bind(this);
     this.changeAvatar = this.changeAvatar.bind(this);
+
+    var numofbank = "";
+    var check = false;
+    var id = localStorage.getItem("ID");
+    var icon = "";
+    var color = "";
+    this.props.data.map(value=>{
+      if(id === value.id.toString())
+      {
+        numofbank = value.numofbank;
+        return;
+      }
+    })
+
+    this.props.banks.map(value=>{
+      if(numofbank === value.Cardnum)
+      {
+        check = true;
+        icon= "fa fa-check-circle-o";
+        color= "green";
+        return;
+      }
+    })
+
+
+
     this.state = {
       laccount :JSON.parse(localStorage.getItem('laccount')) || [],
       lpassword: JSON.parse(localStorage.getItem('lpassword')) || [],
@@ -36,9 +62,9 @@ class ProfilePage extends Component{
       handleoldpassword: "",
       handleconfirmnewpassword: "",
       notifycation: "",
-      check: false,
-      icon: "fa fa-check-circle-o",
-      color: "green",
+      check,
+      icon,
+      color,
     };
   }
   componentWillMount() {
@@ -124,8 +150,7 @@ class ProfilePage extends Component{
       else
       {
         alert("Chúng tôi không tìm thấy số tài khoản của bạn! xin vui lòng kiểm tra lại");
-      }
-      
+      }    
 }
     handleUsername(e)
     {
@@ -172,11 +197,13 @@ class ProfilePage extends Component{
     
    
     onChangeHandler = e =>{
-      var file = e.target.files[0];
-      var path = URL.createObjectURL(file)
+    let reader = new FileReader();
+    reader.onload = (e) => {
       this.setState({
-        avatar: path
+        avatar: e.target.result
       })
+    };
+    reader.readAsDataURL(event.target.files[0]);
     }
 
     profile = ()=>{

@@ -160,6 +160,17 @@ class API {
       console.log(err);
     })
   }
+
+  avatar = ()=>{
+    return axios
+    .get("http://localhost:4000/avatar")
+    .then(res=>{
+      return res.data
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
 }
 
 

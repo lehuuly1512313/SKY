@@ -26,7 +26,7 @@ class About extends Component{
                       architecto, hic alias quia quisquam, obcaecati laborum dolores. Ex libero cumque veritatis numquam placeat?</p>
                   </div>
                 </div>
-              </div> --&gt;
+              </div>
               <div className="site-section">
                 <div className="container">
                   <div className="row mb-5">
