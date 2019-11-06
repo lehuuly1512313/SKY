@@ -11,7 +11,6 @@ class CreateKey extends Component{
     this.create = this.create.bind(this);
     this.dashboard = this.dashboard.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    //this.check = this.check.bind(this);
     this.handleCountry = this.handleCountry.bind(this);
     this.handlebank = this.handlebank.bind(this);
     this.inputcard = this.inputcard.bind(this);
@@ -54,7 +53,6 @@ class CreateKey extends Component{
       copied: false,
       name : "",
       select: "Free Trial",
-      //check: false,
       Country,
       Bank,
       check,
@@ -152,17 +150,20 @@ class CreateKey extends Component{
 
   handlebank(e)
   {
-    this.setState({Bank: e.target.value});
+    this.setState({
+      Bank: e.target.value,
+      check: ""
+    });
+    this.state.banks.map(value=>{
+      if(this.state.card === value.Cardnum && value.Name === e.target.value)
+      {
+        this.setState({
+          check: "Corect"
+        })
+        return;
+      }
+    })  
   }
-
-  // async check(e)
-  // {
-  //   var ch = this.state.check;
-  //   var cb = !ch;
-  //   await this.setState({check: cb});
-  //   console.log(this.state.check);
-  // }
-
 
 create = async () =>{
   var userid = "";

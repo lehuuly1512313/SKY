@@ -116,7 +116,7 @@ class Dashboard extends Component{
                     History
               </span>
               <div class="row">
-                <div class="col-sm-3"><span className="label-input100">Last date:</span></div>
+                <div class="col-sm-3"><span className="label-input100">Last time:</span></div>
                 <div class="col-sm-4">{this.state.last}</div>
               </div>
               <div style = {{paddingTop: "10px", paddingBottom: "10px"}}>

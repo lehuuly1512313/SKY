@@ -17,7 +17,6 @@ import NewSignUp from "./pages/SignUpPage/NewSignUp";
 import NewSignIn from "./pages/LoginPage/NewSignIn";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
-import ChangePassword from "./pages/ChangePassword/ChangePassword"
 
 
 
