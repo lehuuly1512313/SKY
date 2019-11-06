@@ -164,7 +164,7 @@ class NewSignUp extends Component{
        Object.entries(datapost).map(([key,val],i)=>{
         api.postData(val).then( response =>{
           localStorage.setItem("move", true)
-          window.location.reload()
+          window.location.reload();
         })
        
       }) 

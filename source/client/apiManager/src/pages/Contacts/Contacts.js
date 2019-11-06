@@ -34,6 +34,7 @@ class Contacts extends Component {
             email: value.email,
             avatar: value.avatar
           })
+          return;
         }
     })
 
@@ -95,6 +96,10 @@ class Contacts extends Component {
           })
         }
       })
+
+      setTimeout(() => {
+        this.setState({complete: ""})
+      }, 2000);
 
     }
 

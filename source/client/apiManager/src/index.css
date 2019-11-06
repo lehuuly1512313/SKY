@@ -1642,3 +1642,31 @@ img{
     grid-column: 1/10;
   }
 }
+
+
+.chapterTitle
+{
+  color: #333;
+  text-decoration: none;
+  font-weight: bolder;
+  border-bottom: 1px solid transparent;
+  -webkit-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+ 
+}
+
+.chapterTitle:hover
+{
+  color: #333;
+  border-bottom: 1px solid black;
+}
+
+
+.chapterSummary {
+  margin: 0 0 3rem;
+  font-size: 16px!important;
+  line-height: 1.8!important;
+  font-style: inherit;
+}
+

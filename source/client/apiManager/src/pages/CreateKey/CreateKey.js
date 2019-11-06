@@ -97,6 +97,7 @@ class CreateKey extends Component{
             phone: value.phone,
             card: value.numofbank
           })
+          return;
         }
       })
   }

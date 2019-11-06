@@ -83,6 +83,7 @@ class ProfilePage extends Component{
             avatar: value.avatar,
             numofbank: value.numofbank
           })
+          return;
         }
       })
 
@@ -180,7 +181,8 @@ class ProfilePage extends Component{
       this.setState({numofbank: e.target.value})
       this.setState({
         icon: "fa fa-times-circle-o",
-        color: "red"
+        color: "red",
+        check: false,
       })
       this.state.banks.map(value=>{
         if(e.target.value === value.Cardnum)
@@ -190,6 +192,7 @@ class ProfilePage extends Component{
             icon: "fa fa-check-circle-o",
             color: "green"
           })
+          return;
         }
       })
     }
@@ -261,6 +264,7 @@ class ProfilePage extends Component{
         {
           check = true;
           id = value.id;
+          return;
         }
       })
       if(check)

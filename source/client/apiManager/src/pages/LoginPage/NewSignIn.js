@@ -47,6 +47,7 @@ class NewSignIn extends Component{
         {
           check = '1';
           id = value.id;
+          return;
         }
       })
       if(check === '0')

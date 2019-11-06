@@ -48,6 +48,7 @@ class ForgetPassword extends Component{
         if(value.email === this.state.email && value.account === this.state.account)
         {
             check = true;
+            return;
         }
       })
 
@@ -68,6 +69,7 @@ class ForgetPassword extends Component{
         if(this.state.account === value.account)
         {
           id = value.id;
+          return;
         }
       })
       api.forgotpassword(data).then(response =>{
