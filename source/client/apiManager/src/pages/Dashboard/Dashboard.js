@@ -345,7 +345,7 @@ class Dashboard extends Component{
          if(this.state.length === 0)
          {
            return(
-            <div style = {{width: "60%", marginLeft:"20%", border: "1px solid black",marginTop: "20px", padding: "10px 50px 10px 50px", borderRadius: "25px"}}>
+            <div style = {{width: "60%", marginLeft:"20%",boxShadow: "5px 5px 5px #666",background: "#eee",marginTop: "20px", padding: "10px 50px 10px 50px"}}>
               <div style = {{textAlign: "center"}}>
                 <div><img class="navigation-image" src="//cdn.jotfor.ms/assets/img/memberkit/user_guide_images/f1.png?v=0.2" style = {{width: "100px", height:"100px"}} alt="Getting Started with JotForm Podo"/></div>
                 <div style = {{fontSize:"16px"}}>SOA User Guide / Getting Started with SOA</div>
