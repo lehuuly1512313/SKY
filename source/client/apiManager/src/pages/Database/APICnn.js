@@ -71,22 +71,9 @@ class API {
 
   postData = (data)=>{
     return axios
-    .post('http://localhost:4000/users',
-    {
-      id: 0,
-      account : data.account,
-      password: data.password,
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      avatar: data.avatar
-    })
-    .then(function(response){
-      if (response.status === 201 && response != null) {
-       console.log('created');
-      } else {
-        throw new Error('Empty data')
-      }
+    .post('http://localhost:4000/users',data)
+    .then(res=>{
+      return res.data;
     })
     .catch(function (error) {
       console.log(error);

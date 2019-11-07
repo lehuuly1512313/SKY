@@ -14,9 +14,6 @@ class NewSignUp extends Component{
     this.handlemail = this.handlemail.bind(this);
     this.handlephone = this.handlephone.bind(this);
     this.SignUp = this.SignUp.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
-    this.back = this.back.bind(this);
-    this.confirm = this.confirm.bind(this);
     this.handleinput = this.handleinput.bind(this);
     this.timer = 0;
     
@@ -28,14 +25,10 @@ class NewSignUp extends Component{
       lemail: null,
       lphone: null,
       select: "Email",
-      redirect:  JSON.parse(localStorage.getItem('redirect')) || false,
+      redirect:  false,
       cheackusername: null,
-      dataget:this.props.data,
-      modal: false,
-      code: this.randomkey(),
-      recode: "",
-      seconds: 10,
-      msg: null,
+      data:this.props.data,
+      notifycation: ""
     };
   }
 
@@ -69,29 +62,17 @@ class NewSignUp extends Component{
     this.setState({lphone: e.target.value});
   }
 
-  handleSelect(e)
-  {
-      this.setState({select: e.target.value});
-  }
-
   handleinput(e){
     this.setState({recode: e.target.value})
   }
 
-  s4 = ()=>{
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-  }
 
-  randomkey = ()=>
-  {
-    return this.s4();
-  }
 
   SignUp = ()=>
   {
     var check = false;
     var {laccount,lpassword,lrepassword,lfullname,lemail,lphone} = this.state;
-    Object.entries(this.state.dataget).map(([key,value],index)=>{
+    Object.entries(this.state.data).map(([key,value],index)=>{
       if(value.account === this.state.laccount)
       {
         check = true;
@@ -111,144 +92,48 @@ class NewSignUp extends Component{
     }
     else
     {
-
-      this.setState({
-        seconds: 10
-    })
-    this.timer = setInterval(()=>{
-    let seconds = this.state.seconds - 1;
-    this.setState({
-      seconds
-    });
-    if(seconds === 0)
-    {
-        clearInterval(this.timer);
-    }
-    }, 1000);
-      var data = {
-        code: this.state.code,
-        email: this.state.lemail,
-        contain: "Đây là code của bạn để xác thực tài khoản: "
+    this.setState(
+      {
+        notifycation: "Check your email",
       }
-      api.SendMail(data).then(res=>{
-        console.log(res);
-        
-      })
-      this.setState({
-        modal: true
-      });
+    )
+    var data = {
+      msg: "waiting",
+      email: this.state.lemail,
     }
-  }
-
-  back = ()=>{
-    this.setState({
-      modal: false
-    })
-  }
-
-  confirm =  ()=>{
-    var {code, recode} = this.state;
-    if(code === recode)
-    {
-      var {laccount,lpassword,lfullname,lemail,lphone} = this.state;
-      var datapost = [
-        {
+    var {laccount,lpassword,lfullname,lemail,lphone} = this.state;
+    api.postData(data).then(response =>{
+      if(response === "sent") 
+      {
+      var key = {
+          method: "register",
           account: laccount,
           password: lpassword,
           name: lfullname,
           email: lemail,
           phone: lphone,
           avatar: "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg"
-        }
-      ]
-       Object.entries(datapost).map(([key,val],i)=>{
-        api.postData(val).then( response =>{
-          localStorage.setItem("move", true)
+      }
+      api.postData(key).then(res=>{
+        if(res === "successfully")
+        {
+          this.setState({
+            redirect: true
+          })
           window.location.reload();
-        })
-       
-      }) 
-      
+        }
+      })
+    
     }
-    else
-    {
-      alert("mã xác nhận của bạn không chính xác! vui lòng kiểm tra lại email");
+    })    
     }
   }
-
-  componentWillMount(){
-    window.scrollTo(0, 0);
-  }
-
-  RenderModal = ()=>{
-
-      const backdropStyle = {
-        position: 'fixed',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: 'rgba(24, 23, 23, 0.308)',
-        padding: 50
-      };
-      var notification = null;
-      if(this.state.seconds === 0)
-      {
-        notification = (
-          <div><label className = "notification">Check you email and then enter code you recived</label></div>
-        )
-      }
-      else
-      {
-        notification = (
-          <div>
-                  <div class="row">
-                    <div class="col-sm-6"> <label>{"Please waiting "}<label className = "timer-span">{this.state.seconds}</label></label> <label> for sendMail</label></div>
-                  </div>
-            </div>
-        )
-      }
-      return(
-        <div id="modal-id" style={backdropStyle}>
-          <div class="modal-dialog" >
-            <div class="modal-content">
-              
-              <div class="modal-body">
-              <span className="login100-form-title p-b-59" style = {{textAlign :"center",fontSize: "20px"}}>
-                    Verify your account
-              </span>
-             {notification}
-              <div className="wrap-input100 validate-input" data-validate="Name is required">
-                    <span className="label-input100">Your code</span>
-                    <input className="input100" type="text" name="name" placeholder="Code..." style = {{fontSize: "20px"}} onChange = {this.handleinput}/>
-                    <span className="focus-input100" />
-                  </div>
-              </div>
-              <div class="row" style = {{
-                textAlign: "center",
-                paddingBottom : "50px"
-                }}>
-                  {/* {this.RedirectRender()} */}
-                <div class="col-sm-6"> <button type="button" class="btn btn-default" style = {{width :"80%", marginTop: "10px"}} onClick = {this.back}>Back</button></div>
-                <div class="col-sm-6"><button type="button" class="btn btn-primary" style = {{width :"80%", marginTop: "10px"}} onClick = {this.confirm}>Confirm</button></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      )
-  }
-
 
     render(){
-        if(localStorage.getItem("move"))
-        {
+      if(this.state.redirect)
+      {
         return <Redirect to = '/'></Redirect>
-        }
-        if(this.state.modal)
-        {
-          return<div>{this.RenderModal()}</div>
-        }
+      }
         return(
           <div>
             <div className="limiter">
@@ -288,7 +173,10 @@ class NewSignUp extends Component{
                     <span className="label-input100">Repeat Password</span>
                     <input className="input100" type="password" name="repeat-pass" placeholder="*************"  onChange = {this.handleUConfirmPassword} value = {this.state.lrepassword}/>
                     <span className="focus-input100" />
-                  </div>   
+                  </div>  
+                  <div>
+                    <label style = {{color: "green"}}>{this.state.notifycation}</label>
+                  </div> 
                   <div className="container-login100-form-btn">
                     <div className="wrap-login100-form-btn">
                       <div className="login100-form-bgbtn" />

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Chart from './Chart';
 import API from '../../pages/Database/APICnn';
 import {Link} from "react-router-dom";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 const api = new API();
 
 class Dashboard extends Component{
@@ -203,7 +204,12 @@ class Dashboard extends Component{
 
           )
       }
+
       
+      move = ()=>
+      {
+        localStorage.setItem("component", "create-key");
+      }
 
       handleinput(e){
         this.setState({recode: e.target.value})
@@ -299,8 +305,11 @@ class Dashboard extends Component{
                     <td>{value.start}</td>
                     <td>{value.count}</td>
                     <td>
-                    <button type = "button" class="fa fa-eye fa-lg" value = {value.id} onClick = {this.vieclick} data-toggle="modal" href='#modal-id-view'></button>
-                      <button type = "button" class="fa fa-trash-o fa-lg" value = {value.id} onClick = {this.delclick} data-toggle="modal" href='#modal-id'></button>
+                    <CopyToClipboard text={value.value}>
+                      <button type="button" class="fa fa-clone fa-lg" ></button>
+                    </CopyToClipboard>
+                    <button type="button" class="fa fa-eye fa-lg" value={value.id} onClick={this.vieclick} data-toggle="modal" href='#modal-id-view'></button>
+                    <button type="button" class="fa fa-trash-o fa-lg" value={value.id} onClick={this.delclick} data-toggle="modal" href='#modal-id'></button>
                    </td> 
                 </tr>
             )
@@ -346,7 +355,9 @@ class Dashboard extends Component{
             <a class="chapterTitle" href="https://www.jotform.com/help/2-How-to-Create-Your-First-Web-Form">How to create a Key</a>
             </h2>
             <p class="chapterSummary">
-            First-time SOA users often ask how to create a simple web form, how to set up Email Notifications, how to embed a form on a website, how to test the form to see if it's working, and how to view responses in email and JotForm Inbox.&amp;nbsp;Got a... </p> <h2>
+            First-time SOA users often ask how to create a simple web form, how to set up Email Notifications, how to embed a form on a website, how to test the form to see if it's working, and how to view responses in email and JotForm Inbox.&amp;nbsp;Got a... or <Link to = "/create-key" onClick = {this.move}>Click here to get started</Link></p> 
+            
+            <h2>
             <a class="chapterTitle" href="https://www.jotform.com/help/526-How-to-Change-the-Username">How to change the password?</a>
             </h2>
             <p class="chapterSummary">

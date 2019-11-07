@@ -52,7 +52,7 @@ class CreateKey extends Component{
       key: "yourkey",
       copied: false,
       name : "",
-      select: "Free Trial",
+      select: localStorage.getItem("create"),
       Country,
       Bank,
       check,
@@ -293,8 +293,18 @@ dashboard = ()=>{
           <div className="inner-wrap">
             <label style={{color: "black"}}>Your Full Name <input type="text" name="field1" value = {name} readOnly /></label>
             <label style={{color: "black"}}>Your Company <input type="text" name="field1" value = {this.state.company} onChange = {this.handleCompany}/></label>
+            <label style={{color: "black"}}>Your Position <input type="text" name="field1" value = {this.state.company} onChange = {this.handleCompany}/></label>
          </div>
-          <div className="section"><span>2</span>Credit Card &amp; Paypal</div>
+         <div className="section"><span>2</span>Pupose </div>
+          <div className="inner-wrap">
+          <select style = {{outline: "none"}}>
+                <option value="Study">Study</option>
+                <option value="Trial">Trial</option>
+                <option value="Business">Business</option>
+                
+          </select>
+          </div>
+          <div className="section"><span>3</span>Credit Card &amp; Paypal</div>
           <div className="inner-wrap">
           <label style={{color: "black"}}>Country
           <select style = {{outline: "none"}} value={this.state.Country} onChange={this.handleCountry}>
@@ -309,23 +319,24 @@ dashboard = ()=>{
           </label>
             <label  style={{color: "black"}}>Card Number{"   "} <label style = {{color: this.state.color}}>{this.state.check}</label> <input  style={{color: "black"}} type="text" name="field4" value={this.state.card} onChange={this.inputcard}/></label>
           </div>
-          <div className="section"><span>3</span>Email or Phone number to comfirm</div>
+          <div className="section"><span>4</span>Email or Phone number to comfirm</div>
           <div className="inner-wrap">
             <label  style={{color: "black"}}>Your email <input type="email" name="field5"  value ={email} readOnly/></label>
             <label  style={{color: "black"}}>Your phone number<input type="text" name="field6" value = {this.state.phone} onChange = {this.handlePhone}/></label>
           </div>
-          <div className="section"><span>4</span>Pick package you want trial </div>
+          <div className="section"><span>2</span>Pick package you want trial </div>
           <div className="inner-wrap">
           <select style = {{outline: "none"}} onChange={this.handleSelect} value={this.state.select}>
-                <option value="Free Trial">Free Trial</option>
-                <option value="1 Mounth">1 Mounth (0.25 $)</option>
-                <option value="3 Mounth">3 Mounth (0.5 $)</option>
-                <option value="6 Mounth">6 Mounth (1 $)</option> 
-                <option value="9 Mounth">9 Mounth (2 $)</option>
-                <option value="12 Mounth">12 Mounth (5 $)</option>
-                <option value="Unlimited">Unlimited</option> 
+                <option value="Free">Free Trial</option>
+                <option value="1 Month">1 Months (1 $)</option>
+                <option value="3 Months">3 Months (2.5 $)</option>
+                <option value="6 Months">6 Months (5 $)</option> 
+                <option value="9 Months">9 Months (7 $)</option>
+                <option value="12 Months">12 Months (9 $)</option>
+                <option value="Unlimited">Unlimited ($1/1000)</option> 
           </select>
           </div>
+
           <div className="button-section">
             <input type="button" value = "Create" name="Sign Up"  class="btn btn-primary" onClick = {this.create} data-toggle="modal" href="#modal-id"/>
           </div>

@@ -12,8 +12,7 @@ class Menu extends Component{
         super(props);
         var about = window.location.pathname === "/about"? "alway actived":"alway";
         var Contacts = window.location.pathname === "/contacts"? "alway actived":"alway";
-        var Resources = window.location.pathname === "/products"? "alway actived":"alway";
-        var Create_Key = window.location.pathname === "/create-key"? "alway actived":"alway";
+        var Resources = (window.location.pathname === "/products" || window.location.pathname === "/create-key")? "alway actived":"alway";
         var products = window.location.pathname === "/introduce"? "alway actived":"alway";
         var docs = window.location.pathname === "/docs"? "alway actived":"alway";
         this.state = {
@@ -25,7 +24,7 @@ class Menu extends Component{
           redirect: false,
           data: this.props.data,
           products,
-          Create_Key,
+        
           Resources,
           Contacts,
           about,
@@ -56,17 +55,7 @@ class Menu extends Component{
     products = ()=>{
         this.setState({
             products: "alway actived",
-          Create_Key: "alway",
-          Resources: "alway",
-          Contacts: "alway",
-          about: "alway",
-          docs: "alway"
-        })
-    }
-    Create_Key = ()=>{
-        this.setState({
-            products: "alway",
-          Create_Key: "alway actived",
+          
           Resources: "alway",
           Contacts: "alway",
           about: "alway",
@@ -77,7 +66,7 @@ class Menu extends Component{
     Resources = ()=>{
         this.setState({
             products: "alway",
-          Create_Key: "alway",
+          
           Resources: "alway actived",
           Contacts: "alway",
           about: "alway",
@@ -88,7 +77,7 @@ class Menu extends Component{
     Contacts = ()=>{
         this.setState({
             products: "alway",
-          Create_Key: "alway",
+         
           Resources: "alway",
           Contacts: "alway actived",
           about: "alway",
@@ -99,7 +88,7 @@ class Menu extends Component{
     about = ()=>{
         this.setState({
             products: "alway",
-          Create_Key: "alway",
+          
           Resources: "alway",
           Contacts: "alway",
           about: "alway actived",
@@ -111,7 +100,7 @@ class Menu extends Component{
     {
         this.setState({
             products: "alway",
-          Create_Key: "alway",
+         
           Resources: "alway",
           Contacts: "alway",
           about: "alway",
@@ -122,7 +111,7 @@ class Menu extends Component{
     Dashboard = ()=>{
         this.setState({
             products: "alway",
-          Create_Key: "alway",
+          
           Resources: "alway",
           Contacts: "alway",
           about: "alway",
@@ -202,7 +191,7 @@ class Menu extends Component{
                 
                             </li>
                             <li className={this.state.Resources} onClick={this.Resources}><Link to = "/products">Package</Link></li>
-                            <li className={this.state.Create_Key} onClick={this.Create_Key}><Link to = "/create-key">Create key</Link></li>
+                           
                             <li className={this.state.docs} onClick={this.docs}><Link to = "/docs">Docs</Link> 
                             <ul>
                                 <li><a href="gl">Software Development Kit (SDK)</a></li>
