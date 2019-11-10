@@ -4,17 +4,18 @@ import {Redirect} from "react-router-dom";
 import API from '../../pages/Database/APICnn';
 import Avatar from 'react-avatar';
 import '../../App.css'
-const api = new API();
 
 class Menu extends Component{
 
     constructor(props) {
         super(props);
+       
         var about = window.location.pathname === "/about"? "alway actived":"alway";
         var Contacts = window.location.pathname === "/contacts"? "alway actived":"alway";
-        var Resources = (window.location.pathname === "/products" || window.location.pathname === "/create-key")? "alway actived":"alway";
+        var Resources = (window.location.pathname === "/products")? "alway actived":"alway";
         var products = window.location.pathname === "/introduce"? "alway actived":"alway";
         var docs = window.location.pathname === "/docs"? "alway actived":"alway";
+        var Dashboard = window.location.pathname === "/dashboard"? "alway actived":"alway";;
         this.state = {
           maccount :JSON.parse(localStorage.getItem('laccount')) || '',
           mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
@@ -24,7 +25,7 @@ class Menu extends Component{
           redirect: false,
           data: this.props.data,
           products,
-        
+          Dashboard,
           Resources,
           Contacts,
           about,
@@ -55,7 +56,7 @@ class Menu extends Component{
     products = ()=>{
         this.setState({
             products: "alway actived",
-          
+          Dashboard: "alway",
           Resources: "alway",
           Contacts: "alway",
           about: "alway",
@@ -66,7 +67,7 @@ class Menu extends Component{
     Resources = ()=>{
         this.setState({
             products: "alway",
-          
+            Dashboard: "alway",
           Resources: "alway actived",
           Contacts: "alway",
           about: "alway",
@@ -77,7 +78,7 @@ class Menu extends Component{
     Contacts = ()=>{
         this.setState({
             products: "alway",
-         
+            Dashboard: "alway",
           Resources: "alway",
           Contacts: "alway actived",
           about: "alway",
@@ -88,7 +89,7 @@ class Menu extends Component{
     about = ()=>{
         this.setState({
             products: "alway",
-          
+            Dashboard: "alway",
           Resources: "alway",
           Contacts: "alway",
           about: "alway actived",
@@ -100,18 +101,18 @@ class Menu extends Component{
     {
         this.setState({
             products: "alway",
-         
+            Dashboard: "alway",
           Resources: "alway",
           Contacts: "alway",
           about: "alway",
-          docs: "alway  actived"
+          docs: "alway actived"
         })
     }
 
     Dashboard = ()=>{
         this.setState({
             products: "alway",
-          
+            Dashboard: "alway actived",
           Resources: "alway",
           Contacts: "alway",
           about: "alway",
@@ -179,27 +180,25 @@ class Menu extends Component{
                 
                 <div id="padding-sticky" className="header" style = {{display: `${this.props.display}`}}>
                     <div id="sticky-header" >
-                        <Link to = "/">
-                        <div id="branding" >
-                            {/* <img alt = "Image" src="https://www.hackerrthank.com/wp-content/uploads/2018/08/hackerrank_logo.png" className="img-responsive" /> */}
-                            <h2 style={{marginTop:"15px", color: "#3b5998", fontWeight: "bold"}} onClick = {this.Dashboard}>Dashboard</h2>
-                        </div>
-                        </Link>
+                            <div id="branding" >
+                                <img alt = "Image" src="./signupstyle/images/logo.png" className = "logo"/>
+                            </div>
                         <nav id = "togle">
                         <ul id = "res">
-                            <li className={this.state.products} onClick={this.products}><Link to = "/introduce">Introduce</Link>
+                            <li className={this.state.Dashboard} onClick={this.Dashboard} style = {{fontWeight: "bold"}}><Link to = "/dashboard">Dashboard</Link></li>
+                            <li className={this.state.products} onClick={this.products} style = {{fontWeight: "bold"}}><Link to = "/introduce">Introduce</Link>
                 
                             </li>
-                            <li className={this.state.Resources} onClick={this.Resources}><Link to = "/products">Package</Link></li>
+                            <li className={this.state.Resources} onClick={this.Resources} style = {{fontWeight: "bold"}}><Link to = "/products">Package</Link></li>
                            
-                            <li className={this.state.docs} onClick={this.docs}><Link to = "/docs">Docs</Link> 
+                            <li className={this.state.docs} onClick={this.docs} style = {{fontWeight: "bold"}}><Link to = "/docs">Docs</Link> 
                             <ul>
                                 <li><a href="gl">Software Development Kit (SDK)</a></li>
                                 <li><a href="gl">Learn more</a></li>
                             </ul>
                             </li>
-                            <li className={this.state.Contacts} onClick={this.Contacts}><Link to = "/contacts">Contact</Link></li>
-                            <li className={this.state.about} onClick={this.about}><Link to = "/about">About Us</Link> </li>
+                            <li className={this.state.Contacts} onClick={this.Contacts} style = {{fontWeight: "bold"}}><Link to = "/contacts">Contact</Link></li>
+                            <li className={this.state.about} onClick={this.about} style = {{fontWeight: "bold"}}><Link to = "/about">About Us</Link> </li>
                             
                             
                         </ul>

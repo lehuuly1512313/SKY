@@ -80,6 +80,17 @@ class API {
     });
   }
 
+    out_of_date = ()=>{
+    return axios
+    .post('http://localhost:4000/check-out-of-date')
+    .then(res=>{
+      return res.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   SendMail = (data)=>{
     return axios
     .post("http://localhost:4000/send-mail",
@@ -151,6 +162,17 @@ class API {
   avatar = ()=>{
     return axios
     .get("http://localhost:4000/avatar")
+    .then(res=>{
+      return res.data
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
+
+  facebook_google = (data)=>{
+    return axios
+    .post("http://localhost:4000/facebook_google",data)
     .then(res=>{
       return res.data
     })

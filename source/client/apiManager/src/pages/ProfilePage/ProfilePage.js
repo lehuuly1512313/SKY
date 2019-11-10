@@ -375,7 +375,7 @@ class ProfilePage extends Component{
               <div class="row">
                   <div class="col-sm-6">
                   <label ><h4>Current password</h4></label>
-                  <input className="form-control" type="password" name="oldpassword" placeholder="Current password..." name="oldpassword" id = 'oldpassword' value = {this.state.handleoldpassword} onChange = {this.handleoldpassword}/>
+                  <input className="form-control" type="password" minLength = "8" name="oldpassword" placeholder="Current password..." name="oldpassword" id = 'oldpassword' value = {this.state.handleoldpassword} onChange = {this.handleoldpassword}/>
                   </div>
                   <div class="col-sm-6">
                   </div>
@@ -384,7 +384,7 @@ class ProfilePage extends Component{
               <div class="row">
                   <div class="col-sm-6">
                   <label ><h4>New password</h4></label>
-                  <input className="form-control"  type="password" name="newpassword" placeholder = "New password..." id = 'newpassword' value = {this.state.handlenewpassword} onChange = {this.handlenewpassword}/>
+                  <input className="form-control"  type="password" minLength = "8"  name="newpassword" placeholder = "New password..." id = 'newpassword' value = {this.state.handlenewpassword} onChange = {this.handlenewpassword}/>
                   </div>
                   <div class="col-sm-6">
                   </div>
@@ -393,7 +393,7 @@ class ProfilePage extends Component{
               <div class="row">
                   <div class="col-sm-6">
                   <label ><h4>Confirm new password</h4></label>
-                  <input className="form-control"  type="password" name="confirmnewpassword" placeholder = "New password..." id = 'confirmnewpassword' value = {this.state.handleconfirmnewpassword} onChange = {this.handleconfirmnewpassword}/>
+                  <input className="form-control"  type="password" minLength = "8" name="confirmnewpassword" placeholder = "New password..." id = 'confirmnewpassword' value = {this.state.handleconfirmnewpassword} onChange = {this.handleconfirmnewpassword}/>
                   </div>
                   <div class="col-sm-6">
                   </div>

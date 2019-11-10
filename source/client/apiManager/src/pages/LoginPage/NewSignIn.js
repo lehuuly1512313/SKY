@@ -133,11 +133,11 @@ class NewSignIn extends Component{
                         <div class="row">   
                             <div class="col-sm-8"> <span className="label-input100">Or sign in with</span> </div>
                             <div class="col-sm-2">
-                                <Facebook></Facebook>
+                                <Facebook data={this.props.data}></Facebook>
                             
                             </div>
                             <div class="col-sm-2">
-                                <Google></Google>
+                                <Google data={this.props.data}></Google>
                             
                             </div>
                         </div>

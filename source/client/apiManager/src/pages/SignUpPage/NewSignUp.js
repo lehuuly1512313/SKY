@@ -112,7 +112,8 @@ class NewSignUp extends Component{
           name: lfullname,
           email: lemail,
           phone: lphone,
-          avatar: "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg"
+          avatar: "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg",
+          numofbank: ""
       }
       api.postData(key).then(res=>{
         if(res === "successfully")
@@ -151,11 +152,11 @@ class NewSignUp extends Component{
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <span className="label-input100">Email</span>
-                    <input className="input100" type="text" name="email" placeholder="Email addess..."  onChange = {this.handlemail} value = {this.state.lemail}/>
+                    <input className="input100" type="email" name="email" placeholder="Email addess..."  onChange = {this.handlemail} value = {this.state.lemail}/>
                     <span className="focus-input100" />
                   </div><div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <span className="label-input100">Phone</span>
-                    <input className="input100" type="text" name="email" placeholder="Phone number..."  onChange = {this.handlephone} value = {this.state.lphone}/>
+                    <input className="input100" type="number"  maxLength="11" name="quantity" min="0" max="9" placeholder="Phone number..."  onChange = {this.handlephone} value = {this.state.lphone}/>
                     <span className="focus-input100" />
                   </div>
 
@@ -166,12 +167,12 @@ class NewSignUp extends Component{
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Password is required">
                     <span className="label-input100">Password</span>
-                    <input className="input100" type="password" name="pass" placeholder="*************"  onChange = {this.handlePassword} value = {this.state.lpassword}/>
+                    <input className="input100" type="password" name="pass" minLength="8" placeholder="*************"  onChange = {this.handlePassword} value = {this.state.lpassword}/>
                     <span className="focus-input100" />
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Repeat Password is required">
                     <span className="label-input100">Repeat Password</span>
-                    <input className="input100" type="password" name="repeat-pass" placeholder="*************"  onChange = {this.handleUConfirmPassword} value = {this.state.lrepassword}/>
+                    <input className="input100" type="password" name="repeat-pass" minLength="8" placeholder="*************"  onChange = {this.handleUConfirmPassword} value = {this.state.lrepassword}/>
                     <span className="focus-input100" />
                   </div>  
                   <div>

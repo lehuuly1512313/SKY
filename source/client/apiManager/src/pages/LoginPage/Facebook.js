@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
 import FacebookLogin from 'react-facebook-login';
 import {Redirect} from "react-router-dom";
+import API from "../Database/APICnn"
+
+const api = new API();
 
 
 class Facebook extends Component
@@ -31,8 +34,34 @@ class Facebook extends Component
     localStorage.setItem('FacebookName',this.state.name);
     localStorage.setItem('FacebookID',this.state.userID);
     localStorage.setItem('FacebookPicture',this.state.picture);
-    window.location.reload();
-    
+    var data = {
+      name: this.state.name,
+      account: this.state.userID,
+      password: "",
+      avatar: this.state.picture,
+      numofbank: "",
+      email: this.state.email,
+      phone: "",
+    }
+    var check = true;
+    this.props.data.map(value=>{
+      if(this.state.userID === value.account)
+      {
+        check = false;
+      }
+    })
+
+    if(check)
+    {
+      api.facebook_google(data).then(res=>{
+        window.location.reload();
+      })
+    }
+
+    else{
+      window.location.reload();
+    }
+  
   }
 
 

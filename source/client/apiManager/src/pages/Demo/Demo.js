@@ -10,7 +10,8 @@ class Demo extends Component{
     {
         super(props)
         this.state = {
-            value: null
+            value: null,
+            msg: "",
         }
     }
 
@@ -21,9 +22,10 @@ class Demo extends Component{
 
     componentDidMount()
     {
-        soa.CnnTrans("3eacf2f7485ff28054a0075cbd9b955a1138643694b4fde8157303674195912","hello").then(res=>{
+        soa.CnnTrans("4c908551b6ac38c2273d686bd57616f5890c46eefd96c9f515732960640926","hello").then(res=>{
             this.setState({
-                value: res.vie
+                value: res.vie,
+                msg: res.msg
             })
         })
     }
@@ -31,7 +33,10 @@ class Demo extends Component{
     render()
     {
         return(
+            <div>
             <div>{this.state.value}</div>
+            <div>{this.state.msg}</div>
+            </div>
         )
     }
 }

@@ -2,6 +2,9 @@ import GoogleLogin from 'react-google-login';
 import React,{Component} from 'react';
 import {Redirect} from "react-router-dom";
 import "./../../App.css"
+import API from "../Database/APICnn"
+
+const api = new API();
 
 
 class Google extends Component
@@ -30,7 +33,34 @@ class Google extends Component
     localStorage.setItem('GoogleName',this.state.name);
     localStorage.setItem('GoogleID',this.state.userID);
     localStorage.setItem('GooglePicture',this.state.picture);
-    window.location.reload();
+    var data = {
+      name: this.state.name,
+      account: this.state.userID,
+      password: "",
+      avatar: this.state.picture,
+      numofbank: "",
+      email: this.state.email,
+      phone: "",
+    }
+    var check = true;
+    this.props.data.map(value=>{
+      if(this.state.userID === value.account)
+      {
+        check = false;
+      }
+    })
+
+    if(check)
+    {
+      api.facebook_google(data).then(res=>{
+        window.location.reload();
+      })
+    }
+
+    else{
+      window.location.reload();
+    }
+  
   }
 
   render()

@@ -22,6 +22,11 @@ class Loading extends Component {
 
   componentWillMount() {
     window.scrollTo(0, 0);
+
+    api.out_of_date().then(res=>{
+      console.log(res);
+    })
+
     api.getData().then(response => {
       this.setState({
             data: response,

@@ -39,7 +39,7 @@ class Chart extends Component{
           options={{
             title:{
               display:this.props.displayTitle,
-              text:'Most use',
+              text:'Most called',
               fontSize:25
             },
             legend:{

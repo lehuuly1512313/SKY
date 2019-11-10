@@ -20,13 +20,15 @@ class CreateKey extends Component{
     var Country = "Vietnam";
     var Bank =  "Vietcombank";
     var numofbank = "";
+    var bankid = 0;
     var check = "";
     var id = localStorage.getItem("ID");
     this.props.data.map(value=>{
       if(id === value.id.toString())
       {
         numofbank = value.numofbank;
-        check = "Corect";
+        if(numofbank)
+        {  check = "Corect";}
         return;
       }
     })
@@ -36,6 +38,7 @@ class CreateKey extends Component{
       {
         Country = value.Country;
         Bank = value.Name;
+        bankid = value.id;
         return;
       }
     })
@@ -61,6 +64,7 @@ class CreateKey extends Component{
       modal: "",
       company: "",
       phone: "",
+      bankid
     };
   }
 
@@ -122,7 +126,8 @@ class CreateKey extends Component{
       if(e.target.value === value.Cardnum && value.Name === this.state.Bank)
       {
         this.setState({
-          check: "Corect"
+          check: "Corect",
+          bankid: value.id,
         })
         return;
       }
@@ -188,12 +193,44 @@ create = async () =>{
   api.GenKey(data).then(response =>{
     if(response === "sent") 
     {
+    var cost = 0;
+    if(this.state.select === "Free")
+    {
+      cost = 0
+    }
+    if(this.state.select === "1 Month")
+    {
+      cost = 1
+    }
+    if(this.state.select === "3 Months")
+    {
+      cost = 3
+    }
+    if(this.state.select === "6 Months")
+    {
+      cost = 5
+    }
+    if(this.state.select === "9 Months")
+    {
+      cost = 7
+    }
+    if(this.state.select === "12 Months")
+    {
+      cost = 9
+    }
+    if(this.state.select === "Unlimited")
+    {
+      cost = 0
+    }
     var key = {
         method: "get-key",
         id: "0",
         type: this.state.select,
         user: userid,
-        start: Date.now()
+        start: Date.now(),
+        cost,
+        card: this.state.bankid,
+        email: this.state.email,
     }
     api.GenKey(key).then(res=>{
       this.setState({
@@ -225,7 +262,7 @@ dashboard = ()=>{
     render(){
         let name = this.state.name
         let email = this.state.email
-        let card = this.state.bank
+        //let card = this.state.bank
         var content = null;
         if(this.state.phone && this.state.company && (this.state.card && this.state.check === "Corect"))
         {
