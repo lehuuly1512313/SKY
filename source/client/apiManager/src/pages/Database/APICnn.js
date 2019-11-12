@@ -180,6 +180,17 @@ class API {
       console.log(err);
     })
   }
+
+  Recreatekey = (data)=>{
+    return axios
+    .post("http://localhost:4000/register-key-again",data)
+    .then(res=>{
+      return res.data
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
 }
 
 

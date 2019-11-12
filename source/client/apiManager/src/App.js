@@ -17,7 +17,7 @@ import NewSignUp from "./pages/SignUpPage/NewSignUp";
 import NewSignIn from "./pages/LoginPage/NewSignIn";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
-
+import Recreatekey from "./pages/Recreatekey/Recreatekey"
 
 
 class App extends Component {
@@ -26,6 +26,10 @@ class App extends Component {
     {
       path: "/create-key",
       main: ({match}) => <CreateKey match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
+    },
+    {
+      path: "/recreatekey",
+      main: ({match}) => <Recreatekey match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
     },
     {
       path: "/dashboard",
@@ -76,7 +80,8 @@ class App extends Component {
     {
       path: "/:id",
       main: ({match}) => <ProfilePage  match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
-    }
+    },
+
 ]
 
 

@@ -33,7 +33,7 @@ class Footer extends Component {
                 <h3>latest Articles</h3>
                 <div className="media">
                     <a href="#" className="pull-left">
-                    <img src="http://placehold.it/64x64" alt="" className="media-object" />
+                    <img src="https://www.codegrand.com/images/codegrand-logo.png" style = {{width: "64px", height: "64px"}} alt="" className="media-object" />
                     </a>
                     <div className="media-body">
                     <h4 className="media-heading">Programming</h4>
@@ -42,7 +42,7 @@ class Footer extends Component {
                 </div>
                 <div className="media">
                     <a href="#" className="pull-left">
-                    <img src="http://placehold.it/64x64" alt="" className="media-object" />
+                    <img src="https://icon-library.net/images/icon-code/icon-code-9.jpg" style = {{width: "64px", height: "64px"}} alt="" className="media-object" />
                     </a>
                     <div className="media-body">
                     <h4 className="media-heading">Coding</h4>
@@ -51,10 +51,10 @@ class Footer extends Component {
                 </div>
                 <div className="media">
                     <a href="#" className="pull-left">
-                    <img src="http://placehold.it/64x64" alt="" className="media-object" />
+                    <img src="https://nodetx.com/wp-content/uploads/2017/04/code_flat_icon_by_foxinflame-d9bkady.png" style = {{width: "64px", height: "64px"}} alt="" className="media-object" />
                     </a>
                     <div className="media-body">
-                    <h4 className="media-heading">Web Sesign</h4>
+                    <h4 className="media-heading">Web design</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     </div>
                 </div>

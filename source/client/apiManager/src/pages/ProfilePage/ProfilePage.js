@@ -48,7 +48,7 @@ class ProfilePage extends Component{
     this.state = {
       laccount :JSON.parse(localStorage.getItem('laccount')) || [],
       lpassword: JSON.parse(localStorage.getItem('lpassword')) || [],
-      account: localStorage.getItem('user') || [],
+      account: localStorage.getItem('user') || localStorage.getItem('FacebookID') || localStorage.getItem("GoogleID"), 
       first_name: "",
       last_name: "",
       redirect: false,
@@ -65,6 +65,7 @@ class ProfilePage extends Component{
       check,
       icon,
       color,
+      readOnly: "readOnly"
     };
   }
   componentWillMount() {
@@ -86,41 +87,6 @@ class ProfilePage extends Component{
           return;
         }
       })
-
-    if(localStorage.getItem("FacebookID"))
-      {
-        var id = localStorage.getItem("FacebookID");
-        var name = localStorage.getItem("FacebookName");
-        var avatar = localStorage.getItem("FacebookPicture");
-        var email = localStorage.getItem("FacebookUser");
-        var names = name.split(" ");
-        this.setState({
-          ...this.state,
-          first_name: names.pop(),
-          last_name: names.toString().split(",").join(" "),
-          id,
-          phone: id,
-          email,
-          avatar
-        })
-      }
-      if(localStorage.getItem("GoogleID"))
-      {
-        var id = localStorage.getItem("GoogleID");
-        var name = localStorage.getItem("GoogleName");
-        var avatar = localStorage.getItem("GooglePicture");
-        var email = localStorage.getItem("GoogleUser");
-        var names = name.split(" ");
-        this.setState({
-          ...this.state,
-          first_name: names.pop(),
-          last_name: names.toString().split(",").join(" "),
-          id,
-          phone: id,
-          email,
-          avatar
-        })
-      }
   }
   RenderRedirect = ()=>{
     if(this.state.relodirect)

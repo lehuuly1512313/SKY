@@ -41,13 +41,6 @@ class Dashboard extends Component{
           })
       }
         var data = {};
-        if(localStorage.getItem("FacebookID")){
-            data = {id: localStorage.getItem("FacebookID")}
-        }
-        if(localStorage.getItem("GoogleID"))
-        {
-            data = {id: localStorage.getItem("GoogleID")}
-        }
         if(localStorage.getItem("ID"))
         {
             data = {id: localStorage.getItem("ID")}
@@ -310,6 +303,11 @@ class Dashboard extends Component{
         this.setState({fakedata})
     }
 
+    extension = (e)=>{
+      localStorage.setItem("keyID",e.target.value);
+    }
+
+
     renderTable = (data)=>{
         return data.map(value=>{
             return(
@@ -325,7 +323,7 @@ class Dashboard extends Component{
                       <button type="button" class="fa fa-clone fa-lg" ></button>
                     </CopyToClipboard>
                     <button type="button" class="fa fa-eye fa-lg" value={value.id} onClick={this.vieclick} data-toggle="modal" href='#modal-id-view'></button>
-                    <button type="button" class="fa fa-credit-card-alt fa-lg" ></button>
+                    <Link to = "/recreatekey"><button type="button" class="fa fa-credit-card-alt fa-lg" value = {value.id} onClick = {this.extension}></button></Link>
                     <button type="button" class="fa fa-trash-o fa-lg" value={value.id} onClick={this.delclick} data-toggle="modal" href='#modal-id'></button>
                     
                    </td> 

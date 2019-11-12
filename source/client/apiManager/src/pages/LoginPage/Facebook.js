@@ -44,10 +44,12 @@ class Facebook extends Component
       phone: "",
     }
     var check = true;
+    var id = 0;
     this.props.data.map(value=>{
       if(this.state.userID === value.account)
       {
         check = false;
+        id = value.id;
       }
     })
 
@@ -59,6 +61,7 @@ class Facebook extends Component
     }
 
     else{
+      localStorage.setItem("ID",id);
       window.location.reload();
     }
   

@@ -4,7 +4,7 @@ import '../../App.css';
 import {Redirect} from "react-router-dom";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 const api = new API();
-class CreateKey extends Component{
+class Recreatekey extends Component{
 
   constructor(props) {
     super(props);
@@ -57,7 +57,7 @@ class CreateKey extends Component{
       key: "yourkey",
       copied: false,
       name : "",
-      select: localStorage.getItem("create"),
+      select: "1 Month",
       Country,
       Bank,
       check,
@@ -66,11 +66,13 @@ class CreateKey extends Component{
       modal: "",
       company: "",
       phone: "",
-      bankid
+      bankid,
+      keyvalue: "",
+      keystatus: "",
     };
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     window.scrollTo(0, 0);
     if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") || localStorage.getItem("GoogleUser")) 
     {
@@ -83,7 +85,7 @@ class CreateKey extends Component{
       {
         user = localStorage.getItem("GoogleID");
       }
-      this.state.data.map(value=>{
+      await this.state.data.map(value=>{
         if(value.account === user)
         {
           this.setState({
@@ -95,6 +97,24 @@ class CreateKey extends Component{
           })
           return;
         }
+      })
+
+      var data = {};
+        if(localStorage.getItem("ID"))
+        {
+            data = {id: localStorage.getItem("ID")}
+        }
+      await api.getKey(data).then(res=>{
+        res.map(value=>{
+          if(value.id.toString() === localStorage.getItem("keyID"))
+          {
+            this.setState({
+              keyvalue: value.value,
+              keystatus: value.status,
+            })
+          }
+        })
+        
       })
   }
   }
@@ -169,21 +189,17 @@ create = async () =>{
   if(await localStorage.getItem("ID")){
     userid = localStorage.getItem("ID");
   }
-  if(this.state.phone && this.state.company && (this.state.card && this.state.check === "Corect"))
+  if(this.state.card && this.state.check === "Corect")
   {
   var data = {
     msg: "waiting",
     email: this.state.email,
   }
 
-  api.GenKey(data).then(response =>{
+  api.Recreatekey(data).then(response =>{
     if(response === "sent") 
     {
     var cost = 0;
-    if(this.state.select === "Free")
-    {
-      cost = 0
-    }
     if(this.state.select === "1 Month")
     {
       cost = 1
@@ -209,19 +225,19 @@ create = async () =>{
       cost = 0
     }
     var key = {
-        method: "get-key",
-        id: "0",
+        method: "register-again",
+        id: localStorage.getItem("keyID"),
         type: this.state.select,
-        user: userid,
-        start: Date.now(),
-        cost,
         card: this.state.bankid,
+        cost,
         email: this.state.email,
     }
-    api.GenKey(key).then(res=>{
-      this.setState({
-        key: res
-      })
+    api.Recreatekey(key).then(res=>{
+      if(res === "sucessfully")
+      {
+        localStorage.setItem("dashboard" , true);
+        window.location.reload();
+      }
     })
   }
   })
@@ -250,7 +266,7 @@ dashboard = ()=>{
         let email = this.state.email
         //let card = this.state.bank
         var content = null;
-        if(this.state.phone && this.state.company && (this.state.card && this.state.check === "Corect"))
+        if((this.state.card && this.state.check === "Corect"))
         {
           content = (
             <div>
@@ -310,23 +326,19 @@ dashboard = ()=>{
               
             <div className="form-style-10">
                   
-        <h1>Create Key Now<span>Fill out the information to get the key!</span></h1>
+        <h1>Extension<span>Fill out the information to extension the key!</span></h1>
         <form >
-          <div className="section"><span>1</span>Your Information </div>
+
+        <div className="section"><span>1</span>Your key</div>
+          <div className="inner-wrap">
+            <label style={{color: "black"}}> Value <input type="text" name="field1" value = {this.state.keyvalue} readOnly /></label>
+            <label style={{color: "black"}}> Status <input type="text" name="field1" value = {this.state.keystatus} readOnly /></label>
+         </div>
+          <div className="section"><span>2</span>Your Information </div>
           <div className="inner-wrap">
             <label style={{color: "black"}}>Your Full Name <input type="text" name="field1" value = {name} readOnly /></label>
-            <label style={{color: "black"}}>Your Company <input type="text" name="field1" value = {this.state.company} onChange = {this.handleCompany}/></label>
-            <label style={{color: "black"}}>Your Position <input type="text" name="field1" value = {this.state.company} onChange = {this.handleCompany}/></label>
          </div>
-         <div className="section"><span>2</span>Pupose </div>
-          <div className="inner-wrap">
-          <select style = {{outline: "none"}}>
-                <option value="Study">Study</option>
-                <option value="Trial">Trial</option>
-                <option value="Business">Business</option>
-                
-          </select>
-          </div>
+
           <div className="section"><span>3</span>Credit Card &amp; Paypal</div>
           <div className="inner-wrap">
           <label style={{color: "black"}}>Country
@@ -345,12 +357,10 @@ dashboard = ()=>{
           <div className="section"><span>4</span>Email or Phone number to comfirm</div>
           <div className="inner-wrap">
             <label  style={{color: "black"}}>Your email <input type="email" name="field5"  value ={email} readOnly/></label>
-            <label  style={{color: "black"}}>Your phone number<input type="text" name="field6" value = {this.state.phone} onChange = {this.handlePhone}/></label>
           </div>
-          <div className="section"><span>5</span>Pick package you want trial </div>
+          <div className="section"><span>5</span>Pick package you want to extension </div>
           <div className="inner-wrap">
           <select style = {{outline: "none"}} onChange={this.handleSelect} value={this.state.select}>
-                <option value="Free">Free Trial</option>
                 <option value="1 Month">1 Months (1 $)</option>
                 <option value="3 Months">3 Months (2.5 $)</option>
                 <option value="6 Months">6 Months (5 $)</option> 
@@ -361,7 +371,7 @@ dashboard = ()=>{
           </div>
 
           <div className="button-section">
-            <input type="button" value = "Create" name="Sign Up"  class="btn btn-primary" onClick = {this.create} data-toggle="modal" href="#modal-id"/>
+            <input type="button" value = "Extension" name="Sign Up"  class="btn btn-primary" onClick = {this.create}/>
           </div>
         </form>
       </div>
@@ -378,4 +388,4 @@ dashboard = ()=>{
 }
 
 
-export default CreateKey;
+export default Recreatekey;
