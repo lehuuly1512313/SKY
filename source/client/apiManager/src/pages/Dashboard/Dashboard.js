@@ -110,14 +110,14 @@ class Dashboard extends Component{
                     History
               </span>
               <div class="row">
-                <div class="col-sm-3"><span className="label-input100">Last time:</span></div>
+                <div class="col-sm-4"><span className="label-input100">Last time:</span></div>
                 <div class="col-sm-4">{this.state.last}</div>
               </div>
               <div style = {{paddingTop: "10px", paddingBottom: "10px"}}>
 
               </div>
               <div class="row" >
-                <div class="col-sm-3"><span className="label-input100">Source:</span></div>
+                <div class="col-sm-4"><span className="label-input100">Source:</span></div>
                 <div class="col-sm-4"><a href={this.state.source}>{this.state.source}</a></div>
               </div>
 
@@ -160,7 +160,7 @@ class Dashboard extends Component{
             notification = (
               <div>
                       <div class="row">
-                        <div class="col-sm-6"> <label>{"Please waiting "}<label className = "timer-span">{this.state.seconds}</label></label> <label> for sendMail</label></div>
+                        <div class="col-sm-9"> <label>{"Please waiting "}<label className = "timer-span">{this.state.seconds}</label></label> <label> for sendMail</label></div>
                       </div>
                 </div>
             )

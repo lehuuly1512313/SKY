@@ -14,7 +14,7 @@ class Menu extends Component{
         var Contacts = window.location.pathname === "/contacts"? "alway actived":"alway";
         var Resources = (window.location.pathname === "/products")? "alway actived":"alway";
         var products = window.location.pathname === "/introduce"? "alway actived":"alway";
-        var docs = window.location.pathname === "/docs"? "alway actived":"alway";
+        var docs = (window.location.pathname === "/docs" || window.location.pathname === '/SDK')? "alway actived":"alway";
         var Dashboard = window.location.pathname === "/dashboard"? "alway actived":"alway";;
         this.state = {
           maccount :JSON.parse(localStorage.getItem('laccount')) || '',

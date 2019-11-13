@@ -13,7 +13,7 @@ class SDKPage extends Component{
             <div>
             <div class="row space">
             <div class="col-md-3 col-centered">
-                    <h3 class="colorgrey">SDK FOR JAVASCRIPT LANGUAGE</h3>
+                    <h3 class="colorgrey">SDK FOR JAVASCRIPT LANGUAGE (REACTJS LIB)</h3>
                     <div>React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props.
                     </div>
                     <div class="space2">
@@ -124,7 +124,7 @@ class SDKPage extends Component{
         </div>
         <div class="row space">
             <div class="col-md-3 col-centered">
-                    <h3 class="colorgrey">SDK FOR JEE LANGUAGE</h3>
+                    <h3 class="colorgrey">SDK FOR JAVA LANGUAGE (JEE)</h3>
                     <div>React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props.
                     </div>
                     <div class="space2">
