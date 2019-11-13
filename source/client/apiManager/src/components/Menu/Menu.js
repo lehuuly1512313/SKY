@@ -193,7 +193,7 @@ class Menu extends Component{
                            
                             <li className={this.state.docs} onClick={this.docs} style = {{fontWeight: "bold"}}><Link to = "/docs">Docs</Link> 
                             <ul>
-                                <li><a href="gl">Software Development Kit (SDK)</a></li>
+                                <li><Link to="/SDK">Software Development Kit (SDK)</Link></li>
                                 <li><a href="gl">Learn more</a></li>
                             </ul>
                             </li>

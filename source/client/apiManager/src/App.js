@@ -18,7 +18,7 @@ import NewSignIn from "./pages/LoginPage/NewSignIn";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import Recreatekey from "./pages/Recreatekey/Recreatekey"
-
+import SDKPage from "./pages/SDKPage/SDKPage"
 
 class App extends Component {
 
@@ -77,6 +77,10 @@ class App extends Component {
       main: ({match}) => <ProfilePage match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
     }
     ,
+    {
+      path: "/SDK",
+      main: () => <SDKPage />
+    },
     {
       path: "/:id",
       main: ({match}) => <ProfilePage  match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
