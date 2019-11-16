@@ -18,19 +18,19 @@ class HomePage extends Component{
           <input type="radio" name="r" id="r4" />
           <input type="radio" name="r" id="r5" />
           <div className="slide s1">
-            <img style = {{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./loginStyle/img/showcase.jpg" alt="" />
+            <img style={{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./loginStyle/img/showcase.jpg" alt="" />
           </div>
           <div className="slide">
-            <img style = {{ position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/2.jpg" alt="" />
+            <img style={{ position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/2.jpg" alt="" />
           </div>
           <div className="slide">
-            <img style = {{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/3.jpg" alt="" />
+            <img style={{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/3.jpg" alt="" />
           </div>
           <div className="slide">
-            <img style = {{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/4.jpg" alt="" />
+            <img style={{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/4.jpg" alt="" />
           </div>
           <div className="slide">
-            <img style = {{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/5.jpg" alt="" />
+            <img style={{position : "absolute", top: "-144px",marginTop: "-150px",height: "177%"}} src="./aboutStyle/5.jpg" alt="" />
           </div>
         </div>
         <div className="navigation">
@@ -57,17 +57,17 @@ class HomePage extends Component{
                     </form>
                 </div>
                 </section>
-                <div style = {{width: "60%", marginLeft:"20%",boxShadow: "5px 5px 5px #666",background: "#eee",marginTop: "20px", padding: "10px 50px 10px 50px"}}>
-              <div style = {{textAlign: "center"}}>
-                <div><img class="navigation-image" src="//cdn.jotfor.ms/assets/img/memberkit/user_guide_images/f1.png?v=0.2" style = {{width: "100px", height:"100px"}} alt="Getting Started with JotForm Podo"/></div>
-                <div style = {{fontSize:"16px"}}>SOA User Guide / Getting Started with SOA</div>
+                <div style={{width: "60%", marginLeft:"20%",boxShadow: "5px 5px 5px #666",background: "#eee",marginTop: "20px", padding: "10px 50px 10px 50px"}}>
+              <div style={{textAlign: "center"}}>
+                <div><img class="navigation-image" src="//cdn.jotfor.ms/assets/img/memberkit/user_guide_images/f1.png?v=0.2" style={{width: "100px", height:"100px"}} alt="Getting Started with JotForm Podo"/></div>
+                <div style={{fontSize:"16px"}}>SOA User Guide / Getting Started with SOA</div>
               </div>
            
             <h2>
             <a class="chapterTitle" href="https://www.jotform.com/help/2-How-to-Create-Your-First-Web-Form">How to create a Key</a>
             </h2>
             <p class="chapterSummary">
-            First-time SOA users often ask how to create a simple web form, how to set up Email Notifications, how to embed a form on a website, how to test the form to see if it's working, and how to view responses in email and JotForm Inbox.&amp;nbsp;Got a... or <Link to = "/create-key" onClick = {this.move}>Click here to get started</Link></p> 
+            First-time SOA users often ask how to create a simple web form, how to set up Email Notifications, how to embed a form on a website, how to test the form to see if it's working, and how to view responses in email and JotForm Inbox.&amp;nbsp;Got a... or <Link to="/create-key" onClick={this.move}>Click here to get started</Link></p> 
             
             <h2>
             <a class="chapterTitle" href="https://www.jotform.com/help/526-How-to-Change-the-Username">How to change the password?</a>

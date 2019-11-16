@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import API from '../Database/APICnn';
-const api = new API();
+const api=new API();
 
 class SignUpPage extends Component{
 
@@ -99,7 +99,7 @@ class SignUpPage extends Component{
  
     if(this.state.redirect)
     {
-      return <Redirect to = '/'></Redirect>
+      return <Redirect to='/'></Redirect>
     }
   }
     render(){
@@ -122,7 +122,7 @@ class SignUpPage extends Component{
                   </span>
                 </div>
                 <div className="wrap-input100 validate-input" data-validate="Username is required">
-                  <input className="input" type="text" name="username"   onChange = {this.handleUsername}/>
+                  <input className="input" type="text" name="username"   onChange={this.handleUsername}/>
                   <span className="focus-input100" />
                 </div>
                 <div className="p-t-13 p-b-9">
@@ -131,7 +131,7 @@ class SignUpPage extends Component{
                  </span>
                 </div>
                 <div className="wrap-input100 validate-input" data-validate="Username is required">
-                  <input className="input" type="text" name="username"   onChange = {this.handleUsername}/>
+                  <input className="input" type="text" name="username"   onChange={this.handleUsername}/>
                   <span className="focus-input100" />
                 </div>
                 <div className="p-t-13 p-b-9">
@@ -141,7 +141,7 @@ class SignUpPage extends Component{
                 </div>
 
                 <div className="wrap-input100 validate-input" data-validate="Username is required">
-                  <input className="input" type="text" name="username"   onChange = {this.handleUsername}/>
+                  <input className="input" type="text" name="username"   onChange={this.handleUsername}/>
                   <span className="focus-input100" />
                 </div>
                 <div className="p-t-13 p-b-9">
@@ -153,7 +153,7 @@ class SignUpPage extends Component{
                 
                 
                 <div className="wrap-input100 validate-input" data-validate="Password is required">
-                  <input className="input" type="password" name="pass"  onChange = {this.handlePassword}/>
+                  <input className="input" type="password" name="pass"  onChange={this.handlePassword}/>
                   <span className="focus-input100" />
                 </div>
 
@@ -163,7 +163,7 @@ class SignUpPage extends Component{
                   </span>
                 </div>
                 <div className="wrap-input100 validate-input" data-validate="Password is required">
-                  <input className="input" type="password" name="pass"  onChange = {this.handleUConfirmPassword}/>
+                  <input className="input" type="password" name="pass"  onChange={this.handleUConfirmPassword}/>
                   <span className="focus-input100" />
                 </div>
 
@@ -190,7 +190,7 @@ class SignUpPage extends Component{
 
                 <div className="container-login100-form-btn m-t-17">
                   {this.RedirectRender()}
-                  <button className="login100-form-btn" onClick= {this.SignUp} type="button"  data-toggle="modal" href='#modal-id'>
+                  <button className="login100-form-btn" onClick={this.SignUp} type="button"  data-toggle="modal" href='#modal-id'>
                     Sign Up
                   </button>
                 </div>
@@ -198,7 +198,7 @@ class SignUpPage extends Component{
                   <span className="txt2">
                     Ready Account??
                   </span>
-                  <Link to = "/login" className="txt2 bo1">
+                  <Link to="/login" className="txt2 bo1">
                     Login Now
                   </Link>
                 </div>

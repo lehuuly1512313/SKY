@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import App from './App'
 import API from '././pages/Database/APICnn';
-const api = new API();
+const api=new API();
 
 
 
@@ -32,13 +32,13 @@ class Loading extends Component {
             data: response,
       })
     })
-    api.getDataURL("http://localhost:4000/banks").then(res=>{
+    api.getDataURL("http://localhost:4003/banks").then(res=>{
       this.setState({
         banks: res,
       })
     })
 
-    api.getDataURL("http://localhost:4000/banks-name").then(res=>{
+    api.getDataURL("http://localhost:4003/banks-name").then(res=>{
       console.log(res);
       this.setState({
         name: res,
@@ -51,15 +51,15 @@ class Loading extends Component {
       {
           return(
               <div>
-                  <App data = {this.state.data} banks = {this.state.banks} names = {this.state.name}></App>
+                  <App data={this.state.data} banks={this.state.banks} names={this.state.name}></App>
               </div>
           )
       }
       else
       {
           return(
-            <div style = {{textAlign: "center", marginTop: "250px"}}>
-                <img src={"https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif"} alt="loading..." style = {{width: "100px", height: "100px"}}/>
+            <div style={{textAlign: "center", marginTop: "250px"}}>
+                <img src={"https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif"} alt="loading..." style={{width: "100px", height: "100px"}}/>
             </div>
           )
       }

@@ -2,33 +2,33 @@ import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
 import {Link} from "react-router-dom";
 import API from '../Database/APICnn';
-const api = new API();
+const api=new API();
 
 class ProfilePage extends Component{
 
   constructor(props) {
     super(props);
-    this.handlePassword = this.handlePassword.bind(this);
-    this.handleUsername = this.handleUsername.bind(this);
-    this.handleLastname = this.handleLastname.bind(this);
-    this.handleFirstname = this.handleFirstname.bind(this);
-    this.handleoldpassword = this.handleoldpassword.bind(this);
-    this.handlenewpassword = this.handlenewpassword.bind(this);
-    this.handleconfirmnewpassword = this.handleconfirmnewpassword.bind(this);
-    this.handlephone = this.handlephone.bind(this);
-    this.handlenumofbank = this.handlenumofbank.bind(this);
-    this.edit = this.edit.bind(this);
-    this.changeAvatar = this.changeAvatar.bind(this);
+    this.handlePassword=this.handlePassword.bind(this);
+    this.handleUsername=this.handleUsername.bind(this);
+    this.handleLastname=this.handleLastname.bind(this);
+    this.handleFirstname=this.handleFirstname.bind(this);
+    this.handleoldpassword=this.handleoldpassword.bind(this);
+    this.handlenewpassword=this.handlenewpassword.bind(this);
+    this.handleconfirmnewpassword=this.handleconfirmnewpassword.bind(this);
+    this.handlephone=this.handlephone.bind(this);
+    this.handlenumofbank=this.handlenumofbank.bind(this);
+    this.edit=this.edit.bind(this);
+    this.changeAvatar=this.changeAvatar.bind(this);
 
-    var numofbank = "";
-    var check = false;
-    var id = localStorage.getItem("ID");
-    var icon = "";
-    var color = "";
+    var numofbank="";
+    var check=false;
+    var id=localStorage.getItem("ID");
+    var icon="";
+    var color="";
     this.props.data.map(value=>{
       if(id === value.id.toString())
       {
-        numofbank = value.numofbank;
+        numofbank=value.numofbank;
         return;
       }
     })
@@ -36,7 +36,7 @@ class ProfilePage extends Component{
     this.props.banks.map(value=>{
       if(numofbank === value.Cardnum)
       {
-        check = true;
+        check=true;
         icon= "fa fa-check-circle-o";
         color= "green";
         return;
@@ -45,7 +45,7 @@ class ProfilePage extends Component{
 
 
 
-    this.state = {
+    this.state={
       laccount :JSON.parse(localStorage.getItem('laccount')) || [],
       lpassword: JSON.parse(localStorage.getItem('lpassword')) || [],
       account: localStorage.getItem('user') || localStorage.getItem('FacebookID') || localStorage.getItem("GoogleID"), 
@@ -73,7 +73,7 @@ class ProfilePage extends Component{
       this.state.data.map(value=>{
         if(value.account === this.state.account)
         {
-          var name = value.name.split(" ")
+          var name=value.name.split(" ")
           this.setState({
             ...this.state,
             first_name: name.pop(),
@@ -88,11 +88,11 @@ class ProfilePage extends Component{
         }
       })
   }
-  RenderRedirect = ()=>{
+  RenderRedirect=()=>{
     if(this.state.relodirect)
-      return <Redirect to = '/profile'></Redirect>
+      return <Redirect to='/profile'></Redirect>
   }
-  reset = ()=>{
+  reset=()=>{
     this.setState({
       first_name:"",
       last_name:"",
@@ -100,8 +100,8 @@ class ProfilePage extends Component{
       numofbank: ""
     })
   }
-    edit = () =>{
-      var data = {
+    edit=() =>{
+      var data={
         id: localStorage.getItem("ID"),
         name: this.state.last_name + " " + this.state.first_name,
         phone: this.state.phone,
@@ -139,11 +139,11 @@ class ProfilePage extends Component{
       this.setState({last_name: String(e.target.value)});
     }
 
-    handlephone = (e)=>{
+    handlephone=(e)=>{
       this.setState({phone: e.target.value})
     }
 
-    handlenumofbank = (e)=>{
+    handlenumofbank=(e)=>{
       this.setState({numofbank: e.target.value})
       this.setState({
         icon: "fa fa-times-circle-o",
@@ -165,9 +165,9 @@ class ProfilePage extends Component{
 
     
    
-    onChangeHandler = e =>{
-    let reader = new FileReader();
-    reader.onload = (e) => {
+    onChangeHandler=e =>{
+    let reader=new FileReader();
+    reader.onload=(e) => {
       this.setState({
         avatar: e.target.result
       })
@@ -175,7 +175,7 @@ class ProfilePage extends Component{
     reader.readAsDataURL(event.target.files[0]);
     }
 
-    profile = ()=>{
+    profile=()=>{
       this.setState({
         profile_active: "active",
         changepassword_active: null,
@@ -183,7 +183,7 @@ class ProfilePage extends Component{
       })
     }
 
-    changepassword = ()=>{
+    changepassword=()=>{
       this.setState({
         profile_active: null,
         changepassword_active: "active",
@@ -191,7 +191,7 @@ class ProfilePage extends Component{
       })
     }
 
-    setting = ()=>{
+    setting=()=>{
       this.setState({
         profile_active: null,
         changepassword_active: null,
@@ -217,19 +217,19 @@ class ProfilePage extends Component{
       this.setState({handleconfirmnewpassword: e.target.value});
     }
 
-    changeAvatar = (e)=>
+    changeAvatar=(e)=>
     {
       this.setState({avatar: e.target.value})
     }
 
-    change = ()=>{
-      var check = false;
-      var id = null;
+    change=()=>{
+      var check=false;
+      var id=null;
       this.state.data.map(value=>{
         if(localStorage.getItem("user")=== value.account && this.state.handleoldpassword === value.password)
         {
-          check = true;
-          id = value.id;
+          check=true;
+          id=value.id;
           return;
         }
       })
@@ -237,7 +237,7 @@ class ProfilePage extends Component{
       {
         if(this.state.handlenewpassword === this.state.handleconfirmnewpassword)
         {
-          var data = {
+          var data={
             id,
             password: this.state.handlenewpassword
           }
@@ -265,7 +265,7 @@ class ProfilePage extends Component{
       }
     }
 
-    Re_render = ()=>{
+    Re_render=()=>{
       if(this.state.profile_active){
         return(
                         <div className="tab-content">
@@ -275,19 +275,19 @@ class ProfilePage extends Component{
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="first_name" ><h4>First name</h4></label>
-                        <input type="text" className="form-control"  name="first_name" id="first_name" placeholder = "enter your first name" value={this.state.first_name} title="enter your first name if any." onChange={this.handleFirstname} />
+                        <input type="text" className="form-control"  name="first_name" id="first_name" placeholder="enter your first name" value={this.state.first_name} title="enter your first name if any." onChange={this.handleFirstname} />
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="last_name" ><h4>Last name</h4></label>
-                        <input type="text" className="form-control"   name="last_name" id="last_name" placeholder = "enter your last name" value={this.state.last_name} title="enter your last name if any." onChange={this.handleLastname}/>
+                        <input type="text" className="form-control"   name="last_name" id="last_name" placeholder="enter your last name" value={this.state.last_name} title="enter your last name if any." onChange={this.handleLastname}/>
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="phone" ><h4>Phone</h4></label>
-                        <input type="text" className="form-control"  name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." value = {this.state.phone} onChange={this.handlephone}/>
+                        <input type="text" className="form-control"  name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." value={this.state.phone} onChange={this.handlephone}/>
                       </div>
                     </div>
                     <div className="form-group">
@@ -297,7 +297,7 @@ class ProfilePage extends Component{
                        
                         <div class="row">
                           <div class="col-sm-10"><input type="text" className="form-control"  name="mobile" id="mobile" placeholder="enter card number" title="enter your mobile number if any." value={this.state.numofbank} onChange={this.handlenumofbank}/></div>
-                          <div class="col-sm-2" > <i class= {this.state.icon + " " + "fa-3x"} style={{color: this.state.color}} aria-hidden="true"></i></div>
+                          <div class="col-sm-2" > <i class={this.state.icon + " " + "fa-3x"} style={{color: this.state.color}} aria-hidden="true"></i></div>
                         </div>
                       </div>
                     </div>
@@ -318,7 +318,7 @@ class ProfilePage extends Component{
                     <div className="form-group">
                       <div className="col-xs-12">
                         
-                        <label style = {{color: "green"}}>{this.state.notifycation}</label>
+                        <label style={{color: "green"}}>{this.state.notifycation}</label>
                         <div>
                         <button className="btn btn-lg btn-success" onClick={this.edit}><i className="glyphicon glyphicon-ok-sign" /> Save</button>
                         <button className="btn btn-lg" type="reset" onClick={this.reset}><i className="glyphicon glyphicon-repeat" /> Reset</button>
@@ -341,7 +341,7 @@ class ProfilePage extends Component{
               <div class="row">
                   <div class="col-sm-6">
                   <label ><h4>Current password</h4></label>
-                  <input className="form-control" type="password" minLength = "8" name="oldpassword" placeholder="Current password..." name="oldpassword" id = 'oldpassword' value = {this.state.handleoldpassword} onChange = {this.handleoldpassword}/>
+                  <input className="form-control" type="password" minLength="8" name="oldpassword" placeholder="Current password..." id='oldpassword' value={this.state.handleoldpassword} onChange={this.handleoldpassword}/>
                   </div>
                   <div class="col-sm-6">
                   </div>
@@ -350,7 +350,7 @@ class ProfilePage extends Component{
               <div class="row">
                   <div class="col-sm-6">
                   <label ><h4>New password</h4></label>
-                  <input className="form-control"  type="password" minLength = "8"  name="newpassword" placeholder = "New password..." id = 'newpassword' value = {this.state.handlenewpassword} onChange = {this.handlenewpassword}/>
+                  <input className="form-control"  type="password" minLength="8"  name="newpassword" placeholder="New password..." id='newpassword' value={this.state.handlenewpassword} onChange={this.handlenewpassword}/>
                   </div>
                   <div class="col-sm-6">
                   </div>
@@ -359,7 +359,7 @@ class ProfilePage extends Component{
               <div class="row">
                   <div class="col-sm-6">
                   <label ><h4>Confirm new password</h4></label>
-                  <input className="form-control"  type="password" minLength = "8" name="confirmnewpassword" placeholder = "New password..." id = 'confirmnewpassword' value = {this.state.handleconfirmnewpassword} onChange = {this.handleconfirmnewpassword}/>
+                  <input className="form-control"  type="password" minLength="8" name="confirmnewpassword" placeholder="New password..." id='confirmnewpassword' value={this.state.handleconfirmnewpassword} onChange={this.handleconfirmnewpassword}/>
                   </div>
                   <div class="col-sm-6">
                   </div>
@@ -367,7 +367,7 @@ class ProfilePage extends Component{
        
               <div className="form-group">
                 <div className="col-xs-12">
-                  <label style = {{color: "green"}}>{this.state.notifycation}</label>
+                  <label style={{color: "green"}}>{this.state.notifycation}</label>
                   <div>
                   <button className="btn btn-lg btn-success" onClick={this.change}><i className="glyphicon glyphicon-ok-sign" />Change</button>
                   </div>
@@ -405,7 +405,7 @@ class ProfilePage extends Component{
               </div>
               <div className="panel panel-default">
                 <div className="panel-heading">Website <i className="fa fa-link fa-1x" /></div>
-                <div className="panel-body"><Link to = "/">SoundAPI.com</Link></div>
+                <div className="panel-body"><Link to="/">SoundAPI.com</Link></div>
               </div>
              
               <div className="panel panel-default">
@@ -417,9 +417,9 @@ class ProfilePage extends Component{
             </div>{/*/col-3*/}
             <div className="col-sm-9">
               <ul className="nav nav-tabs">
-                <li className={this.state.profile_active} onClick = {this.profile} style = {{cursor: "pointer"}}><a data-toggle="tab" >Profile</a></li>
-                <li className={this.state.changepassword_active} onClick = {this.changepassword} style = {{cursor: "pointer"}}><a data-toggle="tab" >Change password</a></li>
-                <li className={this.state.setting_active} onClick = {this.setting} style = {{cursor: "pointer"}}><a data-toggle="tab" >Setting</a></li>
+                <li className={this.state.profile_active} onClick={this.profile} style={{cursor: "pointer"}}><a data-toggle="tab" >Profile</a></li>
+                <li className={this.state.changepassword_active} onClick={this.changepassword} style={{cursor: "pointer"}}><a data-toggle="tab" >Change password</a></li>
+                <li className={this.state.setting_active} onClick={this.setting} style={{cursor: "pointer"}}><a data-toggle="tab" >Setting</a></li>
               </ul>
               {this.Re_render()}
         </div>{/*/row*/}

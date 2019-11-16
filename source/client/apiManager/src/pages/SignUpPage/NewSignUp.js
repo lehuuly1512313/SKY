@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import API from '../Database/APICnn';
-const api = new API();
+const api=new API();
 
 class NewSignUp extends Component{
 
@@ -133,7 +133,7 @@ class NewSignUp extends Component{
     render(){
       if(this.state.redirect)
       {
-        return <Redirect to = '/'></Redirect>
+        return <Redirect to='/'></Redirect>
       }
         return(
           <div>
@@ -147,45 +147,45 @@ class NewSignUp extends Component{
                   </span>
                   <div className="wrap-input100 validate-input" data-validate="Name is required">
                     <span className="label-input100">Full Name</span>
-                    <input className="input100" type="text" name="name" placeholder="Name..."  onChange = {this.handlefullname} value = {this.state.lfullname}/>
+                    <input className="input100" type="text" name="name" placeholder="Name..."  onChange={this.handlefullname} value={this.state.lfullname}/>
                     <span className="focus-input100" />
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <span className="label-input100">Email</span>
-                    <input className="input100" type="email" name="email" placeholder="Email addess..."  onChange = {this.handlemail} value = {this.state.lemail}/>
+                    <input className="input100" type="email" name="email" placeholder="Email addess..."  onChange={this.handlemail} value={this.state.lemail}/>
                     <span className="focus-input100" />
                   </div><div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <span className="label-input100">Phone</span>
-                    <input className="input100" type="number"  maxLength="11" name="quantity" min="0" max="9" placeholder="Phone number..."  onChange = {this.handlephone} value = {this.state.lphone}/>
+                    <input className="input100" type="number"  maxLength="11" name="quantity" min="0" max="9" placeholder="Phone number..."  onChange={this.handlephone} value={this.state.lphone}/>
                     <span className="focus-input100" />
                   </div>
 
                   <div className="wrap-input100 validate-input" data-validate="Username is required">
                     <span className="label-input100">Username</span>
-                    <input className="input100" type="text" name="username" placeholder="Username..."  onChange = {this.handleUsername} value = {this.state.laccount}/>
+                    <input className="input100" type="text" name="username" placeholder="Username..."  onChange={this.handleUsername} value={this.state.laccount}/>
                     <span className="focus-input100" />
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Password is required">
                     <span className="label-input100">Password</span>
-                    <input className="input100" type="password" name="pass" minLength="8" placeholder="*************"  onChange = {this.handlePassword} value = {this.state.lpassword}/>
+                    <input className="input100" type="password" name="pass" minLength="8" placeholder="*************"  onChange={this.handlePassword} value={this.state.lpassword}/>
                     <span className="focus-input100" />
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Repeat Password is required">
                     <span className="label-input100">Repeat Password</span>
-                    <input className="input100" type="password" name="repeat-pass" minLength="8" placeholder="*************"  onChange = {this.handleUConfirmPassword} value = {this.state.lrepassword}/>
+                    <input className="input100" type="password" name="repeat-pass" minLength="8" placeholder="*************"  onChange={this.handleUConfirmPassword} value={this.state.lrepassword}/>
                     <span className="focus-input100" />
                   </div>  
                   <div>
-                    <label style = {{color: "green"}}>{this.state.notifycation}</label>
+                    <label style={{color: "green"}}>{this.state.notifycation}</label>
                   </div> 
                   <div className="container-login100-form-btn">
                     <div className="wrap-login100-form-btn">
                       <div className="login100-form-bgbtn" />
-                      <button className="login100-form-btn" type = "button"  onClick = {this.SignUp}>
+                      <button className="login100-form-btn" type="button"  onClick={this.SignUp}>
                         Continue
                       </button>
                     </div>
-                    <Link to ="/" className="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+                    <Link to="/" className="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
                       Sign In
                       <i className="fa fa-long-arrow-right m-l-5" />
                     </Link>

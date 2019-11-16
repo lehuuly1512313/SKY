@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 class Services extends Component{
 
 
@@ -32,7 +32,7 @@ class Services extends Component{
                             <span className="icon-star2 text-warning" />
                           </div>
                           <p className="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                          <p><Link to = "/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "Free")}}>Choose this package</button></Link></p>
+                          <p><Link to="/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "Free")}}>Choose this package</button></Link></p>
                         </div>
                       </div>
                     </div>
@@ -53,7 +53,7 @@ class Services extends Component{
                             <span className="icon-star2 text-warning" />
                           </div>
                           <p className="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                          <p><Link to = "/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "1 Month")}}>Choose this package</button></Link></p>
+                          <p><Link to="/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "1 Month")}}>Choose this package</button></Link></p>
                         </div>
                       </div>
                     </div>
@@ -74,7 +74,7 @@ class Services extends Component{
                             <span className="icon-star2 text-warning" />
                           </div>
                           <p className="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                          <p><Link to = "/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "3 Months")}}>Choose this package</button></Link></p>
+                          <p><Link to="/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "3 Months")}}>Choose this package</button></Link></p>
                         </div>
                       </div>
                     </div>
@@ -95,7 +95,7 @@ class Services extends Component{
                             <span className="icon-star2 text-warning" />
                           </div>
                           <p className="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                          <p><Link to = "/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "6 Months")}}>Choose this package</button></Link></p>
+                          <p><Link to="/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "6 Months")}}>Choose this package</button></Link></p>
                         </div>
                       </div>
                     </div>
@@ -116,7 +116,7 @@ class Services extends Component{
                             <span className="icon-star2 text-warning" />
                           </div>
                           <p className="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                          <p><Link to = "/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "9 Months")}}>Choose this package</button></Link></p>
+                          <p><Link to="/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "9 Months")}}>Choose this package</button></Link></p>
                         </div>
                       </div>
                     </div>
@@ -137,7 +137,7 @@ class Services extends Component{
                             <span className="icon-star2 text-warning" />
                           </div>
                           <p className="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                          <p><Link to = "/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "12 Months")}}>Choose this package</button></Link></p>
+                          <p><Link to="/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "12 Months")}}>Choose this package</button></Link></p>
                         </div>
                       </div>
                     </div>
@@ -158,7 +158,7 @@ class Services extends Component{
                             <span className="icon-star2 text-warning" />
                           </div>
                           <p className="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                          <p><Link to = "/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "Unlimited")}}>Choose this package</button></Link></p>
+                          <p><Link to="/create-key"><button className="btn btn-primary rounded-0 px-4" onClick={()=>{localStorage.setItem("create", "Unlimited")}}>Choose this package</button></Link></p>
                         </div>
                       </div>
                     </div>

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import API from '../Database/APICnn';
-const api = new API();
+const api=new API();
 
 class Contacts extends Component {
 
   constructor(props) {
     super(props);
-    this.handleContent = this.handleContent.bind(this);
-    this.SendContacts = this.SendContacts.bind(this);
-    this.state = {
+    this.handleContent=this.handleContent.bind(this);
+    this.SendContacts=this.SendContacts.bind(this);
+    this.state={
       laccount :JSON.parse(localStorage.getItem('laccount')) || [],
       lpassword: JSON.parse(localStorage.getItem('lpassword')) || [],
       account: localStorage.getItem('user') || [],
@@ -24,7 +24,7 @@ class Contacts extends Component {
       this.state.data.map(value=>{
         if(value.account === this.state.account)
         {
-          var name = value.name.split(" ")
+          var name=value.name.split(" ")
           this.setState({
             ...this.state,
             first_name: name.pop(),
@@ -34,17 +34,17 @@ class Contacts extends Component {
             email: value.email,
             avatar: value.avatar
           })
-          return;
+          return true;
         }
     })
 
     if(localStorage.getItem("FacebookID"))
       {
-        var id = localStorage.getItem("FacebookID");
-        var name = localStorage.getItem("FacebookName");
-        var avatar = localStorage.getItem("FacebookPicture");
-        var email = localStorage.getItem("FacebookUser");
-        var names = name.split(" ");
+        var id=localStorage.getItem("FacebookID");
+        var name=localStorage.getItem("FacebookName");
+        var avatar=localStorage.getItem("FacebookPicture");
+        var email=localStorage.getItem("FacebookUser");
+        var names=name.split(" ");
         this.setState({
           ...this.state,
           first_name: names.pop(),
@@ -57,11 +57,11 @@ class Contacts extends Component {
       }
       if(localStorage.getItem("GoogleID"))
       {
-        var id = localStorage.getItem("GoogleID");
-        var name = localStorage.getItem("GoogleName");
-        var avatar = localStorage.getItem("GooglePicture");
-        var email = localStorage.getItem("GoogleUser");
-        var names = name.split(" ");
+        var id=localStorage.getItem("GoogleID");
+        var name=localStorage.getItem("GoogleName");
+        var avatar=localStorage.getItem("GooglePicture");
+        var email=localStorage.getItem("GoogleUser");
+        var names=name.split(" ");
         this.setState({
           ...this.state,
           first_name: names.pop(),
@@ -80,8 +80,8 @@ class Contacts extends Component {
       this.setState({content: String(e.target.value)});
     }
 
-    SendContacts = ()=>{
-      var data = {
+    SendContacts=()=>{
+      var data={
         content: this.state.content,
         from: this.state.email,
         email: this.state.email,
@@ -113,8 +113,6 @@ class Contacts extends Component {
         <div className="container">
           <div className="row align-items-end">
             <div className="col-lg-7">
-              <h2 className="mb-0">Contact</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
             </div>
           </div>
         </div>
@@ -124,21 +122,21 @@ class Contacts extends Component {
                   <div className="row">
                     <div className="col-md-6 form-group">
                       <label htmlFor="fname">First Name</label>
-                      <input type="text" id="fname" className="form-control form-control-lg" value = {this.state.first_name}/>
+                      <input type="text" id="fname" className="form-control form-control-lg" value={this.state.first_name}/>
                     </div>
                     <div className="col-md-6 form-group">
                       <label htmlFor="lname">Last Name</label>
-                      <input type="text" id="lname" className="form-control form-control-lg" value = {this.state.last_name}/>
+                      <input type="text" id="lname" className="form-control form-control-lg" value={this.state.last_name}/>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-md-6 form-group">
                       <label htmlFor="eaddress">Email Address</label>
-                      <input type="text" id="eaddress" className="form-control form-control-lg" value = {this.state.email}/>
+                      <input type="text" id="eaddress" className="form-control form-control-lg" value={this.state.email}/>
                     </div>
                     <div className="col-md-6 form-group">
                       <label htmlFor="tel">Tel. Number</label>
-                      <input type="text" id="tel" className="form-control form-control-lg" value = {this.state.phone}/>
+                      <input type="text" id="tel" className="form-control form-control-lg" value={this.state.phone}/>
                     </div>
                   </div>
                   <div className="row">
@@ -154,13 +152,13 @@ class Contacts extends Component {
                   <div className="row">
                     <div className="col-md-12 form-group">
                       <label htmlFor="message">Message</label>
-                      <textarea name id="message" cols={30} rows={10} className="form-control" value = {this.state.content}  onChange = {this.handleContent}/>
+                      <textarea name id="message" cols={30} rows={10} className="form-control" value={this.state.content}  onChange={this.handleContent}/>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-12">
-                      <div style = {{fontSize: "16px", color: "green"}}>{this.state.complete}</div>
-                      <input type="button" value = "Send" className="btn btn-primary btn-lg px-5" onClick = {this.SendContacts}/>
+                      <div style={{fontSize: "16px", color: "green"}}>{this.state.complete}</div>
+                      <input type="button" value="Send" className="btn btn-primary btn-lg px-5" onClick={this.SendContacts}/>
                     </div>
                   </div>
                 </div>

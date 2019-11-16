@@ -22,59 +22,59 @@ import SDKPage from "./pages/SDKPage/SDKPage"
 
 class App extends Component {
 
-  routes = [
+  routes=[
     {
       path: "/create-key",
-      main: ({match}) => <CreateKey match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
+      main: ({match}) => <CreateKey match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
     },
     {
       path: "/recreatekey",
-      main: ({match}) => <Recreatekey match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
+      main: ({match}) => <Recreatekey match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
     },
     {
       path: "/dashboard",
-      main: ({match,history}) => <Dashboard match = {match} history = {history} data = {this.props.data}/>
+      main: ({match,history}) => <Dashboard match={match} history={history} data={this.props.data}/>
     },
     {
       path: "/introduce",
-      main: ({match,history}) => <HomePage match = {match} history = {history} data = {this.props.data}/>
+      main: ({match,history}) => <HomePage match={match} history={history} data={this.props.data}/>
     },
     {
       path: "/",
       exact: true,
-      main: ({match, history}) => <NewSignIn match = {match} history = {history} data = {this.props.data}/>
+      main: ({match, history}) => <NewSignIn match={match} history={history} data={this.props.data}/>
     },
     {
       path: "/forgot-password",
-      main: ({match, history}) => <ForgetPassword match = {match} history = {history} data = {this.props.data}/>
+      main: ({match, history}) => <ForgetPassword match={match} history={history} data={this.props.data}/>
     },
     {
       path: "/demo",
-      main: ({match, history}) => <Demo match = {match} history = {history} data = {this.props.data} />
+      main: ({match, history}) => <Demo match={match} history={history} data={this.props.data} />
     },
     {
       path: "/admin",
-      main: ({match}) => <AdminPage data = {this.props.data}/>
+      main: ({match}) => <AdminPage data={this.props.data}/>
     },
     {
       path: "/resgister",
-      main: ({match}) => <NewSignUp data = {this.props.data}/>
+      main: ({match}) => <NewSignUp data={this.props.data}/>
     },
     {
       path: "/products",
-      main: ({match}) => <Services match = {match} data = {this.props.data}/>
+      main: ({match}) => <Services match={match} data={this.props.data}/>
     },
     {
       path: "/contacts",
-      main: ({match}) => <Contacts match = {match} data = {this.props.data}/>
+      main: ({match}) => <Contacts match={match} data={this.props.data}/>
     },
     {
       path: "/About",
-      main: ({match}) => <About match = {match} data = {this.props.data}/>
+      main: ({match}) => <About match={match} data={this.props.data}/>
     },
     {
       path: "/profile",
-      main: ({match}) => <ProfilePage match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
+      main: ({match}) => <ProfilePage match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
     }
     ,
     {
@@ -83,38 +83,38 @@ class App extends Component {
     },
     {
       path: "/:id",
-      main: ({match}) => <ProfilePage  match = {match} data = {this.props.data} banks = {this.props.banks} names = {this.props.names}/>
+      main: ({match}) => <ProfilePage  match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
     },
 
 ]
 
 
   render() {
-    var display = "none";
+    var display="none";
     if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") ||  localStorage.getItem("GoogleUser"))  
     {
       display= 'block';
     }
     return (
         <Router>
-           <TopHeader display = {display} />
-            <MenuPage display = {display} data = {this.props.data}/>
+           <TopHeader display={display} />
+            <MenuPage display={display} data={this.props.data}/>
             
           <div >
           <link  rel="stylesheet" href="./servicesStyle/css/style.css"/>
          
             {this.showContentMenu(this.routes)}
           </div>
-          <Footer display = {display}/>
+          <Footer display={display}/>
         </Router>
     );
   }
 
-  showContentMenu = routes => {
-    let result = null;
+  showContentMenu=routes => {
+    let result=null;
     if (routes.length > 0) {
-      result = routes.map((routes, index) => {
-        return <Route key={index} path={routes.path} component={routes.main} exact = {routes.exact} />;
+      result=routes.map((routes, index) => {
+        return <Route key={index} path={routes.path} component={routes.main} exact={routes.exact} />;
       });
     }
     return <Switch>{result}</Switch>;

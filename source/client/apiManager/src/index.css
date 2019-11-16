@@ -1875,10 +1875,10 @@ div.ex2 {
   font-family: 'Source Code Pro', monospace;
  color: #569cd6;
 }
-/* .mr-l-50{
+.mr-l-50{
  margin-left: 80px;
 
-} */
+}
 .white{
   color: white;
   font-family: 'Source Code Pro', monospace;
@@ -1910,7 +1910,7 @@ div.ex2 {
   font-size: 16px;
 }
 
-/* .mr-l-80{
+.mr-l-80{
   margin-left: 120px;
 }
 .mr-l-100{
@@ -1918,7 +1918,7 @@ div.ex2 {
 }
 .mr-l-120{
   margin-left: 200px;
-} */
+}
 .ex1 span::selection{
   background: #5d854c;
 }

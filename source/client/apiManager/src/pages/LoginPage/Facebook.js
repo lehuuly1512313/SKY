@@ -50,6 +50,7 @@ class Facebook extends Component
       {
         check = false;
         id = value.id;
+        return true;
       }
     })
 
@@ -86,8 +87,8 @@ class Facebook extends Component
             fields="name,email,picture"
             callback={this.responseFacebook} 
             cssClass="fb"
-            textButton = ""
-            icon = "fa fa-facebook"
+            textButton=""
+            icon="fa fa-facebook"
             />
           )
     }

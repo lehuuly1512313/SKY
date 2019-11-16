@@ -3,7 +3,7 @@ import API from './../../pages/Database/APICnn';
 import '../../App.css';
 import {Redirect} from "react-router-dom";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-const api = new API();
+const api=new API();
 class Recreatekey extends Component{
 
   constructor(props) {
@@ -271,7 +271,7 @@ dashboard = ()=>{
           content = (
             <div>
                <div class="modal-body">
-            <label className = "notification">Check your email</label>
+            <label className="notification">Check your email</label>
             <div><h4 class="modal-title">Your key</h4></div>
             <input type="text" name="" id="input" class="form-control" value={this.state.key}/>
             </div>
@@ -282,19 +282,19 @@ dashboard = ()=>{
                 </CopyToClipboard>
             {this.state.copied ? <span style={{color: 'red'}}>Copied.</span> : null}
           
-              <button type="button" class="btn btn-default" onClick = {this.dashboard}>DONE</button>
+              <button type="button" class="btn btn-default" onClick={this.dashboard}>DONE</button>
             </div>
             </div>
           )
         }
         else{
-          content = (
+          content=(
             <div> 
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
-            <div class="modal-body" style = {{textAlign: "center"}}>
-            <label style = {{color: "red"}}> Thông báo: Bạn chưa điền đầy đủ hoặc có thông tin sai xin vui long kiểm tra lại</label>
+            <div class="modal-body" style={{textAlign: "center"}}>
+            <label style={{color: "red"}}> Thông báo: Bạn chưa điền đầy đủ hoặc có thông tin sai xin vui long kiểm tra lại</label>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
@@ -331,36 +331,36 @@ dashboard = ()=>{
 
         <div className="section"><span>1</span>Your key</div>
           <div className="inner-wrap">
-            <label style={{color: "black"}}> Value <input type="text" name="field1" value = {this.state.keyvalue} readOnly /></label>
-            <label style={{color: "black"}}> Status <input type="text" name="field1" value = {this.state.keystatus} readOnly /></label>
+            <label style={{color: "black"}}> Value <input type="text" name="field1" value={this.state.keyvalue} readOnly /></label>
+            <label style={{color: "black"}}> Status <input type="text" name="field1" value={this.state.keystatus} readOnly /></label>
          </div>
           <div className="section"><span>2</span>Your Information </div>
           <div className="inner-wrap">
-            <label style={{color: "black"}}>Your Full Name <input type="text" name="field1" value = {name} readOnly /></label>
+            <label style={{color: "black"}}>Your Full Name <input type="text" name="field1" value={name} readOnly /></label>
          </div>
 
           <div className="section"><span>3</span>Credit Card &amp; Paypal</div>
           <div className="inner-wrap">
           <label style={{color: "black"}}>Country
-          <select style = {{outline: "none"}} value={this.state.Country} onChange={this.handleCountry}>
+          <select style={{outline: "none"}} value={this.state.Country} onChange={this.handleCountry}>
                 <option value="Vietnam">Vietnam</option>
                 <option value="Nation">Nation</option>
           </select>
           </label>
           <label style={{color: "black"}} >Bank
-          <select style = {{outline: "none"}} value={this.state.Bank} onChange={this.handlebank}>
+          <select style={{outline: "none"}} value={this.state.Bank} onChange={this.handlebank}>
             {this.loadBanks(this.state.names)}
           </select>
           </label>
-            <label  style={{color: "black"}}>Card Number{"   "} <label style = {{color: this.state.color}}>{this.state.check}</label> <input  style={{color: "black"}} type="text" name="field4" value={this.state.card} onChange={this.inputcard}/></label>
+            <label  style={{color: "black"}}>Card Number{"   "} <label style={{color: this.state.color}}>{this.state.check}</label> <input  style={{color: "black"}} type="text" name="field4" value={this.state.card} onChange={this.inputcard}/></label>
           </div>
           <div className="section"><span>4</span>Email or Phone number to comfirm</div>
           <div className="inner-wrap">
-            <label  style={{color: "black"}}>Your email <input type="email" name="field5"  value ={email} readOnly/></label>
+            <label  style={{color: "black"}}>Your email <input type="email" name="field5"  value={email} readOnly/></label>
           </div>
           <div className="section"><span>5</span>Pick package you want to extension </div>
           <div className="inner-wrap">
-          <select style = {{outline: "none"}} onChange={this.handleSelect} value={this.state.select}>
+          <select style={{outline: "none"}} onChange={this.handleSelect} value={this.state.select}>
                 <option value="1 Month">1 Months (1 $)</option>
                 <option value="3 Months">3 Months (2.5 $)</option>
                 <option value="6 Months">6 Months (5 $)</option> 
@@ -371,7 +371,7 @@ dashboard = ()=>{
           </div>
 
           <div className="button-section">
-            <input type="button" value = "Extension" name="Sign Up"  class="btn btn-primary" onClick = {this.create}/>
+            <input type="button" value="Extension" name="Sign Up"  class="btn btn-primary" onClick={this.create}/>
           </div>
         </form>
       </div>

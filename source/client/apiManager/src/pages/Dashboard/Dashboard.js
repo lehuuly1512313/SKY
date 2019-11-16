@@ -3,16 +3,16 @@ import Chart from './Chart';
 import API from '../../pages/Database/APICnn';
 import {Link} from "react-router-dom";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-const api = new API();
+const api=new API();
 
 class Dashboard extends Component{
 
     constructor(props)
     {
         super(props)
-        this.handleinput = this.handleinput.bind(this);
-        this.timer = 0;
-        this.state = {
+        this.handleinput=this.handleinput.bind(this);
+        this.timer=0;
+        this.state={
             data: [],
             fakedata:[],
             Isloading: false,
@@ -40,16 +40,16 @@ class Dashboard extends Component{
               }
           })
       }
-        var data = {};
+        var data={};
         if(localStorage.getItem("ID"))
         {
-            data = {id: localStorage.getItem("ID")}
+            data={id: localStorage.getItem("ID")}
         }
         api.getKey(data).then(res=>
             {
-                var free = 0;
-                var pay = 0;
-                var un = 0;
+                var free=0;
+                var pay=0;
+                var un=0;
                 res.map(value=>{
                     if(value.type.includes("Free")) free+=1;
                     if(value.type.includes("Month")) pay+=1;
@@ -69,15 +69,15 @@ class Dashboard extends Component{
   
       
 
-    back = ()=>{
+    back=()=>{
       clearInterval(this.timer);
     }
 
      
 
-    confirm =  ()=>{
-        var {code, recode} = this.state;
-        if(code == recode)
+    confirm= ()=>{
+        var {code, recode}=this.state;
+        if(code===recode)
         {
             api.delkey(this.state.id).then(res=>{
                 console.log(res);
@@ -90,8 +90,8 @@ class Dashboard extends Component{
         }
     }
 
-    RenderModalViewClick = ()=>{
-      const backdropStyle = {
+    RenderModalViewClick=()=>{
+      const backdropStyle={
         position: 'fixed',
         top: 0,
         bottom: 0,
@@ -106,14 +106,14 @@ class Dashboard extends Component{
             <div class="modal-content">
               
               <div class="modal-body">
-              <span className="login100-form-title p-b-59" style = {{textAlign :"center",fontSize: "20px"}}>
+              <span className="login100-form-title p-b-59" style={{textAlign :"center",fontSize: "20px"}}>
                     History
               </span>
               <div class="row">
                 <div class="col-sm-4"><span className="label-input100">Last time:</span></div>
                 <div class="col-sm-4">{this.state.last}</div>
               </div>
-              <div style = {{paddingTop: "10px", paddingBottom: "10px"}}>
+              <div style={{paddingTop: "10px", paddingBottom: "10px"}}>
 
               </div>
               <div class="row" >
@@ -122,12 +122,12 @@ class Dashboard extends Component{
               </div>
 
               </div>
-              <div class="row" style = {{
+              <div class="row" style={{
                 textAlign: "center",
                 paddingBottom : "50px",
                 }}>
                 <div class="col-sm-6"></div>
-                <div class="col-sm-6"> <button type="button" class="btn btn-default" style = {{width :"80%", marginTop: "10px",textAlign: "center"}} onClick = {this.back} data-dismiss="modal">Back</button></div>
+                <div class="col-sm-6"> <button type="button" class="btn btn-default" style={{width :"80%", marginTop: "10px",textAlign: "center"}} onClick={this.back} data-dismiss="modal">Back</button></div>
               </div>
             </div>
           </div>
@@ -138,8 +138,8 @@ class Dashboard extends Component{
   }
     
 
-    RenderModalDelClick = ()=>{
-          const backdropStyle = {
+    RenderModalDelClick=()=>{
+          const backdropStyle={
             position: 'fixed',
             top: 0,
             bottom: 0,
@@ -148,19 +148,19 @@ class Dashboard extends Component{
             backgroundColor: 'rgba(24, 23, 23, 0.308)',
             padding: 50
           };
-          var notification = null;
+          var notification=null;
           if(this.state.seconds === 0)
           {
-            notification = (
-              <div><label className = "notification">Check your email and then enter code you recived</label></div>
+            notification=(
+              <div><label className="notification">Check your email and then enter code you recived</label></div>
             )
           }
           else
           {
-            notification = (
+            notification=(
               <div>
                       <div class="row">
-                        <div class="col-sm-9"> <label>{"Please waiting "}<label className = "timer-span">{this.state.seconds}</label></label> <label> for sendMail</label></div>
+                        <div class="col-sm-9"> <label>{"Please waiting "}<label className="timer-span">{this.state.seconds}</label></label> <label> for sendMail</label></div>
                       </div>
                 </div>
             )
@@ -171,24 +171,24 @@ class Dashboard extends Component{
                 <div class="modal-content">
                   
                   <div class="modal-body">
-                  <span className="login100-form-title p-b-59" style = {{textAlign :"center",fontSize: "20px"}}>
+                  <span className="login100-form-title p-b-59" style={{textAlign :"center",fontSize: "20px"}}>
                         confirm delete key
                   </span>
                   
                   {notification}
                   <div className="wrap-input100 validate-input" data-validate="Name is required">
                         <span className="label-input100">Your code</span>
-                        <input className="input100" type="text" name="name" placeholder="Code..." style = {{fontSize: "20px"}} onChange = {this.handleinput}/>
+                        <input className="input100" type="text" name="name" placeholder="Code..." style={{fontSize: "20px"}} onChange={this.handleinput}/>
                         <span className="focus-input100" />
                       </div>
                   </div>
-                  <div class="row" style = {{
+                  <div class="row" style={{
                     textAlign: "center",
                     paddingBottom : "50px"
                     }}>
                       {/* {this.RedirectRender()} */}
-                    <div class="col-sm-6"> <button type="button" class="btn btn-default" style = {{width :"80%", marginTop: "10px"}} onClick = {this.back} data-dismiss="modal">Back</button></div>
-                    <div class="col-sm-6"><button type="button" class="btn btn-primary" style = {{width :"80%", marginTop: "10px"}} onClick = {this.confirm}>Confirm</button></div>
+                    <div class="col-sm-6"> <button type="button" class="btn btn-default" style={{width :"80%", marginTop: "10px"}} onClick={this.back} data-dismiss="modal">Back</button></div>
+                    <div class="col-sm-6"><button type="button" class="btn btn-primary" style={{width :"80%", marginTop: "10px"}} onClick={this.confirm}>Confirm</button></div>
                   </div>
                 </div>
               </div>
@@ -199,7 +199,7 @@ class Dashboard extends Component{
       }
 
       
-      move = ()=>
+      move=()=>
       {
         localStorage.setItem("component", "create-key");
       }
@@ -209,16 +209,16 @@ class Dashboard extends Component{
         console.log(this.state.recode);
       }
       
-      s4 = ()=>{
+      s4=()=>{
         return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
       }
     
-      randomkey = ()=>
+      randomkey=()=>
       {
         return this.s4();
       }
 
-    delclick = (e)=>
+    delclick=(e)=>
     {
         
         this.setState({
@@ -226,8 +226,8 @@ class Dashboard extends Component{
             id: e.target.value,
             seconds: 10
         })
-        this.timer = setInterval(()=>{
-        let seconds = this.state.seconds - 1;
+        this.timer=setInterval(()=>{
+        let seconds=this.state.seconds - 1;
         this.setState({
           seconds
         });
@@ -236,7 +236,7 @@ class Dashboard extends Component{
             clearInterval(this.timer);
         }
         }, 1000);
-        var data = {
+        var data={
             code: this.state.code,
             email: this.state.lemail,
             contain: "Đây là code của bạn dùng để xác nhận xóa key "
@@ -246,7 +246,7 @@ class Dashboard extends Component{
         })
     }
 
-    vieclick = (e)=>
+    vieclick=(e)=>
     {
       this.state.data.map(value=>{
         if(e.target.value === value.id.toString())
@@ -262,13 +262,13 @@ class Dashboard extends Component{
      
     }
 
-    handleSearch = (e)=>{
+    handleSearch=(e)=>{
         this.setState({search: e.target.value});
-        var search = e.target.value;
-        var fakedata = [];
+        var search=e.target.value;
+        var fakedata=[];
         if(search === "")
         {
-            fakedata = this.state.data;
+            fakedata=this.state.data;
         }
         else
         {
@@ -283,13 +283,13 @@ class Dashboard extends Component{
         
     }
 
-    search = ()=>{
-        var {search} = this.state;
-        var {data} = this.state;
-        var fakedata = [];
+    search=()=>{
+        var {search}=this.state;
+        var {data}=this.state;
+        var fakedata=[];
         if(search === "")
         {
-            fakedata = data
+            fakedata=data
         }
         else
         {
@@ -303,12 +303,12 @@ class Dashboard extends Component{
         this.setState({fakedata})
     }
 
-    extension = (e)=>{
+    extension=(e)=>{
       localStorage.setItem("keyID",e.target.value);
     }
 
 
-    renderTable = (data)=>{
+    renderTable=(data)=>{
         return data.map(value=>{
             return(
                 <tr>
@@ -320,11 +320,11 @@ class Dashboard extends Component{
                     <td>{value.count}</td>
                     <td>
                     <CopyToClipboard text={value.value}>
-                      <button type="button" class="fa fa-clone fa-lg" title = "Copy this key"></button>
+                      <button type="button" class="fa fa-clone fa-lg" title="Copy this key"></button>
                     </CopyToClipboard>
-                    <button type="button" class="fa fa-eye fa-lg" value={value.id} onClick={this.vieclick} data-toggle="modal" href='#modal-id-view' title = "View history of this key"></button>
-                    <Link to = "/recreatekey"><button type="button" class="fa fa-credit-card-alt fa-lg" value = {value.id} onClick = {this.extension} title = "Extension for this key"></button></Link>
-                    <button type="button" class="fa fa-trash-o fa-lg" value={value.id} onClick={this.delclick} data-toggle="modal" href='#modal-id' title = "Delete this key"></button>
+                    <button type="button" class="fa fa-eye fa-lg" value={value.id} onClick={this.vieclick} data-toggle="modal" href='#modal-id-view' title="View history of this key"></button>
+                    <Link to="/recreatekey"><button type="button" class="fa fa-credit-card-alt fa-lg" value={value.id} onClick={this.extension} title="Extension for this key"></button></Link>
+                    <button type="button" class="fa fa-trash-o fa-lg" value={value.id} onClick={this.delclick} data-toggle="modal" href='#modal-id' title="Delete this key"></button>
                     
                    </td> 
                 </tr>
@@ -333,9 +333,9 @@ class Dashboard extends Component{
     }
 
 
-    RenderChart = ()=>{
-        var {free,pay,un} = this.state
-        var chartData = {labels: ['Free Trial', 'Pay', 'Unlimted'],
+    RenderChart=()=>{
+        var {free,pay,un}=this.state
+        var chartData={labels: ['Free Trial', 'Pay', 'Unlimted'],
         datasets:[
           {
             label:'Population',
@@ -361,17 +361,17 @@ class Dashboard extends Component{
          if(this.state.length === 0)
          {
            return(
-            // <div style = {{width: "60%", marginLeft:"20%",boxShadow: "5px 5px 5px #666",background: "#eee",marginTop: "20px", padding: "10px 50px 10px 50px"}}>
-            //   <div style = {{textAlign: "center"}}>
-            //     <div><img class="navigation-image" src="//cdn.jotfor.ms/assets/img/memberkit/user_guide_images/f1.png?v=0.2" style = {{width: "100px", height:"100px"}} alt="Getting Started with JotForm Podo"/></div>
-            //     <div style = {{fontSize:"16px"}}>SOA User Guide / Getting Started with SOA</div>
+            // <div style={{width: "60%", marginLeft:"20%",boxShadow: "5px 5px 5px #666",background: "#eee",marginTop: "20px", padding: "10px 50px 10px 50px"}}>
+            //   <div style={{textAlign: "center"}}>
+            //     <div><img class="navigation-image" src="//cdn.jotfor.ms/assets/img/memberkit/user_guide_images/f1.png?v=0.2" style={{width: "100px", height:"100px"}} alt="Getting Started with JotForm Podo"/></div>
+            //     <div style={{fontSize:"16px"}}>SOA User Guide / Getting Started with SOA</div>
             //   </div>
            
             // <h2>
             // <a class="chapterTitle" href="https://www.jotform.com/help/2-How-to-Create-Your-First-Web-Form">How to create a Key</a>
             // </h2>
             // <p class="chapterSummary">
-            // First-time SOA users often ask how to create a simple web form, how to set up Email Notifications, how to embed a form on a website, how to test the form to see if it's working, and how to view responses in email and JotForm Inbox.&amp;nbsp;Got a... or <Link to = "/create-key" onClick = {this.move}>Click here to get started</Link></p> 
+            // First-time SOA users often ask how to create a simple web form, how to set up Email Notifications, how to embed a form on a website, how to test the form to see if it's working, and how to view responses in email and JotForm Inbox.&amp;nbsp;Got a... or <Link to="/create-key" onClick={this.move}>Click here to get started</Link></p> 
             
             // <h2>
             // <a class="chapterTitle" href="https://www.jotform.com/help/526-How-to-Change-the-Username">How to change the password?</a>
@@ -435,7 +435,7 @@ class Dashboard extends Component{
               and you will be the next person we collaborate with. You need to create a key to get started, let us help you, click the button below and follow the instructions
             </span>
                 <div id="btn-sign">
-                <Link className = "btnSign" to = "/products">
+                <Link className="btnSign" to="/products">
                     <div className="btns btn1">Get started &amp; Code</div>
                 </Link>
                 </div>
@@ -451,16 +451,16 @@ class Dashboard extends Component{
             {this.RenderModalViewClick()}
               
 
-            <div style = {{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
-              <input type="text" style = {{width: "100%"}} class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search" onChange = {this.handleSearch}/>
+            <div style={{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
+              <input type="text" style={{width: "100%"}} class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search" onChange={this.handleSearch}/>
             </div>
              
-        <div style = {{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
-            <table class="table table-striped table-inverse table-responsive" style = {{width: "100%"}}>
-                <thead class="thead-inverse" style = {{backgroundColor: "#3b5998", color: "white"}}>
+        <div style={{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
+            <table class="table table-striped table-inverse table-responsive" style={{width: "100%"}}>
+                <thead class="thead-inverse" style={{backgroundColor: "#3b5998", color: "white"}}>
                     <tr>
                         <th >ID</th>
-                        <th style = {{width: "15%"}}>Key</th>
+                        <th style={{width: "15%"}}>Key</th>
                         <th>Type</th>
                         <th>Status</th>
                         <th>Start date</th>
@@ -483,8 +483,8 @@ class Dashboard extends Component{
         else
         {
             return(
-                <div style = {{textAlign: "center", marginTop: "100px"}}>
-                    <img src={"https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"} alt="loading..." style = {{width: "100px", height: "100px"}}/>
+                <div style={{textAlign: "center", marginTop: "100px"}}>
+                    <img src={"https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"} alt="loading..." style={{width: "100px", height: "100px"}}/>
                 </div>
               )
         }

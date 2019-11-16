@@ -3,7 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import API from '../Database/APICnn';
 import Facebook from './Facebook';
 import Google from './Google'
-const api = new API();
+const api=new API();
 
 
 
@@ -12,10 +12,10 @@ class LoginPage extends Component{
   
     constructor(props) {
       super(props);
-      this.handlePassword = this.handlePassword.bind(this);
-      this.handleUsername = this.handleUsername.bind(this);
-      this.signIn = this.signIn.bind(this);
-      this.state = {
+      this.handlePassword=this.handlePassword.bind(this);
+      this.handleUsername=this.handleUsername.bind(this);
+      this.signIn=this.signIn.bind(this);
+      this.state={
         laccount :JSON.parse(localStorage.getItem('laccount')) || [],
         lpassword: JSON.parse(localStorage.getItem('lstate')) || [],
         redirect: false,
@@ -34,7 +34,7 @@ class LoginPage extends Component{
 
 
    getInitialState() {
-      var selectedOption = localStorage.getItem( 'SelectedOption' ) || 1;
+      var selectedOption=localStorage.getItem( 'SelectedOption' ) || 1;
   
       return {
           selectedOption: selectedOption
@@ -56,7 +56,7 @@ class LoginPage extends Component{
       this.setState({lpassword: e.target.value});
     }
 
-    addProject = (newProject) => {
+    addProject=(newProject) => {
       this.setState({
         allProjects: this.state.allProjects.concat(newProject)
       },() => {
@@ -67,15 +67,15 @@ class LoginPage extends Component{
 
 
 
-    putdata = () =>{
+    putdata=() =>{
       // m tìm kiếm ID muốn replace trong this.state.data tìm bằng user nghe, cái user t đang lưu trong localstorage,
       // m get rồi tìm kiếm id là đc.
        // rồi truyền ID vào hàm push data
       // t bỏ hàm này trong SignIn khi m ấn btn sign nó sẽ replace
-      // ví dụ ID = 1;
-      var id = 1;
+      // ví dụ ID=1;
+      var id=1;
       // nhấn sign in xong kiểm tra console log in ra thành công rồi là ok 
-      var data = {
+      var data={
         name: "Lê Hữu Lý",
         avatar: "avatar 1",
         birthday: 1569683675,
@@ -87,14 +87,14 @@ class LoginPage extends Component{
       api.getDataWithAccountParams('account1');
       }
 
-    signIn = () =>{
+    signIn=() =>{
       this.putdata();
-      var check = '0';
-      var id = null;
+      var check='0';
+      var id=null;
       Object.entries(this.state.data).map(([key,value],i) =>{
         if(value.account === this.state.laccount && value.password === this.state.lpassword)
         {
-          check = '1';
+          check='1';
         
         }
       })
@@ -124,9 +124,9 @@ class LoginPage extends Component{
     
 
     render(){
-      var {redirect} = this.state;
-      redirect = localStorage.getItem('redirect');
-      var logout = localStorage.getItem('logout');
+      var {redirect}=this.state;
+      redirect=localStorage.getItem('redirect');
+      var logout=localStorage.getItem('logout');
       if(redirect || logout)
       {
         localStorage.clear();
@@ -134,7 +134,7 @@ class LoginPage extends Component{
       }
       if(localStorage.getItem('user'))
       {
-        return <Redirect to = '/homepage'></Redirect>
+        return <Redirect to='/homepage'></Redirect>
       }
       else{
         return(
@@ -147,7 +147,7 @@ class LoginPage extends Component{
   
                   <span className="login100-form-title p-b-34">
                   <div id="branding" >
-                              {/* <img alt = "Image" src="https://www.hackerrank.com/wp-content/uploads/2018/08/hackerrank_logo.png" className="img-responsive" /> */}
+                              {/* <img alt="Image" src="https://www.hackerrank.com/wp-content/uploads/2018/08/hackerrank_logo.png" className="img-responsive" /> */}
                               <h3 style={{marginTop:"15px"}}><strong>SOU</strong>nd API</h3>
                           </div>
                   </span>
@@ -160,7 +160,7 @@ class LoginPage extends Component{
                     </span>
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Username is required">
-                    <input className="input100" type="text" name="username" id = 'account' onChange = {this.handleUsername}/>
+                    <input className="input100" type="text" name="username" id='account' onChange={this.handleUsername}/>
                     <span className="focus-input100" />
                   </div>
                   <div className="p-t-13 p-b-9">
@@ -172,12 +172,12 @@ class LoginPage extends Component{
                     </a>
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Password is required">
-                    <input className="input100" type="password" name="pass" id = 'password' onChange = {this.handlePassword}/>
+                    <input className="input100" type="password" name="pass" id='password' onChange={this.handlePassword}/>
                     <span className="focus-input100" />
                   </div>
                   <div className="container-login100-form-btn">
                     
-                    <button type="button" className="login100-form-btn" onClick = {this.signIn}>
+                    <button type="button" className="login100-form-btn" onClick={this.signIn}>
                       Sign In
                     </button>
                     
@@ -186,7 +186,7 @@ class LoginPage extends Component{
                     <span className="txt2">
                       Not a member?
                     </span>
-                    <Link to = "/resgister" className="txt2 bo1">
+                    <Link to="/resgister" className="txt2 bo1">
                       Sign up now
                     </Link>
                   </div>

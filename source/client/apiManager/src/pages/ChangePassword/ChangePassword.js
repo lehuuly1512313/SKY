@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import API from '../Database/APICnn';
-const api = new API();
+const api=new API();
 
 
 
@@ -108,7 +108,7 @@ class ChangePassword extends Component{
     render(){
       if(this.state.redirect)
       {
-        return <Redirect to = '/'></Redirect>
+        return <Redirect to='/'></Redirect>
       }
         return(
           //   <div>
@@ -171,12 +171,12 @@ class ChangePassword extends Component{
 
             <div className="panel panel-default">
                 <div className="panel-heading">Website <i className="fa fa-link fa-1x" /></div>
-                <div className="panel-body"><Link to = "/">SoundAPI.com</Link></div>
+                <div className="panel-body"><Link to="/">SoundAPI.com</Link></div>
               </div>
               
               <div className="panel panel-default">
                 <div className="panel-heading">Website <i className="fa fa-link fa-1x" /></div>
-                <div className="panel-body"><Link to = "/">SoundAPI.com</Link></div>
+                <div className="panel-body"><Link to="/">SoundAPI.com</Link></div>
               </div>
              
               <div className="panel panel-default">
@@ -209,7 +209,7 @@ class ChangePassword extends Component{
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="phone" ><h4>Phone</h4></label>
-                        <input type="text" className="form-control"  name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." value = {this.state.phone}/>
+                        <input type="text" className="form-control"  name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." value={this.state.phone}/>
                       </div>
                     </div>
                     <div className="form-group">

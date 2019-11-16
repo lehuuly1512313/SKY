@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {Redirect} from "react-router-dom";
-import API from '../../pages/Database/APICnn';
 import Avatar from 'react-avatar';
 import '../../App.css'
 
@@ -10,13 +9,13 @@ class Menu extends Component{
     constructor(props) {
         super(props);
        
-        var about = window.location.pathname === "/about"? "alway actived":"alway";
-        var Contacts = window.location.pathname === "/contacts"? "alway actived":"alway";
-        var Resources = (window.location.pathname === "/products")? "alway actived":"alway";
-        var products = window.location.pathname === "/introduce"? "alway actived":"alway";
-        var docs = (window.location.pathname === "/docs" || window.location.pathname === '/SDK')? "alway actived":"alway";
-        var Dashboard = window.location.pathname === "/dashboard"? "alway actived":"alway";;
-        this.state = {
+        var about=window.location.pathname === "/about"? "alway actived":"alway";
+        var Contacts=window.location.pathname === "/contacts"? "alway actived":"alway";
+        var Resources=(window.location.pathname === "/products")? "alway actived":"alway";
+        var products=window.location.pathname === "/introduce"? "alway actived":"alway";
+        var docs=(window.location.pathname === "/docs" || window.location.pathname === '/SDK')? "alway actived":"alway";
+        var Dashboard=window.location.pathname === "/dashboard"? "alway actived":"alway";;
+        this.state={
           maccount :JSON.parse(localStorage.getItem('laccount')) || '',
           mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
           user: localStorage.getItem('user'),
@@ -49,11 +48,11 @@ class Menu extends Component{
     RenderRedirect = ()=>{
         if(this.state.redirect)
           {
-              return <Redirect to = '/'></Redirect>
+              return <Redirect to='/'></Redirect>
             }
       }
 
-    products = ()=>{
+    products=()=>{
         this.setState({
             products: "alway actived",
           Dashboard: "alway",
@@ -64,7 +63,7 @@ class Menu extends Component{
         })
     }
 
-    Resources = ()=>{
+    Resources=()=>{
         this.setState({
             products: "alway",
             Dashboard: "alway",
@@ -75,7 +74,7 @@ class Menu extends Component{
         })
     }
 
-    Contacts = ()=>{
+    Contacts=()=>{
         this.setState({
             products: "alway",
             Dashboard: "alway",
@@ -86,7 +85,7 @@ class Menu extends Component{
         })
     }
 
-    about = ()=>{
+    about=()=>{
         this.setState({
             products: "alway",
             Dashboard: "alway",
@@ -97,7 +96,7 @@ class Menu extends Component{
         })
     }
 
-    docs = ()=>
+    docs=()=>
     {
         this.setState({
             products: "alway",
@@ -109,7 +108,7 @@ class Menu extends Component{
         })
     }
 
-    Dashboard = ()=>{
+    Dashboard=()=>{
         this.setState({
             products: "alway",
             Dashboard: "alway actived",
@@ -120,100 +119,100 @@ class Menu extends Component{
         })
     }
 
-    profile = ()=>{
+    profile=()=>{
         localStorage.setItem("profile", "active");
         localStorage.removeItem("change");
     }
 
-    change = ()=>{
+    change=()=>{
         localStorage.setItem("change", "active");
         localStorage.removeItem("profile");
     }
 
 
     render(){
-        var name = 'Login';
-        var log_out = 'Sign Up';
-        var link = 'resgister';
-        var iconlogin_profile = "fa fa-sign-in";
-        var iconsingup_logout = "fa fa-user-plus";
-        var substring = '';
-        var avatar = './servicesStyle/images/avatar.png';
+        var name='Login';
+        var log_out='Sign Up';
+        var link='resgister';
+        var iconlogin_profile="fa fa-sign-in";
+        var iconsingup_logout="fa fa-user-plus";
+        var substring='';
+        var avatar='./servicesStyle/images/avatar.png';
 
         if(this.state.facebookuser)
         {
-            log_out = 'Log out';
-            iconsingup_logout = "fa fa-sign-out";
-            link = '';
-            name = localStorage.getItem('FacebookName');
-            iconlogin_profile = "fa fa-facebook-official";
-            avatar = localStorage.getItem('FacebookPicture');
+            log_out='Log out';
+            iconsingup_logout="fa fa-sign-out";
+            link='';
+            name=localStorage.getItem('FacebookName');
+            iconlogin_profile="fa fa-facebook-official";
+            avatar=localStorage.getItem('FacebookPicture');
         }
 
         if(this.state.googleuser)
         {
-            log_out = 'Log out';
-            iconsingup_logout = "fa fa-sign-out";
-            link = '';
-            name = localStorage.getItem('GoogleName');
-            iconlogin_profile = "fa fa-google";
-            avatar = localStorage.getItem('GooglePicture');
+            log_out='Log out';
+            iconsingup_logout="fa fa-sign-out";
+            link='';
+            name=localStorage.getItem('GoogleName');
+            iconlogin_profile="fa fa-google";
+            avatar=localStorage.getItem('GooglePicture');
         }
        
         if(this.state.user)
         {
-            substring = this.state.user;
-            log_out = 'Log out';
-            iconsingup_logout = "fa fa-sign-out";
-            link = '';
+            substring=this.state.user;
+            log_out='Log out';
+            iconsingup_logout="fa fa-sign-out";
+            link='';
             Object.entries(this.state.data).map(([key,value],i)=>{
                 if(value.account === substring)
                 {
-                    name = value.name;
-                    iconlogin_profile = "fa fa-user";
-                    avatar = value.avatar;
+                    name=value.name;
+                    iconlogin_profile="fa fa-user";
+                    avatar=value.avatar;
                 }
             });
         }
 
         return(
                 
-                <div id="padding-sticky" className="header" style = {{display: `${this.props.display}`}}>
+                <div id="padding-sticky" className="header" style={{display: `${this.props.display}`}}>
                     <div id="sticky-header" >
                             <div id="branding" >
-                                <img alt = "Image" src="./signupstyle/images/logo.png" className = "logo"/>
+                                <img alt="Image" src="./signupstyle/images/logo.png" className="logo"/>
                             </div>
-                        <nav id = "togle">
-                        <ul id = "res">
-                            <li className={this.state.Dashboard} onClick={this.Dashboard} style = {{fontWeight: "bold"}}><Link to = "/dashboard">Dashboard</Link></li>
-                            <li className={this.state.products} onClick={this.products} style = {{fontWeight: "bold"}}><Link to = "/introduce">Introduce</Link>
+                        <nav id="togle">
+                        <ul id="res">
+                            <li className={this.state.Dashboard} onClick={this.Dashboard} style={{fontWeight: "bold"}}><Link to="/dashboard">Dashboard</Link></li>
+                            <li className={this.state.products} onClick={this.products} style={{fontWeight: "bold"}}><Link to="/introduce">Introduce</Link>
                 
                             </li>
-                            <li className={this.state.Resources} onClick={this.Resources} style = {{fontWeight: "bold"}}><Link to = "/products">Package</Link></li>
+                            <li className={this.state.Resources} onClick={this.Resources} style={{fontWeight: "bold"}}><Link to="/products">Package</Link></li>
                            
-                            <li className={this.state.docs} onClick={this.docs} style = {{fontWeight: "bold"}}><Link to = "/docs">Docs</Link> 
+                            <li className={this.state.docs} onClick={this.docs} style={{fontWeight: "bold"}}><Link to="/docs">Docs</Link> 
                             <ul>
                                 <li><Link to="/SDK">Software Development Kit (SDK)</Link></li>
                                 <li><a href="gl">Learn more</a></li>
                             </ul>
                             </li>
-                            <li className={this.state.Contacts} onClick={this.Contacts} style = {{fontWeight: "bold"}}><Link to = "/contacts">Contact</Link></li>
-                            <li className={this.state.about} onClick={this.about} style = {{fontWeight: "bold"}}><Link to = "/about">About Us</Link> </li>
+                            <li className={this.state.Contacts} onClick={this.Contacts} style={{fontWeight: "bold"}}><Link to="/contacts">Contact</Link></li>
+                            <li className={this.state.about} onClick={this.about} style={{fontWeight: "bold"}}><Link to="/about">About Us</Link> </li>
                             
                             
                         </ul>
                         </nav>
-                        <div className = "toggle"><i className="fa fa-bars menu"></i></div>
+                        <div className="toggle"><i className="fa fa-bars menu"></i></div>
                         {this.RenderRedirect()}
-                        <div className = "dropdown">
-                            <Avatar src= {avatar} size="50"  round = {true} className = "avatar-header" style ={{marginTop: '5px'}}/>
+                        <div className="dropdown">
+                            <Avatar src={avatar} size="50"  round={true} className="avatar-header" style={{marginTop: '5px'}}/>
                                 <div class="dropdown-content">
-                                    <Link to ={`/${name}`} className = "Link" onClick = {this.profile}><span><i class={iconlogin_profile} aria-hidden="true"></i>{"  "}{name}</span></Link>
-                                    <Link to = {`/${link}`} className = "Link"><span onClick = {this.onClick_LogOutOrSignUp}><i class={iconsingup_logout} aria-hidden="true"></i>{"  "}{log_out}</span></Link>
+                                    <Link to={`/${name}`} className="Link" onClick={this.profile}><span><i class={iconlogin_profile} aria-hidden="true"></i>{"  "}{name}</span></Link>
+                                    <Link to={`/${link}`} className="Link"><span onClick={this.onClick_LogOutOrSignUp}><i class={iconsingup_logout} aria-hidden="true"></i>{"  "}{log_out}</span></Link>
                                 </div>
                            </div>
-                            <span id = "btn-menu-hidden" ><i class="fa fa-bars fa-menu-hidden" aria-hidden="true"></i></span>
-                            <div className= "sticky-header-show-nobackground"></div>   
+                            <span id="btn-menu-hidden" ><i class="fa fa-bars fa-menu-hidden" aria-hidden="true"></i></span>
+                            <div className="sticky-header-show-nobackground"></div>   
                     </div>
 
                 </div>
