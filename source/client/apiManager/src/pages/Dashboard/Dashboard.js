@@ -320,11 +320,11 @@ class Dashboard extends Component{
                     <td>{value.count}</td>
                     <td>
                     <CopyToClipboard text={value.value}>
-                      <button type="button" class="fa fa-clone fa-lg" ></button>
+                      <button type="button" class="fa fa-clone fa-lg" title = "Copy this key"></button>
                     </CopyToClipboard>
-                    <button type="button" class="fa fa-eye fa-lg" value={value.id} onClick={this.vieclick} data-toggle="modal" href='#modal-id-view'></button>
-                    <Link to = "/recreatekey"><button type="button" class="fa fa-credit-card-alt fa-lg" value = {value.id} onClick = {this.extension}></button></Link>
-                    <button type="button" class="fa fa-trash-o fa-lg" value={value.id} onClick={this.delclick} data-toggle="modal" href='#modal-id'></button>
+                    <button type="button" class="fa fa-eye fa-lg" value={value.id} onClick={this.vieclick} data-toggle="modal" href='#modal-id-view' title = "View history of this key"></button>
+                    <Link to = "/recreatekey"><button type="button" class="fa fa-credit-card-alt fa-lg" value = {value.id} onClick = {this.extension} title = "Extension for this key"></button></Link>
+                    <button type="button" class="fa fa-trash-o fa-lg" value={value.id} onClick={this.delclick} data-toggle="modal" href='#modal-id' title = "Delete this key"></button>
                     
                    </td> 
                 </tr>
@@ -449,11 +449,10 @@ class Dashboard extends Component{
         <div>
             {this.RenderModalDelClick()}
             {this.RenderModalViewClick()}
-            <div class="row" style = {{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
-                <div class="col-sm-11">
-                        <input type="text" style = {{width: "100%"}} class="form-control" name="" id="" aria-describedby="helpId" placeholder="" onChange = {this.handleSearch}/>
-                </div>
-                <div class="col-sm-1"><button class="fa fa-search fa-2x"  onClick = {this.search}></button></div>
+              
+
+            <div style = {{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
+              <input type="text" style = {{width: "100%"}} class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search" onChange = {this.handleSearch}/>
             </div>
              
         <div style = {{width: "90%", marginLeft: "5%", marginTop:"2%"}}>

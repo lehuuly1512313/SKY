@@ -181,6 +181,17 @@ class API {
     })
   }
 
+  getIDfacebook_google = (data)=>{
+    return axios
+    .get(`http://localhost:4000/facebook_google/${data.account}`)
+    .then(res=>{
+      return res.data
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
+
   Recreatekey = (data)=>{
     return axios
     .post("http://localhost:4000/register-key-again",data)

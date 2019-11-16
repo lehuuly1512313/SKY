@@ -55,7 +55,13 @@ class Google extends Component
     if(check)
     {
       api.facebook_google(data).then(res=>{
-        window.location.reload();
+        if(res === "sucessfully")
+        {
+          api.getIDfacebook_google({account: this.state.userID}).then(res=>{
+            localStorage.setItem("ID",res[0].id);
+            window.location.reload();
+          })
+        }
       })
     }
 
