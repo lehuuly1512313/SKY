@@ -103,7 +103,7 @@ class NewSignIn extends Component{
                   
                   <div className="wrap-input100 validate-input" data-validate="Username is required">
                     <span className="label-input100">Username</span>
-                    <input className="input100" type="text" name="username" placeholder="Username..." name="username" id='account' onChange={this.handleUsername}/>
+                    <input className="input100" type="text" name="username" placeholder="Username..."  id='account' onChange={this.handleUsername}/>
                     <span className="focus-input100" />
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Password is required">

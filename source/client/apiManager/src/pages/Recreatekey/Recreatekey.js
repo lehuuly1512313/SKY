@@ -29,7 +29,7 @@ class Recreatekey extends Component{
         numofbank = value.numofbank;
         if(numofbank)
         {  check = "Corect";}
-        return;
+        return true;
       }
     })
     console.log(numofbank);
@@ -39,9 +39,7 @@ class Recreatekey extends Component{
         Country = value.Country;
         Bank = value.Name;
         bankid = value.id;
-        
-      
-        return;
+        return true;
       }
     })
 
@@ -95,7 +93,7 @@ class Recreatekey extends Component{
             phone: value.phone,
             card: value.numofbank
           })
-          return;
+          return true;
         }
       })
 
@@ -143,7 +141,7 @@ class Recreatekey extends Component{
           check: "Corect",
           bankid: value.id,
         })
-        return;
+        return true;
       }
     })  
   }
@@ -179,7 +177,7 @@ class Recreatekey extends Component{
         this.setState({
           check: "Corect"
         })
-        return;
+        return true;
       }
     })  
   }
