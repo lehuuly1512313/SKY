@@ -36,7 +36,7 @@ class Dashboard extends Component{
               if(localStorage.getItem("ID") === value.id.toString())
               {
                 this.setState({lemail: value.email})
-                return;
+                return true;
               }
           })
       }
@@ -256,7 +256,7 @@ class Dashboard extends Component{
             source: value.source
           })
          
-          return;
+          return true;
         }
       })
      

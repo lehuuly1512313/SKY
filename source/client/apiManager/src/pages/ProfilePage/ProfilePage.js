@@ -108,7 +108,14 @@ class ProfilePage extends Component{
         numofbank: this.state.numofbank,
         avatar: this.state.avatar
       }
-      if(this.state.check)
+      console.log(data);
+      if(this.state.phone.length < 10 || this.state.phone.length > 11)
+      {
+        alert("Số điện thoại không đúng định dạng")
+      }
+      else
+      {
+      if(this.state.check || this.state.numofbank === "")
       {
         api.putdata(data).then(res=>{
           window.location.reload();
@@ -118,6 +125,7 @@ class ProfilePage extends Component{
       {
         alert("Chúng tôi không tìm thấy số tài khoản của bạn! xin vui lòng kiểm tra lại");
       }    
+    }
 }
     handleUsername(e)
     {
@@ -145,6 +153,7 @@ class ProfilePage extends Component{
 
     handlenumofbank=(e)=>{
       this.setState({numofbank: e.target.value})
+     
       this.setState({
         icon: "fa fa-times-circle-o",
         color: "red",
@@ -235,7 +244,15 @@ class ProfilePage extends Component{
       })
       if(check)
       {
-        if(this.state.handlenewpassword === this.state.handleconfirmnewpassword)
+       if(this.state.handlenewpassword.length < 6)
+        {
+          alert("Mật khẩu mới phải trên 6 ký tự")
+        }
+        else if(this.state.handlenewpassword !== this.state.handleconfirmnewpassword)
+        {
+          alert("Bạn nhập lại mật khẩu không chính xác")
+        }
+        else
         {
           var data={
             id,
@@ -253,14 +270,6 @@ class ProfilePage extends Component{
               this.setState({notifycation: ""})
             }, 1500);
           })
-        }
-        else if(this.state.handlenewpassword.length < 6)
-        {
-          alert("Mật khẩu mới phải trên 6 ký tự")
-        }
-        else 
-        {
-          alert("Bạn nhập lại mật khẩu không chính xác")
         }
       }
       else

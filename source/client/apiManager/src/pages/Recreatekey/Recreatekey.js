@@ -67,6 +67,7 @@ class Recreatekey extends Component{
       bankid,
       keyvalue: "",
       keystatus: "",
+      notifycation: "",
     };
   }
 
@@ -194,9 +195,14 @@ create = async () =>{
     email: this.state.email,
   }
 
+
+  this.setState({
+    notifycation: "Check your email"
+  })
   api.Recreatekey(data).then(response =>{
+    
     if(response === "sent") 
-    {
+    {     
     var cost = 0;
     if(this.state.select === "1 Month")
     {
@@ -367,7 +373,7 @@ dashboard = ()=>{
                 <option value="Unlimited">Unlimited ($1/1000)</option> 
           </select>
           </div>
-
+          <label style={{color: "green"}}>{this.state.notifycation}</label>
           <div className="button-section">
             <input type="button" value="Extension" name="Sign Up"  class="btn btn-primary" onClick={this.create}/>
           </div>
