@@ -100,7 +100,7 @@ class App extends Component {
            <TopHeader display={display} />
             <MenuPage display={display} data={this.props.data}/>
             
-          <div >
+          <div style ={{overflow : "hidden"}}>
           <link  rel="stylesheet" href="./servicesStyle/css/style.css"/>
          
             {this.showContentMenu(this.routes)}
