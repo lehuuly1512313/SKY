@@ -3,7 +3,7 @@ import axios from 'axios'
 class API {
   getData = () => {
     return axios
-      .get('http://localhost:4001/users')
+      .get('https://back-end-services-soa.herokuapp.com/users')
       .then(function(response) {
         if (response.status === 200 && response != null) {
           var data = response.data
@@ -20,7 +20,7 @@ class API {
 
   GenKey = (data) => {
     return axios
-      .post('http://localhost:4002/key',data)
+      .post('https://back-end-services-soa.herokuapp.com/key',data)
       .then(res=>{
         return res.data;
       })
@@ -31,7 +31,7 @@ class API {
 
   forgotpassword = (data) => {
     return axios
-      .post('http://localhost:4001/forgotpassword',data)
+      .post('https://back-end-services-soa.herokuapp.com/forgotpassword',data)
       .then(res=>{
         return res.data;
       })
@@ -42,7 +42,7 @@ class API {
 
   changepassword = (data) =>{
     return axios
-    .post('http://localhost:4001/changepassword',data)
+    .post('https://back-end-services-soa.herokuapp.com/changepassword',data)
     .then(res=>{
       return res.data;
     })
@@ -71,7 +71,7 @@ class API {
 
   postData = (data)=>{
     return axios
-    .post('http://localhost:4001/users',data)
+    .post('https://back-end-services-soa.herokuapp.com/users',data)
     .then(res=>{
       return res.data;
     })
@@ -82,7 +82,7 @@ class API {
 
     out_of_date = ()=>{
     return axios
-    .post('http://localhost:4002/check-out-of-date')
+    .post('https://back-end-services-soa.herokuapp.com/check-out-of-date')
     .then(res=>{
       return res.data;
     })
@@ -93,7 +93,7 @@ class API {
 
   SendMail = (data)=>{
     return axios
-    .post("http://localhost:4001/send-mail",
+    .post("https://back-end-services-soa.herokuapp.com/send-mail",
     {
       code : data.code,
       email: data.email,
@@ -111,7 +111,7 @@ class API {
 
   SendMailContacts = (data)=>{
     return axios
-    .post("http://localhost:4001/send-mail-contacts",
+    .post("https://back-end-services-soa.herokuapp.com/send-mail-contacts",
     {
       email: data.email,
       from: data.from,
@@ -128,7 +128,7 @@ class API {
 
   getKey = data=>{
     return axios
-    .get(`http://localhost:4002/get-keys/${data.id}`)
+    .get(`https://back-end-services-soa.herokuapp.com/get-keys/${data.id}`)
     .then(res=>{
       return res.data;
     })
@@ -139,7 +139,7 @@ class API {
 
   putdata = (data)=>{
     return axios
-    .put(`http://localhost:4001/users`,data)
+    .put(`https://back-end-services-soa.herokuapp.com/users`,data)
     .then(res=>{
       return res.data;
     })
@@ -150,7 +150,7 @@ class API {
 
   delkey = (id)=>{
     return axios
-    .delete(`http://localhost:4002/keys/${id}`)
+    .delete(`https://back-end-services-soa.herokuapp.com/keys/${id}`)
     .then(res=>{
       return res.data;
     })
@@ -161,7 +161,7 @@ class API {
 
   avatar = ()=>{
     return axios
-    .get("http://localhost:4001/avatar")
+    .get("https://back-end-services-soa.herokuapp.com/avatar")
     .then(res=>{
       return res.data
     })
@@ -172,7 +172,7 @@ class API {
 
   facebook_google = (data)=>{
     return axios
-    .post("http://localhost:4001/facebook_google",data)
+    .post("https://back-end-services-soa.herokuapp.com/facebook_google",data)
     .then(res=>{
       return res.data
     })
@@ -183,7 +183,7 @@ class API {
 
   getIDfacebook_google = (data)=>{
     return axios
-    .get(`http://localhost:4001/facebook_google/${data.account}`)
+    .get(`https://back-end-services-soa.herokuapp.com/facebook_google/${data.account}`)
     .then(res=>{
       return res.data
     })
@@ -194,7 +194,7 @@ class API {
 
   Recreatekey = (data)=>{
     return axios
-    .post("http://localhost:4002/register-key-again",data)
+    .post("https://back-end-services-soa.herokuapp.com/register-key-again",data)
     .then(res=>{
       return res.data
     })

@@ -32,13 +32,13 @@ class Loading extends Component {
             data: response,
       })
     })
-    api.getDataURL("http://localhost:4003/banks").then(res=>{
+    api.getDataURL("https://back-end-services-soa.herokuapp.com/banks").then(res=>{
       this.setState({
         banks: res,
       })
     })
 
-    api.getDataURL("http://localhost:4003/banks-name").then(res=>{
+    api.getDataURL("https://back-end-services-soa.herokuapp.com/banks-name").then(res=>{
       console.log(res);
       this.setState({
         name: res,
