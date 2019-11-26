@@ -1980,7 +1980,7 @@ width: 300px;
 position: relative;
 }
 .modal-content{
-height: 100vh;
+height: 30vh;
 position: absolute !important;
 top:-31px;
 right: 0px;
@@ -2246,8 +2246,38 @@ visibility: hidden;
   .form-style-10{
     margin-left: 200px;
   }
+  .modal-content{
+    right: -110px;
+  }
 }
 
+
+
+@media (max-width: 690px){
+  #backgroundForm{
+    display: none;
+  }
+
+  .form-style-10{
+    margin-left: 127px;
+  }
+  .modal-content{
+    right: -110px;
+  }
+}
+
+@media (max-width: 600px){
+  #backgroundForm{
+    display: none;
+  }
+
+  .form-style-10{
+    margin-left: 9px;
+  }
+  .modal-content{
+    right:-5px;
+  }
+}
 @media (max-width: 414px){
   
 
