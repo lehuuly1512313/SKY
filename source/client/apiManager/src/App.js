@@ -19,6 +19,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import Recreatekey from "./pages/Recreatekey/Recreatekey"
 import SDKPage from "./pages/SDKPage/SDKPage"
+import Guid from "./pages/Guid/Guid"
 
 class App extends Component {
 
@@ -73,6 +74,10 @@ class App extends Component {
       main: ({match}) => <About match={match} data={this.props.data}/>
     },
     {
+      path: "/guid",
+      main: ({match}) => <Guid match={match} data={this.props.data}/>
+    },
+    {
       path: "/profile",
       main: ({match}) => <ProfilePage match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
     }
@@ -85,6 +90,7 @@ class App extends Component {
       path: "/:id",
       main: ({match}) => <ProfilePage  match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
     },
+    
 
 ]
 

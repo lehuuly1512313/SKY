@@ -203,7 +203,7 @@ class Menu extends Component{
                             <li className={this.state.docs + " docs"} onClick={this.docs} style = {{fontWeight: "bold"}}><Link to = "/docs">Docs</Link> 
                             <ul>
                                 <li><Link to="/SDK">Software Development Kit (SDK)</Link></li>
-                                <li><a href="gl">Learn more</a></li>
+                                <li><Link to="/guid">Learn more </Link></li>
                             </ul>
                             </li>
                             <li className={this.state.Contacts} onClick={this.Contacts} style = {{fontWeight: "bold"}}><Link to = "/contacts">Contact</Link></li>
