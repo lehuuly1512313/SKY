@@ -17,32 +17,7 @@ class Recreatekey extends Component{
     this.handleCompany = this.handleCompany.bind(this);
     this.handlePhone = this.handlePhone.bind(this);
 
-    var Country = "Vietnam";
-    var Bank =  "Vietcombank";
-    var numofbank = "";
-    var bankid = 0;
-    var check = "";
-    var id = localStorage.getItem("ID");
-    this.props.data.map(value=>{
-      if(id === value.id.toString())
-      {
-        numofbank = value.numofbank;
-        if(numofbank)
-        {  check = "Corect";}
-        return true;
-      }
-    })
-    console.log(numofbank);
-    this.props.banks.map(value=>{
-      if(numofbank === value.Cardnum)
-      {
-        Country = value.Country;
-        Bank = value.Name;
-        bankid = value.id;
-        return true;
-      }
-    })
-
+   
     this.state = {
       maccount :JSON.parse(localStorage.getItem('laccount')) || '',
       mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
@@ -56,15 +31,14 @@ class Recreatekey extends Component{
       copied: false,
       name : "",
       select: "1 Month",
-      Country,
-      Bank,
-      check,
+      
+     
       card: "",
       color:"green",
       modal: "",
       company: "",
       phone: "",
-      bankid,
+
       keyvalue: "",
       keystatus: "",
       notifycation: "",
@@ -183,69 +157,48 @@ class Recreatekey extends Component{
     })  
   }
 
-create = async () =>{
-  var userid = "";
-  if(await localStorage.getItem("ID")){
-    userid = localStorage.getItem("ID");
-  }
-  if(this.state.card && this.state.check === "Corect")
-  {
-  var data = {
-    msg: "waiting",
-    email: this.state.email,
-  }
-
+create =() =>{
+  
+    var data={
+      msg: "send-mail",
+      email: this.state.email,
+    }
 
   this.setState({
     notifycation: "Check your email"
   })
-  api.Recreatekey(data).then(response =>{
-    
-    if(response === "sent") 
-    {     
-    var cost = 0;
-    if(this.state.select === "1 Month")
+
+  api.Recreatekey(data).then(res=>{
+    if(res === "sent")
     {
-      cost = 1
+      var set = setInterval(()=>{
+        var data2 = {
+          msg: "waiting"
+        }
+        api.Recreatekey(data2).then(res=>{
+          if(res === "done")
+            {
+              clearInterval(set);
+              var key = {
+                msg: "register-again",
+                id: localStorage.getItem("keyID"),
+                type: this.state.select,
+                email: this.state.email,
+            }
+              api.Recreatekey(key).then(res=>{
+                localStorage.setItem("dashboard" , true);
+                window.location.reload();
+              })
+            }
+        })
+      },2000)
     }
-    if(this.state.select === "3 Months")
-    {
-      cost = 3
-    }
-    if(this.state.select === "6 Months")
-    {
-      cost = 5
-    }
-    if(this.state.select === "9 Months")
-    {
-      cost = 7
-    }
-    if(this.state.select === "12 Months")
-    {
-      cost = 9
-    }
-    if(this.state.select === "Unlimited")
-    {
-      cost = 0
-    }
-    var key = {
-        method: "register-again",
-        id: localStorage.getItem("keyID"),
-        type: this.state.select,
-        card: this.state.bankid,
-        cost,
-        email: this.state.email,
-    }
-    api.Recreatekey(key).then(res=>{
-      if(res === "sucessfully")
-      {
-        localStorage.setItem("dashboard" , true);
-        window.location.reload();
-      }
-    })
-  }
   })
-}
+  setTimeout(()=>{
+    this.setState({
+      notifycation: ""
+    })
+  },2000)
 }
 
 
@@ -270,42 +223,6 @@ dashboard = ()=>{
         let email = this.state.email
         //let card = this.state.bank
         var content = null;
-        if((this.state.card && this.state.check === "Corect"))
-        {
-          content = (
-            <div>
-               <div class="modal-body">
-            <label className="notification">Check your email</label>
-            <div><h4 class="modal-title">Your key</h4></div>
-            <input type="text" name="" id="input" class="form-control" value={this.state.key}/>
-            </div>
-            <div class="modal-footer">
-            <CopyToClipboard text={this.state.key}
-                    onCopy={() => this.setState({copied: true})}>
-                     <button type="button" class="btn btn-success" >COPY</button>
-                </CopyToClipboard>
-            {this.state.copied ? <span style={{color: 'red'}}>Copied.</span> : null}
-          
-              <button type="button" class="btn btn-default" onClick={this.dashboard}>DONE</button>
-            </div>
-            </div>
-          )
-        }
-        else{
-          content=(
-            <div> 
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              </div>
-            <div class="modal-body" style={{textAlign: "center"}}>
-            <label style={{color: "red"}}> Thông báo: Bạn chưa điền đầy đủ hoặc có thông tin sai xin vui long kiểm tra lại</label>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-            </div>
-            </div>
-          )
-        }
         if(localStorage.getItem("dashboard"))
         {
           localStorage.removeItem("dashboard")
@@ -343,26 +260,11 @@ dashboard = ()=>{
             <label style={{color: "black"}}>Your Full Name <input type="text" name="field1" value={name} readOnly /></label>
          </div>
 
-          <div className="section"><span>3</span>Credit Card &amp; Paypal</div>
-          <div className="inner-wrap">
-          <label style={{color: "black"}}>Country
-          <select style={{outline: "none"}} value={this.state.Country} onChange={this.handleCountry}>
-                <option value="Vietnam">Vietnam</option>
-                <option value="Nation">Nation</option>
-          </select>
-          </label>
-          <label style={{color: "black"}} >Bank
-          <select style={{outline: "none"}} value={this.state.Bank} onChange={this.handlebank}>
-            {this.loadBanks(this.state.names)}
-          </select>
-          </label>
-            <label  style={{color: "black"}}>Card Number{"   "} <label style={{color: this.state.color}}>{this.state.check}</label> <input  style={{color: "black"}} type="text" name="field4" value={this.state.card} onChange={this.inputcard}/></label>
-          </div>
-          <div className="section"><span>4</span>Email or Phone number to comfirm</div>
+          <div className="section"><span>3</span>Email or Phone number to comfirm</div>
           <div className="inner-wrap">
             <label  style={{color: "black"}}>Your email <input type="email" name="field5"  value={email} readOnly/></label>
           </div>
-          <div className="section"><span>5</span>Pick package you want to extension </div>
+          <div className="section"><span>4</span>Pick package you want to extension </div>
           <div className="inner-wrap">
           <select style={{outline: "none"}} onChange={this.handleSelect} value={this.state.select}>
                 <option value="1 Month">1 Months (1 $)</option>
@@ -373,7 +275,7 @@ dashboard = ()=>{
                 <option value="Unlimited">Unlimited ($1/1000)</option> 
           </select>
           </div>
-          <label style={{color: "green"}}>{this.state.notifycation}</label>
+          <label style={{color: "green", fontSize: "30px"}}>{this.state.notifycation}</label>
           <div className="button-section">
             <input type="button" value="Extension" name="Sign Up"  class="btn btn-primary" onClick={this.create}/>
           </div>

@@ -17,34 +17,6 @@ class CreateKey extends Component{
     this.handleCompany=this.handleCompany.bind(this);
     this.handlePhone=this.handlePhone.bind(this);
 
-    var Country="Vietnam";
-    var Bank= "Vietcombank";
-    var numofbank="";
-    var bankid=0;
-    var check="";
-    var id=localStorage.getItem("ID");
-    this.props.data.map(value=>{
-      if(id === value.id.toString())
-      {
-        numofbank=value.numofbank;
-        if(numofbank)
-        {  check="Corect";}
-        return true;
-      }
-    })
-    console.log(numofbank);
-    this.props.banks.map(value=>{
-      if(numofbank === value.Cardnum)
-      {
-        Country=value.Country;
-        Bank=value.Name;
-        bankid=value.id;
-        
-      
-        return true;
-      }
-    })
-
     this.state={
       maccount :JSON.parse(localStorage.getItem('laccount')) || '',
       mpassword: JSON.parse(localStorage.getItem('lpassword')) || '',
@@ -57,16 +29,12 @@ class CreateKey extends Component{
       key: "yourkey",
       copied: false,
       name : "",
-      select: localStorage.getItem("create"),
-      Country,
-      Bank,
-      check,
+      select: "Free",
       card: "",
       color:"green",
       modal: "",
       company: "",
       phone: "",
-      bankid
     };
   }
 
@@ -169,53 +137,14 @@ create=async () =>{
   if(await localStorage.getItem("ID")){
     userid=localStorage.getItem("ID");
   }
-  if(this.state.phone && this.state.company && (this.state.card && this.state.check === "Corect"))
+  if(this.state.phone)
   {
-  var data={
-    msg: "waiting",
-    email: this.state.email,
-  }
-
-  api.GenKey(data).then(response =>{
-    if(response === "sent") 
-    {
-    var cost=0;
-    if(this.state.select === "Free")
-    {
-      cost=0
-    }
-    if(this.state.select === "1 Month")
-    {
-      cost=1
-    }
-    if(this.state.select === "3 Months")
-    {
-      cost=3
-    }
-    if(this.state.select === "6 Months")
-    {
-      cost=5
-    }
-    if(this.state.select === "9 Months")
-    {
-      cost=7
-    }
-    if(this.state.select === "12 Months")
-    {
-      cost=9
-    }
-    if(this.state.select === "Unlimited")
-    {
-      cost=0
-    }
     var key={
-        method: "get-key",
+        msg: "get-key",
         id: "0",
         type: this.state.select,
         user: userid,
         start: Date.now(),
-        cost,
-        card: this.state.bankid,
         email: this.state.email,
     }
     api.GenKey(key).then(res=>{
@@ -224,8 +153,6 @@ create=async () =>{
       })
     })
   }
-  })
-}
 }
 
 
@@ -250,12 +177,11 @@ dashboard=()=>{
         let email=this.state.email
         //let card=this.state.bank
         var content=null;
-        if(this.state.phone && this.state.company && (this.state.card && this.state.check === "Corect"))
+        if(this.state.phone)
         {
           content=(
             <div>
                <div class="modal-body">
-            <label className="notification">Check your email</label>
             <div><h4 class="modal-title">Your key</h4></div>
             <input type="text" name="" id="input" class="form-control" value={this.state.key}/>
             </div>
@@ -315,8 +241,6 @@ dashboard=()=>{
           <div className="section"><span>1</span>Your Information </div>
           <div className="inner-wrap">
             <label style={{color: "black"}}>Your Full Name <input type="text" name="field1" value={name} readOnly /></label>
-            <label style={{color: "black"}}>Your Company <input type="text" name="field1" value={this.state.company} onChange={this.handleCompany}/></label>
-            <label style={{color: "black"}}>Your Position <input type="text" name="field1" value={this.state.company} onChange={this.handleCompany}/></label>
          </div>
          <div className="section"><span>2</span>Pupose </div>
           <div className="inner-wrap">
@@ -327,27 +251,12 @@ dashboard=()=>{
                 
           </select>
           </div>
-          <div className="section"><span>3</span>Credit Card &amp; Paypal</div>
-          <div className="inner-wrap">
-          <label style={{color: "black"}}>Country
-          <select style={{outline: "none"}} value={this.state.Country} onChange={this.handleCountry}>
-                <option value="Vietnam">Vietnam</option>
-                <option value="Nation">Nation</option>
-          </select>
-          </label>
-          <label style={{color: "black"}} >Bank
-          <select style={{outline: "none"}} value={this.state.Bank} onChange={this.handlebank}>
-            {this.loadBanks(this.state.names)}
-          </select>
-          </label>
-            <label  style={{color: "black"}}>Card Number{"   "} <label style={{color: this.state.color}}>{this.state.check}</label> <input  style={{color: "black"}} type="text" name="field4" value={this.state.card} onChange={this.inputcard}/></label>
-          </div>
-          <div className="section"><span>4</span>Email or Phone number to comfirm</div>
+          <div className="section"><span>3</span>Email or Phone number to comfirm</div>
           <div className="inner-wrap">
             <label  style={{color: "black"}}>Your email <input type="email" name="field5"  value ={email} readOnly/></label>
             <label  style={{color: "black"}}>Your phone number<input type="text" name="field6" value={this.state.phone} onChange={this.handlePhone}/></label>
           </div>
-          <div className="section"><span>5</span>Pick package you want trial </div>
+          <div className="section"><span>4</span>Pick package you want trial </div>
           <div className="inner-wrap">
           <select style={{outline: "none"}} onChange={this.handleSelect} value={this.state.select}>
                 <option value="Free">Free Trial</option>

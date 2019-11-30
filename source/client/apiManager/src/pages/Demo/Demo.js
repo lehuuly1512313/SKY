@@ -22,7 +22,7 @@ class Demo extends Component{
 
     componentDidMount()
     {
-        soa.CnnTrans("59ccc0ebcf3923adc1aa81a80fd69103da78e0f50b0d814715738251338601","hello").then(res=>{
+        soa.CnnTrans("f25c17d165c37ab3a509daa80c1827273511cc6b46bdbb20157510891582521","hello").then(res=>{
             this.setState({
                 value: res.vie,
                 msg: res.msg

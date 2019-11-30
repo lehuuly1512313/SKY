@@ -180,10 +180,7 @@ class Menu extends Component{
                 <div id="padding-sticky" className="header" style={{display: `${this.props.display}`}}>
                     <div id="sticky-header" >
                             <div id="branding" >
-                                <Link to = "/dashboard">
                                 <img alt = "Image" src="./signupstyle/images/logo.png" className = "logo"/>
-
-                                </Link>
                             </div>
                             <input className = "chek" id = "chek" type = "checkbox"/>  
                             {/* <label htmlFor = "chek">1</label> */}
@@ -198,14 +195,8 @@ class Menu extends Component{
                             <li className={this.state.products} onClick={this.products} style = {{fontWeight: "bold"}}><Link to = "/introduce">Introduce</Link>
                 
                             </li>
-                            <li className={this.state.Resources} onClick={this.Resources} style = {{fontWeight: "bold"}}><Link to = "/products">Package</Link></li>
-                           
-                            <li className={this.state.docs + " docs"} onClick={this.docs} style = {{fontWeight: "bold"}}><Link to = "/docs">Docs</Link> 
-                            <ul>
-                                <li><Link to="/SDK">Software Development Kit (SDK)</Link></li>
-                                <li><Link to="/guid">Learn more </Link></li>
-                            </ul>
-                            </li>
+                            <li className={this.state.Resources} onClick={this.Resources} style = {{fontWeight: "bold"}}><Link to = "/create-key">Create key</Link></li>
+
                             <li className={this.state.Contacts} onClick={this.Contacts} style = {{fontWeight: "bold"}}><Link to = "/contacts">Contact</Link></li>
                             <li className={this.state.about} onClick={this.about} style = {{fontWeight: "bold"}}><Link to = "/about">About Us</Link> </li>
                             {/* <li id = "SDK2" className = {this.state.docs} style = {{fontWeight: "bold"}}><Link to="/SDK">SDK Template</Link></li> */}

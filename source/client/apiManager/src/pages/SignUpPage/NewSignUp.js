@@ -8,7 +8,6 @@ class NewSignUp extends Component{
   constructor(props) {
     super(props);
     this.handlePassword = this.handlePassword.bind(this);
-    this.handleUsername = this.handleUsername.bind(this);
     this.handleUConfirmPassword = this.handleUConfirmPassword.bind(this);
     this.handlefullname = this.handlefullname.bind(this);
     this.handlemail = this.handlemail.bind(this);
@@ -32,11 +31,6 @@ class NewSignUp extends Component{
     };
   }
 
-  handleUsername(e)
-  {
-    this.setState({laccount: e.target.value});
-  }
-
   handlePassword(e)
   {
     this.setState({lpassword: e.target.value});
@@ -55,6 +49,7 @@ class NewSignUp extends Component{
   handlemail(e)
   {
     this.setState({lemail: e.target.value});
+    this.setState({laccount: e.target.value});
   }
 
   handlephone(e)
@@ -67,82 +62,160 @@ class NewSignUp extends Component{
   }
 
 
+  RenderModalViewClick=()=>{
+    const backdropStyle={
+      position: 'fixed',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: 'rgba(24, 23, 23, 0.308)',
+      padding: 50
+    };
+    return(     
+      <div  class="modal fade" id="modal-id" style={backdropStyle}>
+        <div class="modal-dialog" >
+          <div class="modal-content">
+            
+            <div class="modal-body">
+              <div style={{
+                    textAlign: "center",
+                    fontSize: "30px",
+                    padding: "10px"
+                    }}>
+                   Notification
+              </div>
+            <span style={{textAlign :"center",fontSize: "30px",color: "green",paddingBottom : "50px"}}>
+              {this.state.notifycation}
+            </span>
+            <div class="row" style={{
+                    textAlign: "center",
+                    paddingBottom : "10px"
+              
+                    }}>
+                      <div class="col-sm-6"></div>
+                    <div class="col-sm-6"> <button type="button" class="btn btn-default" style={{width :"80%", marginTop: "10px"}} onClick={this.back} data-dismiss="modal">ok</button></div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+}
+
 
   SignUp = ()=>
   {
     var check = false;
-    var {laccount,lpassword,lrepassword,lfullname,lemail,lphone} = this.state;
+    var {lpassword,lrepassword,lfullname,lemail,lphone} = this.state;
     Object.entries(this.state.data).map(([key,value],index)=>{
       if(value.account === this.state.laccount)
       {
         check = true;
-        return;
-      }
+        return true;
+      } 
     })
+    var notifycation = "";
     if(check === true){
-      alert("tài khoản đã tồn tại");
+       notifycation = "Account already exists"
+       this.setState(
+        {
+          notifycation
+        }
+      )
     }
-    else if(!laccount || !lpassword || !lrepassword || !lfullname || !lemail || !lphone) 
+    else if(!lpassword || !lrepassword || !lfullname || !lemail || !lphone) 
     {
-      alert("Bạn chưa điền đầy đủ thông tin");
+      notifycation = "You have not filled in the information"
+      this.setState(
+        {
+          notifycation
+        }
+      )
     }
     else if(lpassword!==lrepassword)
     {
-      alert("Bạn nhập lại mật khẩu sai! vui lòng kiểm tra lại");
+      notifycation = "You entered the wrong password again! please check again";
+      this.setState(
+        {
+          notifycation
+        }
+      )
     }
     else if(lpassword.length < 6)
     {
-      alert("Mật khẩu phải trên 6 ký tự");
+      notifycation = "Password must be over 6 characters";
+      this.setState(
+        {
+          notifycation
+        }
+      )
     }
     else if(!lemail.includes("@"))
     {
-      alert("Email không đúng định dạng");
+      notifycation = "Email invalidate";
+      this.setState(
+        {
+          notifycation
+        }
+      )
     }
     else if(lphone.length < 10 || lphone.length > 11)
     {
-      alert("Số điện thoại không hợp lệ");
-    }
-    else if(laccount.length < 6)
-    {
-      alert("Tài khoản phải trên 6 ký tự");
+      notifycation ="invalid phone number";
+      this.setState(
+        {
+          notifycation
+        }
+      )
     }
     else
     {
+      notifycation = "please check your mail to active account"
     this.setState(
       {
-        notifycation: "Check your email",
+        notifycation
       }
     )
     var data = {
-      msg: "waiting",
+      msg: "send-mail",
       email: this.state.lemail,
     }
+    localStorage.setItem("account", lemail)
     var {laccount,lpassword,lfullname,lemail,lphone} = this.state;
-    api.postData(data).then(response =>{
-      if(response === "sent") 
+    api.postData(data).then(res=>{
+      if(res === "sent")
       {
-      var key = {
-          method: "register",
-          account: laccount,
-          password: lpassword,
-          name: lfullname,
-          email: lemail,
-          phone: lphone,
-          avatar: "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg",
-          numofbank: ""
-      }
-      api.postData(key).then(res=>{
-        if(res === "successfully")
-        {
-          this.setState({
-            redirect: true
+        var set = setInterval(()=>{
+          var data2 = {
+            msg: "waiting"
+          }
+          api.postData(data2).then(res=>{
+            if(res === "done")
+              {
+                clearInterval(set);
+                var key = {
+                  msg: "register",
+                  account: lemail,
+                  password: lpassword,
+                  name: lfullname,
+                  email: lemail,
+                  phone: lphone,
+                  avatar: "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg",
+                  numofbank: ""
+              }
+                api.postData(key).then(res=>{
+                  this.setState({
+                    redirect: true
+                  })
+                  localStorage.clear();
+                  window.location.reload();
+                })
+              }
           })
-          window.location.reload();
-        }
-      })
-    
-    }
-    })    
+        },2000)
+      }
+    })
     }
   }
 
@@ -153,6 +226,7 @@ class NewSignUp extends Component{
       }
         return(
           <div>
+            {this.RenderModalViewClick()}
             <div className="limiter">
             <div className="container-login100">
               <div className="login100-more" style={{backgroundImage: 'url("./signupstyle/images/signup.jpg")'}} />
@@ -175,12 +249,6 @@ class NewSignUp extends Component{
                     <input className="input100" type="number"  maxLength="11" name="quantity" min="0" max="9" placeholder="08xxxxxxx"  onChange={this.handlephone} value={this.state.lphone}/>
                     <span className="focus-input100" />
                   </div>
-
-                  <div className="wrap-input100 validate-input" data-validate="Username is required">
-                    <span className="label-input100">Username</span>
-                    <input className="input100" type="text" name="username" placeholder="Username must be over 6 characters"  onChange={this.handleUsername} value={this.state.laccount}/>
-                    <span className="focus-input100" />
-                  </div>
                   <div className="wrap-input100 validate-input" data-validate="Password is required">
                     <span className="label-input100">Password</span>
                     <input className="input100" type="password" name="pass" minLength="8" placeholder="Password must be over 6 characters"  onChange={this.handlePassword} value={this.state.lpassword}/>
@@ -192,12 +260,12 @@ class NewSignUp extends Component{
                     <span className="focus-input100" />
                   </div>  
                   <div>
-                    <label style={{color: "green"}}>{this.state.notifycation}</label>
+                   
                   </div> 
                   <div className="container-login100-form-btn">
                     <div className="wrap-login100-form-btn">
                       <div className="login100-form-bgbtn" />
-                      <button className="login100-form-btn" type="button"  onClick={this.SignUp}>
+                      <button className="login100-form-btn" type="button"  onClick={this.SignUp} data-toggle="modal" href='#modal-id'>
                         Continue
                       </button>
                     </div>

@@ -25,6 +25,8 @@ class Dashboard extends Component{
             showModal: false,
             last: "",
             source: "",
+            bool: false,
+            key: "",
         }
     }
 
@@ -79,9 +81,8 @@ class Dashboard extends Component{
         var {code, recode}=this.state;
         if(code===recode)
         {
-            api.delkey(this.state.id).then(res=>{
-                console.log(res);
-                window.location.reload();
+            this.setState({
+              bool:true
             })
         }
         else
@@ -215,7 +216,7 @@ class Dashboard extends Component{
     
       randomkey=()=>
       {
-        return this.s4();
+        return this.s4() + this.s4();
       }
 
     delclick=(e)=>
@@ -243,6 +244,15 @@ class Dashboard extends Component{
           }
         api.SendMail(data).then(res=>{
             console.log(res);
+            var set = setInterval(()=>{
+            api.delkey(this.state.id,{bool: this.state.bool}).then(res=>{
+              if(res === "done")
+              {
+                clearInterval(set);
+                window.location.reload();
+              }
+            })
+            },2000)
         })
     }
 
@@ -310,22 +320,27 @@ class Dashboard extends Component{
 
     renderTable=(data)=>{
         return data.map(value=>{
+          var color = "green";
+          if(value.status === "expired")
+          {
+            color = "red"
+          }
             return(
-                <tr>
+                <tr style = {{fontWeight:"bolder"}}>
                     <td scope="row">{value.id}</td>
                     <td>{value.value}</td>
                     <td>{value.type}</td>
-                    <td>{value.status}</td>
-                    <td>{value.start}</td>
+                    <td style = {{color:`${color}`}}>{value.status}</td>
+                    <td >{value.start}</td>
                     <td>{value.count}</td>
                     <td>
                     <CopyToClipboard text={value.value}>
                       <button type="button" class="fa fa-clone fa-lg" title="Copy this key"></button>
                     </CopyToClipboard>
                     <button type="button" class="fa fa-eye fa-lg" value={value.id} onClick={this.vieclick} data-toggle="modal" href='#modal-id-view' title="View history of this key"></button>
-                    <Link to="/recreatekey"><button type="button" class="fa fa-credit-card-alt fa-lg" value={value.id} onClick={this.extension} title="Extension for this key"></button></Link>
+                    <button type="button" class="fa fa-recycle fa-lg" value={value.id + "/"+value.value} onClick={this.changekey} title="change key value" data-toggle="modal" href='#modal-id-changekey'></button>
+                    <Link to="/recreatekey"><button type="button" class="fa fa-credit-card-alt fa-lg" value={value.id} onClick={this.extension} title="Extension for this key" ></button></Link>
                     <button type="button" class="fa fa-trash-o fa-lg" value={value.id} onClick={this.delclick} data-toggle="modal" href='#modal-id' title="Delete this key"></button>
-                    
                    </td> 
                 </tr>
             )
@@ -352,6 +367,71 @@ class Dashboard extends Component{
           }
         ]}
        return <Chart chartData={chartData} legendPosition="bottom" />
+    }
+
+    changekey = (e)=>
+    {
+      var value = e.target.value.split("/");
+      var key = value[1];
+      var id = value[0];
+      this.setState({
+        key: key
+      })
+
+     
+      var key2 = {
+          msg: "change-key",
+          id,
+          key,
+          start: Date.now(),
+          user: localStorage.getItem("ID")
+        }
+      api.Changekey(key2).then(res=>{
+      this.setState({
+        key: res
+        })
+      })
+     
+    }
+
+    dashboard= ()=>{
+      window.location.reload();
+    }
+
+    rendermodalchangekey = ()=>{
+      const backdropStyle={
+        position: 'fixed',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'rgba(24, 23, 23, 0.308)',
+        padding: 50
+      };
+      return(
+        <div id="modal-id-changekey" class="modal fade" style={backdropStyle}>
+         <div class="modal-dialog" >
+            <div class="modal-content">
+            <div class="modal-header" style = {{fontSize:'30px'}}>
+              Change value of this key
+              </div>
+        <div class="modal-body">
+     <label className="notification" style = {{color: "green", fontSize:'30px'}}>Your key has been changed</label>
+     <input type="text" name="" id="input" style = {{color: "green"}} class="form-control" value={this.state.key}/>
+     </div>
+     <div class="modal-footer">
+     <CopyToClipboard text={this.state.key}
+             onCopy={() => this.setState({copied: true})}>
+              <button type="button" class="btn btn-success" >COPY</button>
+         </CopyToClipboard>
+     {this.state.copied ? <span style={{color: 'red'}}>Copied.</span> : null}
+   
+       <button type="button" class="btn btn-default" onClick={this.dashboard}>DONE</button>
+     </div>
+     </div>
+     </div>
+     </div>
+      );
     }
 
     render()
@@ -435,7 +515,7 @@ class Dashboard extends Component{
               and you will be the next person we collaborate with. You need to create a key to get started, let us help you, click the button below and follow the instructions
             </span>
                 <div id="btn-sign">
-                <Link className="btnSign" to="/products">
+                <Link className="btnSign" to="/create-key">
                     <div className="btns btn1">Get started &amp; Code</div>
                 </Link>
                 </div>
@@ -449,7 +529,7 @@ class Dashboard extends Component{
         <div>
             {this.RenderModalDelClick()}
             {this.RenderModalViewClick()}
-              
+            {this.rendermodalchangekey()}
 
             <div style={{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
               <input type="text" style={{width: "100%"}} class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search" onChange={this.handleSearch}/>
@@ -474,6 +554,56 @@ class Dashboard extends Component{
             </table>
             <div>
                 {this.RenderChart()}
+            </div>
+
+            <div >
+              <h2>
+                Step 1
+              </h2>
+              <p style = {{fontSize: "16px"}}>
+                 You need create a key 
+                 <ul>
+                   <li>
+                     <div>
+                        If you do not have any key to use then please press this button in the dashboard
+                      </div>
+                    </li>
+                    <li>
+                     <div>
+                     If you already have one, you can skip this step, or create an additional key by clicking the create key button on the menu
+                      </div>
+                    </li>
+                 </ul>
+              </p>
+           
+            </div>
+         
+            <div>
+              <h2>
+                Step 2
+              </h2>
+
+            </div>
+            <div>
+            <p style = {{fontSize: "16px"}}>Copy the code into your project, you can customize the css if you want</p>
+            </div>
+            <div>
+              <pre className="notranslate lang-html devsite-jsfiddle-code-sample" dir="ltr" is-upgraded><span className="dec">&lt;!DOCTYPE html&gt;</span><span className="pln"><br /></span><span className="tag">&lt;html&gt;</span><span className="pln"><br />&nbsp; </span><span className="tag">&lt;head&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;title&gt;</span><span className="pln">Simple Map</span><span className="tag">&lt;/title&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;meta</span><span className="pln"> </span><span className="atn">name</span><span className="pun">=</span><span className="atv">"viewport"</span><span className="pln"> </span><span className="atn">content</span><span className="pun">=</span><span className="atv">"initial-scale=1.0"</span><span className="tag">&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;meta</span><span className="pln"> </span><span className="atn">charset</span><span className="pun">=</span><span className="atv">"utf-8"</span><span className="tag">&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;style&gt;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="com">/* Always set the map height explicitly to define the size of the div<br />&nbsp; &nbsp; &nbsp; &nbsp;* element that contains the map. */</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">#</span><span className="pln">map </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">height</span><span className="pun">:</span><span className="pln"> </span><span className="lit">100%</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="com">/* Optional: Makes the sample page fill the window. */</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; html</span><span className="pun">,</span><span className="pln"> body </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">height</span><span className="pun">:</span><span className="pln"> </span><span className="lit">100%</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">margin</span><span className="pun">:</span><span className="pln"> </span><span className="lit">0</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">padding</span><span className="pun">:</span><span className="pln"> </span><span className="lit">0</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"}</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;/style&gt;</span><span className="pln"><br />&nbsp; </span><span className="tag">&lt;/head&gt;</span><span className="pln"><br />&nbsp; </span><span className="tag">&lt;body&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;div</span><span className="pln"> </span><span className="atn">id</span><span className="pun">=</span><span className="atv">"map"</span><span className="tag">&gt;&lt;/div&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;script&gt;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="kwd">var</span><span className="pln"> map</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="kwd">function</span><span className="pln"> initMap</span><span className="pun">()</span><span className="pln"> </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; map </span><span className="pun">=</span><span className="pln"> </span><span className="kwd">new</span><span className="pln"> google</span><span className="pun">.</span><span className="pln">maps</span><span className="pun">.</span><span className="typ">Map</span><span className="pun">(</span><span className="pln">document</span><span className="pun">.</span><span className="pln">getElementById</span><span className="pun">(</span><span className="str">'map'</span><span className="pun">),</span><span className="pln"> </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; center</span><span className="pun">:</span><span className="pln"> </span><span className="pun">{"{"}</span><span className="pln">lat</span><span className="pun">:</span><span className="pln"> </span><span className="pun">-</span><span className="lit">34.397</span><span className="pun">,</span><span className="pln"> lng</span><span className="pun">:</span><span className="pln"> </span><span className="lit">150.644</span><span className="pun">{"}"},</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; zoom</span><span className="pun">:</span><span className="pln"> </span><span className="lit">8</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"});</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"}</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;/script&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;script</span><span className="pln"> </span><span className="atn">src</span><span className="pun">=</span><span className="atv">"https://maps.googleapis.com/maps/api/js?key=</span><span><devsite-credentials-dialog type="api_key" className data-modal-dialog-id="api-key-credentials-dialog" data-title="Click to insert your API key">YOUR_API_KEY</devsite-credentials-dialog></span><span className="atv">&amp;callback=initMap"</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="atn">async</span><span className="pln"> </span><span className="atn">defer</span><span className="tag">&gt;&lt;/script&gt;</span><span className="pln"><br />&nbsp; </span></pre>
+            </div>
+
+            <div >
+              <h2>
+                Step 3
+              </h2>
+              <p style = {{fontSize: "16px"}}>
+              Copy your key by clicking the button as shown below
+                  </p>
+            <img style = {{width: "100%"}} src="./servicesStyle/images/COPYKEY.png"></img>
+            <p style = {{fontSize: "16px"}}>
+              Copy your key by clicking the button as shown below
+                  </p>
+
+              <img style = {{width: "100%"}} src="./servicesStyle/images/PASTE.png"></img>
             </div>
         </div>
         </div>

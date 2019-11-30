@@ -32,13 +32,13 @@ class Loading extends Component {
             data: response,
       })
     })
-    api.getDataURL("https://back-end-services-soa.herokuapp.com/banks").then(res=>{
+    api.getDataURL("http://localhost:4000/banks").then(res=>{
       this.setState({
         banks: res,
       })
     })
 
-    api.getDataURL("https://back-end-services-soa.herokuapp.com/banks-name").then(res=>{
+    api.getDataURL("http://localhost:4000/banks-name").then(res=>{
       console.log(res);
       this.setState({
         name: res,
@@ -59,7 +59,7 @@ class Loading extends Component {
       {
           return(
             <div style={{textAlign: "center", marginTop: "250px"}}>
-                <img src={"https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif"} alt="loading..." style={{width: "100px", height: "100px"}}/>
+                <img src={"https://retchhh.files.wordpress.com/2015/03/loading4.gif?w=300&h=300"} alt="loading..." style={{width: "100px", height: "100px"}}/>
             </div>
           )
       }

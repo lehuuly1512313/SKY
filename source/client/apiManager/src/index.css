@@ -1971,21 +1971,6 @@ height: 40px;
 border: none;
 }
 
-/* .choice-btn{
-height: 100px;
-width: 300px;
-} */
-
-.modal-dialog{
-position: relative;
-}
-.modal-content{
-height: 30vh;
-position: absolute !important;
-top:-31px;
-right: 0px;
-}
-
 .btn-menu-back{
 left: 10px;
 top:50px;
@@ -2246,38 +2231,8 @@ visibility: hidden;
   .form-style-10{
     margin-left: 200px;
   }
-  .modal-content{
-    right: -110px;
-  }
 }
 
-
-
-@media (max-width: 690px){
-  #backgroundForm{
-    display: none;
-  }
-
-  .form-style-10{
-    margin-left: 127px;
-  }
-  .modal-content{
-    right: -110px;
-  }
-}
-
-@media (max-width: 600px){
-  #backgroundForm{
-    display: none;
-  }
-
-  .form-style-10{
-    margin-left: 9px;
-  }
-  .modal-content{
-    right:-5px;
-  }
-}
 @media (max-width: 414px){
   
 

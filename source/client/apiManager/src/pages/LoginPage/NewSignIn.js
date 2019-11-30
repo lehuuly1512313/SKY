@@ -19,7 +19,8 @@ class NewSignIn extends Component{
         laccount :JSON.parse(localStorage.getItem('laccount')) || [],
         lpassword: JSON.parse(localStorage.getItem('lstate')) || [],
         redirect: false,
-        data: this.props.data
+        data: this.props.data,
+        notifycation: "",
       };
     }
 
@@ -50,8 +51,22 @@ class NewSignIn extends Component{
           return;
         }
       })
+      var notifycation = "";
+      if(this.state.laccount === localStorage.getItem("account")){
+        notifycation = "Please check your email to activate your account";
+        this.setState({
+          notifycation
+        })
+      }
+      else
+      {
       if(check === '0')
-        alert("đăng nhập thất bại! tài khoản hoặc mật khẩu không chính xác");
+        {
+          notifycation = "Login failed! account or password is incorrect";
+          this.setState({
+            notifycation
+          })
+        }
       else
         {
           console.log("đăng nhập thành công");
@@ -69,6 +84,11 @@ class NewSignIn extends Component{
         localStorage.setItem("ID", id);
         window.location.reload();
         }
+      }
+
+      setTimeout(() => {
+        this.setState({notifycation: ""})
+      }, 3000);
   }
 
   
@@ -100,7 +120,7 @@ class NewSignIn extends Component{
                   <span className="login100-form-title p-b-59">
                     Sign In
                   </span>
-                  
+                  <label style={{color: "green", fontSize :'30px'}}>{this.state.notifycation}</label>
                   <div className="wrap-input100 validate-input" data-validate="Username is required">
                     <span className="label-input100">Username</span>
                     <input className="input100" type="text" name="username" placeholder="Username..."  id='account' onChange={this.handleUsername}/>
@@ -149,8 +169,7 @@ class NewSignIn extends Component{
                         Forgot password
                       <i className="fa fa-long-arrow-right m-l-5" />
                     </Link></div>
-                            
-                    
+
                     </div>
                   </div>
                 </form>
