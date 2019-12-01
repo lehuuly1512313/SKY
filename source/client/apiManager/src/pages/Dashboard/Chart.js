@@ -20,8 +20,9 @@ class Chart extends Component{
       <div className="chart">
 
 <div class="row">
-  <div class="col-sm-6"> <Bar
+   <Bar
           data={this.state.chartData}
+          height="100px"
           options={{
             title:{
               display:this.props.displayTitle,
@@ -33,21 +34,8 @@ class Chart extends Component{
               position:this.props.legendPosition
             }
           }}
-        /></div>
-  <div class="col-sm-6"><Line
-          data={this.state.chartData}
-          options={{
-            title:{
-              display:this.props.displayTitle,
-              text:'Most called',
-              fontSize:25
-            },
-            legend:{
-              display:this.props.displayLegend,
-              position:this.props.legendPosition
-            }
-          }}
-        /></div>
+        />
+ 
 </div>
        
 
