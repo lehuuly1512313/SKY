@@ -30,10 +30,11 @@ class Facebook extends Component
       email: response.email,
       picture: response.picture.data.url,
     })
-    localStorage.setItem('FacebookUser',this.state.email);
-    localStorage.setItem('FacebookName',this.state.name);
-    localStorage.setItem('FacebookID',this.state.userID);
-    localStorage.setItem('FacebookPicture',this.state.picture);
+    localStorage.setItem('email',this.state.email);
+    localStorage.setItem('name',this.state.name);
+    localStorage.setItem('user',this.state.userID);
+    localStorage.setItem('avatar',this.state.picture);
+    localStorage.setItem("facebook",true);
     var data = {
       name: this.state.name,
       account: this.state.userID,
@@ -43,34 +44,12 @@ class Facebook extends Component
       email: this.state.email,
       phone: "",
     }
-    var check = true;
-    var id = 0;
-    this.props.data.map(value=>{
-      if(this.state.userID === value.account)
-      {
-        check = false;
-        id = value.id;
-        return true;
-      }
-    })
+    
 
-    if(check)
-    {
-      api.facebook_google(data).then(res=>{
-        if(res === "sucessfully")
-        {
-          api.getIDfacebook_google({account: this.state.userID}).then(res=>{
-            localStorage.setItem("ID",res[0].id);
-            window.location.reload();
-          })
-        }
-      
-      })
-    }
-    else{
-      localStorage.setItem("ID",id);
+    api.fbgglogin(data).then(res=>{
+      localStorage.setItem('ID',res.id);
       window.location.reload();
-    }
+    })
   
   }
 

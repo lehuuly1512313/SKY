@@ -16,32 +16,10 @@ class ProfilePage extends Component{
     this.handlenewpassword=this.handlenewpassword.bind(this);
     this.handleconfirmnewpassword=this.handleconfirmnewpassword.bind(this);
     this.handlephone=this.handlephone.bind(this);
-    this.handlenumofbank=this.handlenumofbank.bind(this);
     this.edit=this.edit.bind(this);
     this.changeAvatar=this.changeAvatar.bind(this);
 
-    var numofbank="";
-    var check=false;
-    var id=localStorage.getItem("ID");
-    var icon="";
-    var color="";
-    this.props.data.map(value=>{
-      if(id === value.id.toString())
-      {
-        numofbank=value.numofbank;
-        return;
-      }
-    })
-
-    this.props.banks.map(value=>{
-      if(numofbank === value.Cardnum)
-      {
-        check=true;
-        icon= "fa fa-check-circle-o";
-        color= "green";
-        return;
-      }
-    })
+   
 
 
 
@@ -62,31 +40,31 @@ class ProfilePage extends Component{
       handleoldpassword: "",
       handleconfirmnewpassword: "",
       notifycation: "",
-      check,
-      icon,
-      color,
       readOnly: "readOnly"
     };
   }
   componentWillMount() {
        window.scrollTo(0, 0);  
-      this.state.data.map(value=>{
-        if(value.account === this.state.account)
-        {
-          var name=value.name.split(" ")
+     
+          var email = "";
+          if(localStorage.getItem("email"))
+          {
+            email = localStorage.getItem("email")
+          }
+          else
+          {
+            email = localStorage.getItem('user');
+          }
+          var name=localStorage.getItem('name').split(" ")
           this.setState({
             ...this.state,
             first_name: name.pop(),
             last_name: name.toString().split(",").join(" "),
-            id: value.id,
-            phone: value.phone,
-            email: value.email,
-            avatar: value.avatar,
-            numofbank: value.numofbank
+            id: localStorage.getItem('id'),
+            phone: localStorage.getItem('phone'),
+            email,
+            avatar: localStorage.getItem('avatar'),
           })
-          return;
-        }
-      })
   }
   RenderRedirect=()=>{
     if(this.state.relodirect)
@@ -97,7 +75,7 @@ class ProfilePage extends Component{
       first_name:"",
       last_name:"",
       phone: "",
-      numofbank: ""
+      
     })
   }
     edit=() =>{
@@ -105,7 +83,6 @@ class ProfilePage extends Component{
         id: localStorage.getItem("ID"),
         name: this.state.last_name + " " + this.state.first_name,
         phone: this.state.phone,
-        numofbank: this.state.numofbank,
         avatar: this.state.avatar
       }
       console.log(data);
@@ -115,17 +92,14 @@ class ProfilePage extends Component{
       }
       else
       {
-      if(this.state.check || this.state.numofbank === "")
-      {
+        localStorage.setItem('name', data.name);
+        localStorage.setItem('phone',data.phone);
+        localStorage.setItem('avatar',data.avatar);
+        localStorage.setItem("facebook",true);
         api.putdata(data).then(res=>{
           window.location.reload();
         })
       }
-      else
-      {
-        alert("Chúng tôi không tìm thấy số tài khoản của bạn! xin vui lòng kiểm tra lại");
-      }    
-    }
 }
     handleUsername(e)
     {
@@ -151,29 +125,8 @@ class ProfilePage extends Component{
       this.setState({phone: e.target.value})
     }
 
-    handlenumofbank=(e)=>{
-      this.setState({numofbank: e.target.value})
-     
-      this.setState({
-        icon: "fa fa-times-circle-o",
-        color: "red",
-        check: false,
-      })
-      this.state.banks.map(value=>{
-        if(e.target.value === value.Cardnum)
-        {
-          this.setState({
-            check:true,
-            icon: "fa fa-check-circle-o",
-            color: "green"
-          })
-          return;
-        }
-      })
-    }
-
-    
    
+
     onChangeHandler=e =>{
     let reader=new FileReader();
     reader.onload=(e) => {
@@ -303,17 +256,7 @@ class ProfilePage extends Component{
                         <input type="text" className="form-control"  name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." value={this.state.phone} onChange={this.handlephone}/>
                       </div>
                     </div>
-                    <div className="form-group">
-                      <div className="col-xs-6">
-                        <label htmlFor="mobile" ><h4>Card Number</h4></label>
-                        
-                       
-                        <div class="row">
-                          <div class="col-sm-10"><input type="text" className="form-control"  name="mobile" id="mobile" placeholder="enter card number" title="enter your mobile number if any." value={this.state.numofbank} onChange={this.handlenumofbank}/></div>
-                          <div class="col-sm-2" > <i class={this.state.icon + " " + "fa-3x"} style={{color: this.state.color}} aria-hidden="true"></i></div>
-                        </div>
-                      </div>
-                    </div>
+                   
                     <div className="form-group">
                       <div className="col-xs-6">
                         <label htmlFor="account" ><h4>Username</h4></label>

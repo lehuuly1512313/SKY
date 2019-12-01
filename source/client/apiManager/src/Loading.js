@@ -25,26 +25,11 @@ class Loading extends Component {
 
     api.out_of_date().then(res=>{
       console.log(res);
-    })
-
-    api.getData().then(response => {
       this.setState({
-            data: response,
-      })
-    })
-    api.getDataURL("http://localhost:4000/banks").then(res=>{
-      this.setState({
-        banks: res,
-      })
-    })
-
-    api.getDataURL("http://localhost:4000/banks-name").then(res=>{
-      console.log(res);
-      this.setState({
-        name: res,
         isLoading: true
       })
     })
+    
   }
   render() {
       if(this.state.isLoading)

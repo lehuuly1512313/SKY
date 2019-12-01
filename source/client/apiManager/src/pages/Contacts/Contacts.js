@@ -21,58 +21,31 @@ class Contacts extends Component {
   }
   componentWillMount() {
     window.scrollTo(0, 0);
-      this.state.data.map(value=>{
-        if(value.account === this.state.account)
-        {
-          var name=value.name.split(" ")
-          this.setState({
-            ...this.state,
-            first_name: name.pop(),
-            last_name: name.toString().split(",").join(" "),
-            id: value.id,
-            phone: value.phone,
-            email: value.email,
-            avatar: value.avatar
-          })
-          return true;
-        }
-    })
-
-    if(localStorage.getItem("FacebookID"))
-      {
-        var id=localStorage.getItem("FacebookID");
-        var name=localStorage.getItem("FacebookName");
-        var avatar=localStorage.getItem("FacebookPicture");
-        var email=localStorage.getItem("FacebookUser");
-        var names=name.split(" ");
-        this.setState({
-          ...this.state,
-          first_name: names.pop(),
-          last_name: names.toString().split(",").join(" "),
-          id,
-          phone: id,
-          email,
-          avatar
-        })
-      }
-      if(localStorage.getItem("GoogleID"))
-      {
-        var id=localStorage.getItem("GoogleID");
-        var name=localStorage.getItem("GoogleName");
-        var avatar=localStorage.getItem("GooglePicture");
-        var email=localStorage.getItem("GoogleUser");
-        var names=name.split(" ");
-        this.setState({
-          ...this.state,
-          first_name: names.pop(),
-          last_name: names.toString().split(",").join(" "),
-          id,
-          phone: id,
-          email,
-          avatar
-        })
-      }
     
+
+  
+        var id=localStorage.getItem("ID");
+        var name=localStorage.getItem("name");
+        var avatar=localStorage.getItem("avatar");
+        var email='';
+        if(localStorage.getItem('email'))
+        {
+          email = localStorage.getItem('email')
+        }
+        else
+        {
+          email = localStorage.getItem('user')
+        }
+        var names=name.split(" ");
+        this.setState({
+          ...this.state,
+          first_name: names.pop(),
+          last_name: names.toString().split(",").join(" "),
+          id,
+          phone: localStorage.getItem('phone'),
+          email,
+          avatar
+        })
   }
 
     handleContent(e)

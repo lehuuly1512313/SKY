@@ -21,6 +21,7 @@ class NewSignIn extends Component{
         redirect: false,
         data: this.props.data,
         notifycation: "",
+        src: "none",
       };
     }
 
@@ -41,54 +42,65 @@ class NewSignIn extends Component{
     }
 
     signIn=() =>{
-      var check='0';
       var id=null;
-      Object.entries(this.state.data).map(([key,value],i) =>{
-        if(value.account === this.state.laccount && value.password === this.state.lpassword)
-        {
-          check='1';
-          id=value.id;
-          return;
-        }
-      })
       var notifycation = "";
+      this.setState({
+        src: 'block',
+       
+      })
       if(this.state.laccount === localStorage.getItem("account")){
         notifycation = "Please check your email to activate your account";
         this.setState({
-          notifycation
+          notifycation,
+          src: 'none'
         })
       }
       else
       {
-      if(check === '0')
-        {
-          notifycation = "Login failed! account or password is incorrect";
-          this.setState({
-            notifycation
-          })
-        }
-      else
-        {
-          console.log("đăng nhập thành công");
-        
         this.setState({
-          laccount: this.state.laccount,
-          redirect : true,
-          lpassword: this.state.lpassword,
-          lstate: this.state.lstate,
-          rec:true
-        },() => {
-          localStorage.setItem('user', this.state.laccount)
-        });
-        localStorage.setItem("logged", true);
-        localStorage.setItem("ID", id);
-        window.location.reload();
+        src: 'block'
+      })
+
+        var data = {
+          account: this.state.laccount,
+          password: this.state.lpassword,
         }
+        api.login(data).then(res=>{
+          if(res.account)
+          {
+            id = res.id;
+            this.setState({
+              laccount: this.state.laccount,
+              redirect : true,
+              lpassword: this.state.lpassword,
+              lstate: this.state.lstate,
+              rec:true
+            },() => {
+              localStorage.setItem('user', this.state.laccount)
+            });
+            localStorage.setItem("logged", true);
+            localStorage.setItem("ID", id);
+            localStorage.setItem("name", res.name);
+            localStorage.setItem("avatar", res.avatar);
+            localStorage.setItem("phone",res.phone);
+            window.location.reload();
+          }
+          else
+          {
+            notifycation = res;
+            this.setState({
+              notifycation,
+              src:'none'
+            })
+          }
+          
+          setTimeout(() => {
+            this.setState({notifycation: ""})
+          }, 3000);
+        })
       }
 
-      setTimeout(() => {
-        this.setState({notifycation: ""})
-      }, 3000);
+     
   }
 
   
@@ -120,7 +132,8 @@ class NewSignIn extends Component{
                   <span className="login100-form-title p-b-59">
                     Sign In
                   </span>
-                  <label style={{color: "green", fontSize :'30px'}}>{this.state.notifycation}</label>
+                  <img src={"https://retchhh.files.wordpress.com/2015/03/loading4.gif?w=300&h=300"} alt="loading..." style={{width: "20px", height: "20px",display:`${this.state.src}`}}/>
+                  <label style={{color: "green", fontSize :'25px'}}>{this.state.notifycation}</label>
                   <div className="wrap-input100 validate-input" data-validate="Username is required">
                     <span className="label-input100">Username</span>
                     <input className="input100" type="text" name="username" placeholder="Username..."  id='account' onChange={this.handleUsername}/>

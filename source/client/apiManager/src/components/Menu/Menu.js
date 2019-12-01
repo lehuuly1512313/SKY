@@ -138,42 +138,29 @@ class Menu extends Component{
         var iconsingup_logout="fa fa-user-plus";
         var substring='';
         var avatar='./servicesStyle/images/avatar.png';
-
-        if(this.state.facebookuser)
-        {
-            log_out='Log out';
-            iconsingup_logout="fa fa-sign-out";
-            link='';
-            name=localStorage.getItem('FacebookName');
-            iconlogin_profile="fa fa-facebook-official";
-            avatar=localStorage.getItem('FacebookPicture');
-        }
-
-        if(this.state.googleuser)
-        {
-            log_out='Log out';
-            iconsingup_logout="fa fa-sign-out";
-            link='';
-            name=localStorage.getItem('GoogleName');
-            iconlogin_profile="fa fa-google";
-            avatar=localStorage.getItem('GooglePicture');
-        }
-       
+        log_out='Log out';
+        iconsingup_logout="fa fa-sign-out";
+        link='';
         if(this.state.user)
         {
             substring=this.state.user;
-            log_out='Log out';
-            iconsingup_logout="fa fa-sign-out";
-            link='';
-            Object.entries(this.state.data).map(([key,value],i)=>{
-                if(value.account === substring)
-                {
-                    name=value.name;
-                    iconlogin_profile="fa fa-user";
-                    avatar=value.avatar;
-                }
-            });
+            name=localStorage.getItem('name');
+            iconlogin_profile="fa fa-user";
+            avatar=localStorage.getItem("avatar");
         }
+        if(localStorage.getItem("facebook"))
+        {
+            iconlogin_profile="fa fa-facebook-official";
+        }
+
+        if(localStorage.getItem("google"))
+        {
+           
+            iconlogin_profile="fa fa-google";
+            
+        }
+       
+  
 
         return(
                 

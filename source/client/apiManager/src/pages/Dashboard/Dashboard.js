@@ -32,16 +32,17 @@ class Dashboard extends Component{
 
     componentWillMount()
     {
-      if(localStorage.getItem("ID"))
-      {
-          this.state.userData.map(value=>{
-              if(localStorage.getItem("ID") === value.id.toString())
-              {
-                this.setState({lemail: value.email})
-                return true;
-              }
-          })
-      }
+
+        var lemail = "";
+        if(localStorage.getItem('email'))
+        {
+          lemail = localStorage.getItem('email')
+        }
+        else
+        {
+          lemail = localStorage.getItem('user')
+        }
+        this.setState({lemail })
         var data={};
         if(localStorage.getItem("ID"))
         {
@@ -566,6 +567,7 @@ class Dashboard extends Component{
                    <li>
                      <div>
                         If you do not have any key to use then please press this button in the dashboard
+                        <img src="./servicesStyle/images/CREATE.png"></img>
                       </div>
                     </li>
                     <li>
@@ -614,7 +616,7 @@ class Dashboard extends Component{
         {
             return(
                 <div style={{textAlign: "center", marginTop: "100px"}}>
-                    <img src={"https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"} alt="loading..." style={{width: "100px", height: "100px"}}/>
+                    <img src={"https://retchhh.files.wordpress.com/2015/03/loading4.gif?w=300&h=300"} alt="loading..." style={{width: "50px", height: "50px"}}/>
                 </div>
               )
         }

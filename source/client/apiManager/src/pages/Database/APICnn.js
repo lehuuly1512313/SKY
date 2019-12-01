@@ -181,6 +181,28 @@ class API {
     })
   }
 
+  login = (data)=>{
+    return axios
+    .post("http://localhost:4000/log-in",data)
+    .then(res=>{
+      return res.data
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
+
+  fbgglogin = (data)=>{
+    return axios
+    .post("http://localhost:4000/fb-gg-login",data)
+    .then(res=>{
+      return res.data
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
+
   getIDfacebook_google = (data)=>{
     return axios
     .get(`http://localhost:4000/facebook_google/${data.account}`)

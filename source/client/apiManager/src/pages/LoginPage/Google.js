@@ -29,47 +29,25 @@ class Google extends Component
           email: response.profileObj.email,
           picture: response.profileObj.imageUrl,
       })
-    localStorage.setItem('GoogleUser',this.state.email);
-    localStorage.setItem('GoogleName',this.state.name);
-    localStorage.setItem('GoogleID',this.state.userID);
-    localStorage.setItem('GooglePicture',this.state.picture);
-    var data = {
-      name: this.state.name,
-      account: this.state.userID,
-      password: "",
-      avatar: this.state.picture,
-      numofbank: "",
-      email: this.state.email,
-      phone: "",
-    }
-    var check = true;
-    var id = 0;
-    this.props.data.map(value=>{
-      if(this.state.userID === value.account)
-      {
-        check = false;
-        id = value.id;
+      localStorage.setItem('email',this.state.email);
+      localStorage.setItem('name',this.state.name);
+      localStorage.setItem('user',this.state.userID);
+      localStorage.setItem('avatar',this.state.picture);
+      localStorage.setItem("google",true);
+      var data = {
+        name: this.state.name,
+        account: this.state.userID,
+        password: "",
+        avatar: this.state.picture,
+        numofbank: "",
+        email: this.state.email,
+        phone: "",
       }
-    })
-
-    if(check)
-    {
-      api.facebook_google(data).then(res=>{
-        if(res === "sucessfully")
-        {
-          api.getIDfacebook_google({account: this.state.userID}).then(res=>{
-            localStorage.setItem("ID",res[0].id);
-            window.location.reload();
-          })
-        }
+      
+      api.fbgglogin(data).then(res=>{
+        localStorage.setItem('ID',res.id);
+        window.location.reload();
       })
-    }
-
-    else{
-      localStorage.setItem("ID",id);
-      window.location.reload();
-    }
-  
   }
 
   render()

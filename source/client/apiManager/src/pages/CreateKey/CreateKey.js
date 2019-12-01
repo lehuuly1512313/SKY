@@ -40,31 +40,21 @@ class CreateKey extends Component{
 
   componentWillMount() {
     window.scrollTo(0, 0);
-    if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") || localStorage.getItem("GoogleUser")) 
+    var email = "";
+    if(localStorage.getItem('email'))
     {
-      var user=localStorage.getItem("user");
-      if(localStorage.getItem("FacebookUser"))
-      {
-        user=localStorage.getItem("FacebookID");
-      }
-      if(localStorage.getItem("GoogleUser"))
-      {
-        user=localStorage.getItem("GoogleID");
-      }
-      this.state.data.map(value=>{
-        if(value.account === user)
-        {
-          this.setState({
-            ...this.state,
-            name: value.name,
-            email: value.email,
-            phone: value.phone,
-            card: value.numofbank
-          })
-          return true;
-        }
-      })
-  }
+      email = localStorage.getItem('email')
+    }
+    else
+    {
+      email = localStorage.getItem('user')
+    }
+    this.setState({
+      ...this.state,
+      name: localStorage.getItem('name'),
+      email,
+      phone: localStorage.getItem('phone'),
+    })
   }
 
 
