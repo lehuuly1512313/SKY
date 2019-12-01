@@ -5,7 +5,7 @@ class SOA{
         var today = new Date();
         var date = today.getDate() +"/"+parseInt(today.getMonth()+1)+"/"+today.getFullYear()+"-"+today.getHours()+":"+today.getMinutes();
         return axios
-          .post('http://localhost:4000/translate',
+          .post('https://back-end-services-soa.herokuapp.com/translate',
           {
               key,
               last: date,

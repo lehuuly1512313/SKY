@@ -3,6 +3,7 @@ import Chart from './Chart';
 import API from '../../pages/Database/APICnn';
 import {Link} from "react-router-dom";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import './app.css'
 const api=new API();
 
 class Dashboard extends Component{
@@ -442,84 +443,77 @@ class Dashboard extends Component{
          if(this.state.length === 0)
          {
            return(
-            // <div style={{width: "60%", marginLeft:"20%",boxShadow: "5px 5px 5px #666",background: "#eee",marginTop: "20px", padding: "10px 50px 10px 50px"}}>
-            //   <div style={{textAlign: "center"}}>
-            //     <div><img class="navigation-image" src="//cdn.jotfor.ms/assets/img/memberkit/user_guide_images/f1.png?v=0.2" style={{width: "100px", height:"100px"}} alt="Getting Started with JotForm Podo"/></div>
-            //     <div style={{fontSize:"16px"}}>SOA User Guide / Getting Started with SOA</div>
-            //   </div>
-           
-            // <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/2-How-to-Create-Your-First-Web-Form">How to create a Key</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // First-time SOA users often ask how to create a simple web form, how to set up Email Notifications, how to embed a form on a website, how to test the form to see if it's working, and how to view responses in email and JotForm Inbox.&amp;nbsp;Got a... or <Link to="/create-key" onClick={this.move}>Click here to get started</Link></p> 
-            
-            // <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/526-How-to-Change-the-Username">How to change the password?</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // NOTE: This guide is valid only for accounts in the Starter (FREE) plan. If your account is on a paid plan and you want to change the username, contact us here.To change the username of your JotForm account, follow the steps below.1. Go to the Profile... </p> <h2>
-
-            // <a class="chapterTitle" href="https://www.jotform.com/help/489-How-to-reset-the-password">How to reset the password?</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // If you need help resetting your password, we can help by sending you a link to reset it.In order to get the link you need to:1. Visit Jotform's Website.&amp;nbsp;2. Click on Login button.3. Click on Forgot Password?4. Enter either the email address o... </p> <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/527-How-to-Delete-My-Account">How to delete a key?</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // NOTE: Deleting your account will delete all the forms and the form submissions owned by your account.To delete your JotForm account, follow the steps below.1. Go to the Profile section of your account.https://www.jotform.com/myaccount/profile2.&amp;n... </p> <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/527-How-to-Delete-My-Account">How to update your profile?</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // NOTE: Deleting your account will delete all the forms and the form submissions owned by your account.To delete your JotForm account, follow the steps below.1. Go to the Profile section of your account.https://www.jotform.com/myaccount/profile2.&amp;n... </p> <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/527-How-to-Delete-My-Account">How to use a key?</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // NOTE: Deleting your account will delete all the forms and the form submissions owned by your account.To delete your JotForm account, follow the steps below.1. Go to the Profile section of your account.https://www.jotform.com/myaccount/profile2.&amp;n... </p> <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/46-Quick-Overview-of-Form-Fields">Introduce</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // JotForm has pretty much any type of Form Fields you might need. Take a look at the complete list below and get a brief description of each one of them.BASIC FORM ELEMENTSHEADER: A Header briefly explains what your form is about. Use the Subheader if ... </p> <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/106-How-to-Use-Form-Templates">Package</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // Form Templates&amp;nbsp;are the usual go-to solution of first time JotForm users. Whether you're looking for a template to get started with, a form that closely matches your requirement, or even just using it for the design and layout, templates are ... </p> <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/184-How-to-Apply-a-Theme-to-Your-Form">Create key</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // Applying a Theme within the Form BuilderTo apply a theme to your form in the form builder, follow these steps:1. Open your form in the form builder2. Click the Form Designer icon3. Go to Themes tab and select the theme you wish to use.Applying a Them... </p> <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/420-What-s-New-in-JotForm-4-0">Docs</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // JotForm 4.0 was built around the idea that making forms should be a breeze. The main goal is effortless form creation anytime, anywhere, and on any device with ease.You may have seen the improvements we had back when we launched V3 but the new sets o... </p> <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/408-Understanding-Your-Account-Usage-and-Limits">Contact</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // Confused on how your account limits work? Don't worry, in this guide we got you covered. Here, we will help you understand the different limits that your account has based on the subscription or plan that you are into.First, please visit our PRICING ... </p> <h2>
-            // <a class="chapterTitle" href="https://www.jotform.com/help/56-Quick-overview-of-form-themes">About us</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // If you want to know how to change the themes of your forms, click here.If you're here to just look around to see how the form's style changes with each theme applied, we hope you enjoy the tour.DefaultNova ThemePastel ThemeJot ThemeBaby BluePaper Gre... </p> <h2>
-
-            // <a class="chapterTitle" href="https://www.jotform.com/help/8-Terms-of-Use">Terms of Use</a>
-            // </h2>
-            // <p class="chapterSummary">
-            // Please read this Agreement carefully to ensure you understand each provision. These Terms of Service ("Terms") govern your use of JotForm, Inc. ("Company", JotForm) web site located at https://www.jotform.com (the "Site&amp;q... </p>
-            
-            
-            // </div>
-            <section id="sec-1">
-            <span id="join-over">
-                At the moment we have collaborated with more than <strong>1000 developers</strong>.
-            </span>
-            <span id="practice">
-              and you will be the next person we collaborate with. You need to create a key to get started, let us help you, click the button below and follow the instructions
-            </span>
-                <div id="btn-sign">
-                <Link className="btnSign" to="/create-key">
-                    <div className="btns btn1">Get started &amp; Code</div>
+            <section style = {{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
+               <div id="btn-sign">
+                <Link className="btnSign" to="/create-key" style = {{position:"absolute", top: "216px", right: "94px"}}>
+                    <div className="btns btn1" style = {{textAlign: "center"}}>Get started</div>
                 </Link>
                 </div>
+              <div id = "overview-dashboard">
+              <h1 className = "mr-l-50" style = {{color: "#202124"}}>Overview</h1>
+              <div id = "overview-warning">
+                <div>
+                <p><strong style = {{color: "#1451a3"}}>New Users:</strong> Before you can start using the Google Maps Platform APIs and SDKs, you must sign up and create a billing account. To learn more, see <Link>Get Started with Google Maps Platform.</Link> </p>
+                </div>
+              
+              </div>
+              <div id = 'waring-desp'>
+                <p>The Maps JavaScript API lets you customize maps with your own content and imagery for display on web pages and mobile devices. The Maps JavaScript API features four basic map types (roadmap, satellite, hybrid, and terrain) which you can modify using layers and styles, controls and events, and various services and libraries.</p>
+              </div>
+              <h2 className = "mr-l-50">
+                Step 1 : You need create a key 
+              </h2>
+              <p id = "overview-li" style = {{fontSize: "16px"}}>
+                 
+                 <ul>
+                   <li>
+                     <div>
+                        If you do not have any key to use then please press this button in the dashboard
+                      </div>
+                    </li>
+                    <li>
+                     <div>
+                     If you already have one, you can skip this step, or create an additional key by clicking the create key button on the menu
+                      </div>
+                    </li>
+                 </ul>
+              </p>
+           
+            </div>
+         
+            <div>
+              <h2 className = "mr-l-50">
+                Step 2 : Hello, World
+              </h2>
+
+            </div>
+            <div>
+            <p style = {{fontSize: "16px"}}>Copy the code into your project, you can customize the css if you want</p>
+            </div>
+            <div style = {{position: 'relative'}}>
+              
+              <button style = {{ borderRadius:"5px", backgroundColor: "#5c5c6369" ,top : "10px" ,right: "10px", height: "50px", width: "50px", position: "absolute"}}>copy</button>
+              
+              <pre className="notranslate lang-html devsite-jsfiddle-code-sample" dir="ltr" is-upgraded><span className="dec">&lt;!DOCTYPE html&gt;</span><span className="pln"><br /></span><span className="tag">&lt;html&gt;</span><span className="pln"><br />&nbsp; </span><span className="tag">&lt;head&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;title&gt;</span><span className="pln">Simple Map</span><span className="tag">&lt;/title&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;meta</span><span className="pln"> </span><span className="atn">name</span><span className="pun">=</span><span className="atv">"viewport"</span><span className="pln"> </span><span className="atn">content</span><span className="pun">=</span><span className="atv">"initial-scale=1.0"</span><span className="tag">&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;meta</span><span className="pln"> </span><span className="atn">charset</span><span className="pun">=</span><span className="atv">"utf-8"</span><span className="tag">&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;style&gt;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="com">/* Always set the map height explicitly to define the size of the div<br />&nbsp; &nbsp; &nbsp; &nbsp;* element that contains the map. */</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">#</span><span className="pln">map </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">height</span><span className="pun">:</span><span className="pln"> </span><span className="lit">100%</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="com">/* Optional: Makes the sample page fill the window. */</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; html</span><span className="pun">,</span><span className="pln"> body </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">height</span><span className="pun">:</span><span className="pln"> </span><span className="lit">100%</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">margin</span><span className="pun">:</span><span className="pln"> </span><span className="lit">0</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">padding</span><span className="pun">:</span><span className="pln"> </span><span className="lit">0</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"}</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;/style&gt;</span><span className="pln"><br />&nbsp; </span><span className="tag">&lt;/head&gt;</span><span className="pln"><br />&nbsp; </span><span className="tag">&lt;body&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;div</span><span className="pln"> </span><span className="atn">id</span><span className="pun">=</span><span className="atv">"map"</span><span className="tag">&gt;&lt;/div&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;script&gt;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="kwd">var</span><span className="pln"> map</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="kwd">function</span><span className="pln"> initMap</span><span className="pun">()</span><span className="pln"> </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; map </span><span className="pun">=</span><span className="pln"> </span><span className="kwd">new</span><span className="pln"> google</span><span className="pun">.</span><span className="pln">maps</span><span className="pun">.</span><span className="typ">Map</span><span className="pun">(</span><span className="pln">document</span><span className="pun">.</span><span className="pln">getElementById</span><span className="pun">(</span><span className="str">'map'</span><span className="pun">),</span><span className="pln"> </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; center</span><span className="pun">:</span><span className="pln"> </span><span className="pun">{"{"}</span><span className="pln">lat</span><span className="pun">:</span><span className="pln"> </span><span className="pun">-</span><span className="lit">34.397</span><span className="pun">,</span><span className="pln"> lng</span><span className="pun">:</span><span className="pln"> </span><span className="lit">150.644</span><span className="pun">{"}"},</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; zoom</span><span className="pun">:</span><span className="pln"> </span><span className="lit">8</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"});</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"}</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;/script&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;script</span><span className="pln"> </span><span className="atn">src</span><span className="pun">=</span><span className="atv">"https://maps.googleapis.com/maps/api/js?key=</span><span><devsite-credentials-dialog type="api_key" className data-modal-dialog-id="api-key-credentials-dialog" data-title="Click to insert your API key">YOUR_API_KEY</devsite-credentials-dialog></span><span className="atv">&amp;callback=initMap"</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="atn">async</span><span className="pln"> </span><span className="atn">defer</span><span className="tag">&gt;&lt;/script&gt;</span><span className="pln"><br />&nbsp; </span></pre>
+            </div>
+
+            <div >
+              <h2 className = "mr-l-50">
+                Step 3 : Set key into SDK
+              </h2>
+              <p style = {{fontSize: "16px"}}>
+              Copy your key by clicking the button as shown below
+                  </p>
+            <img style = {{width: "100%"}} src="./servicesStyle/images/COPYKEY.png"></img>
+            <p style = {{fontSize: "16px"}}>
+              Copy your key by clicking the button as shown below
+                  </p>
+
+              <img style = {{width: "100%"}} src="./servicesStyle/images/PASTE.png"></img>
+            </div>
+       
+           
+               
             
             </section>
            )
@@ -531,7 +525,7 @@ class Dashboard extends Component{
             {this.RenderModalDelClick()}
             {this.RenderModalViewClick()}
             {this.rendermodalchangekey()}
-
+            {/* <div id = "overview-dashboard" ><h1 style = {{marginLeft: "5%"}}>Management</h1></div> */}
             <div style={{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
               <input type="text" style={{width: "100%"}} class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search" onChange={this.handleSearch}/>
             </div>
@@ -557,17 +551,26 @@ class Dashboard extends Component{
                 {this.RenderChart()}
             </div>
 
-            <div >
-              <h2>
-                Step 1
+            <div id = "overview-dashboard">
+              <h1 className = "mr-l-50" style = {{color: "#202124"}}>Overview</h1>
+              <div id = "overview-warning">
+                <div>
+                <p><strong style = {{color: "#1451a3"}}>New Users:</strong> Before you can start using the Google Maps Platform APIs and SDKs, you must sign up and create a billing account. To learn more, see <Link>Get Started with Google Maps Platform.</Link> </p>
+                </div>
+              
+              </div>
+              <div id = 'waring-desp'>
+                <p>The Maps JavaScript API lets you customize maps with your own content and imagery for display on web pages and mobile devices. The Maps JavaScript API features four basic map types (roadmap, satellite, hybrid, and terrain) which you can modify using layers and styles, controls and events, and various services and libraries.</p>
+              </div>
+              <h2 className = "mr-l-50">
+                Step 1 : You need create a key 
               </h2>
-              <p style = {{fontSize: "16px"}}>
-                 You need create a key 
+              <p id = "overview-li" style = {{fontSize: "16px"}}>
+                 
                  <ul>
                    <li>
                      <div>
                         If you do not have any key to use then please press this button in the dashboard
-                        <img src="./servicesStyle/images/CREATE.png"></img>
                       </div>
                     </li>
                     <li>
@@ -581,21 +584,24 @@ class Dashboard extends Component{
             </div>
          
             <div>
-              <h2>
-                Step 2
+              <h2 className = "mr-l-50">
+                Step 2 : Hello, World
               </h2>
 
             </div>
             <div>
             <p style = {{fontSize: "16px"}}>Copy the code into your project, you can customize the css if you want</p>
             </div>
-            <div>
+            <div style = {{position: 'relative'}}>
+              
+              <button style = {{ borderRadius:"5px", backgroundColor: "#5c5c6369" ,top : "10px" ,right: "10px", height: "50px", width: "50px", position: "absolute"}}>copy</button>
+              
               <pre className="notranslate lang-html devsite-jsfiddle-code-sample" dir="ltr" is-upgraded><span className="dec">&lt;!DOCTYPE html&gt;</span><span className="pln"><br /></span><span className="tag">&lt;html&gt;</span><span className="pln"><br />&nbsp; </span><span className="tag">&lt;head&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;title&gt;</span><span className="pln">Simple Map</span><span className="tag">&lt;/title&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;meta</span><span className="pln"> </span><span className="atn">name</span><span className="pun">=</span><span className="atv">"viewport"</span><span className="pln"> </span><span className="atn">content</span><span className="pun">=</span><span className="atv">"initial-scale=1.0"</span><span className="tag">&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;meta</span><span className="pln"> </span><span className="atn">charset</span><span className="pun">=</span><span className="atv">"utf-8"</span><span className="tag">&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;style&gt;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="com">/* Always set the map height explicitly to define the size of the div<br />&nbsp; &nbsp; &nbsp; &nbsp;* element that contains the map. */</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">#</span><span className="pln">map </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">height</span><span className="pun">:</span><span className="pln"> </span><span className="lit">100%</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="com">/* Optional: Makes the sample page fill the window. */</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; html</span><span className="pun">,</span><span className="pln"> body </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">height</span><span className="pun">:</span><span className="pln"> </span><span className="lit">100%</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">margin</span><span className="pun">:</span><span className="pln"> </span><span className="lit">0</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="kwd">padding</span><span className="pun">:</span><span className="pln"> </span><span className="lit">0</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"}</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;/style&gt;</span><span className="pln"><br />&nbsp; </span><span className="tag">&lt;/head&gt;</span><span className="pln"><br />&nbsp; </span><span className="tag">&lt;body&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;div</span><span className="pln"> </span><span className="atn">id</span><span className="pun">=</span><span className="atv">"map"</span><span className="tag">&gt;&lt;/div&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;script&gt;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="kwd">var</span><span className="pln"> map</span><span className="pun">;</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="kwd">function</span><span className="pln"> initMap</span><span className="pun">()</span><span className="pln"> </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; map </span><span className="pun">=</span><span className="pln"> </span><span className="kwd">new</span><span className="pln"> google</span><span className="pun">.</span><span className="pln">maps</span><span className="pun">.</span><span className="typ">Map</span><span className="pun">(</span><span className="pln">document</span><span className="pun">.</span><span className="pln">getElementById</span><span className="pun">(</span><span className="str">'map'</span><span className="pun">),</span><span className="pln"> </span><span className="pun">{"{"}</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; center</span><span className="pun">:</span><span className="pln"> </span><span className="pun">{"{"}</span><span className="pln">lat</span><span className="pun">:</span><span className="pln"> </span><span className="pun">-</span><span className="lit">34.397</span><span className="pun">,</span><span className="pln"> lng</span><span className="pun">:</span><span className="pln"> </span><span className="lit">150.644</span><span className="pun">{"}"},</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; zoom</span><span className="pun">:</span><span className="pln"> </span><span className="lit">8</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"});</span><span className="pln"><br />&nbsp; &nbsp; &nbsp; </span><span className="pun">{"}"}</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;/script&gt;</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="tag">&lt;script</span><span className="pln"> </span><span className="atn">src</span><span className="pun">=</span><span className="atv">"https://maps.googleapis.com/maps/api/js?key=</span><span><devsite-credentials-dialog type="api_key" className data-modal-dialog-id="api-key-credentials-dialog" data-title="Click to insert your API key">YOUR_API_KEY</devsite-credentials-dialog></span><span className="atv">&amp;callback=initMap"</span><span className="pln"><br />&nbsp; &nbsp; </span><span className="atn">async</span><span className="pln"> </span><span className="atn">defer</span><span className="tag">&gt;&lt;/script&gt;</span><span className="pln"><br />&nbsp; </span></pre>
             </div>
 
             <div >
-              <h2>
-                Step 3
+              <h2 className = "mr-l-50">
+                Step 3 : Set key into SDK
               </h2>
               <p style = {{fontSize: "16px"}}>
               Copy your key by clicking the button as shown below

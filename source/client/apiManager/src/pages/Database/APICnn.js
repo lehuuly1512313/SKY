@@ -3,7 +3,7 @@ import axios from 'axios'
 class API {
   getData = () => {
     return axios
-      .get('http://localhost:4000/users')
+      .get('https://back-end-services-soa.herokuapp.com/users')
       .then(function(response) {
         if (response.status === 200 && response != null) {
           var data = response.data
@@ -20,7 +20,7 @@ class API {
 
   GenKey = (data) => {
     return axios
-      .post('http://localhost:4000/key-time-out',data)
+      .post('https://back-end-services-soa.herokuapp.com/key-time-out',data)
       .then(res=>{
         return res.data;
       })
@@ -31,7 +31,7 @@ class API {
 
   forgotpassword = (data) => {
     return axios
-      .post('http://localhost:4000/forgotpassword-time-out',data)
+      .post('https://back-end-services-soa.herokuapp.com/forgotpassword-time-out',data)
       .then(res=>{
         return res.data;
       })
@@ -42,7 +42,7 @@ class API {
 
   changepassword = (data) =>{
     return axios
-    .post('http://localhost:4000/changepassword',data)
+    .post('https://back-end-services-soa.herokuapp.com/changepassword',data)
     .then(res=>{
       return res.data;
     })
@@ -71,7 +71,7 @@ class API {
 
   postData = (data)=>{
     return axios
-    .post('http://localhost:4000/users-time-out',data)
+    .post('https://back-end-services-soa.herokuapp.com/users-time-out',data)
     .then(res=>{
       return res.data;
     })
@@ -82,7 +82,7 @@ class API {
 
     out_of_date = ()=>{
     return axios
-    .post('http://localhost:4000/check-out-of-date')
+    .post('https://back-end-services-soa.herokuapp.com/check-out-of-date')
     .then(res=>{
       return res.data;
     })
@@ -93,7 +93,7 @@ class API {
 
   SendMail = (data)=>{
     return axios
-    .post("http://localhost:4000/send-mail",
+    .post("https://back-end-services-soa.herokuapp.com/send-mail",
     {
       code : data.code,
       email: data.email,
@@ -111,7 +111,7 @@ class API {
 
   SendMailContacts = (data)=>{
     return axios
-    .post("http://localhost:4000/send-mail-contacts",
+    .post("https://back-end-services-soa.herokuapp.com/send-mail-contacts",
     {
       email: data.email,
       from: data.from,
@@ -128,7 +128,7 @@ class API {
 
   getKey = data=>{
     return axios
-    .get(`http://localhost:4000/get-keys/${data.id}`)
+    .get(`https://back-end-services-soa.herokuapp.com/get-keys/${data.id}`)
     .then(res=>{
       return res.data;
     })
@@ -139,7 +139,7 @@ class API {
 
   putdata = (data)=>{
     return axios
-    .put(`http://localhost:4000/users`,data)
+    .put(`https://back-end-services-soa.herokuapp.com/users`,data)
     .then(res=>{
       return res.data;
     })
@@ -150,7 +150,7 @@ class API {
 
   delkey = (id,data)=>{
     return axios
-    .post(`http://localhost:4000/keys/${id}`,data)
+    .post(`https://back-end-services-soa.herokuapp.com/keys/${id}`,data)
     .then(res=>{
       return res.data;
     })
@@ -161,7 +161,7 @@ class API {
 
   avatar = ()=>{
     return axios
-    .get("http://localhost:4000/avatar")
+    .get("https://back-end-services-soa.herokuapp.com/avatar")
     .then(res=>{
       return res.data
     })
@@ -172,7 +172,7 @@ class API {
 
   facebook_google = (data)=>{
     return axios
-    .post("http://localhost:4000/facebook_google",data)
+    .post("https://back-end-services-soa.herokuapp.com/facebook_google",data)
     .then(res=>{
       return res.data
     })
@@ -183,7 +183,7 @@ class API {
 
   login = (data)=>{
     return axios
-    .post("http://localhost:4000/log-in",data)
+    .post("https://back-end-services-soa.herokuapp.com/log-in",data)
     .then(res=>{
       return res.data
     })
@@ -194,7 +194,7 @@ class API {
 
   fbgglogin = (data)=>{
     return axios
-    .post("http://localhost:4000/fb-gg-login",data)
+    .post("https://back-end-services-soa.herokuapp.com/fb-gg-login",data)
     .then(res=>{
       return res.data
     })
@@ -205,7 +205,7 @@ class API {
 
   getIDfacebook_google = (data)=>{
     return axios
-    .get(`http://localhost:4000/facebook_google/${data.account}`)
+    .get(`https://back-end-services-soa.herokuapp.com/facebook_google/${data.account}`)
     .then(res=>{
       return res.data
     })
@@ -216,7 +216,7 @@ class API {
 
   Recreatekey = (data)=>{
     return axios
-    .post("http://localhost:4000/register-key-again-time-out",data)
+    .post("https://back-end-services-soa.herokuapp.com/register-key-again-time-out",data)
     .then(res=>{
       return res.data
     })
@@ -227,7 +227,7 @@ class API {
 
   Changekey = (data)=>{
     return axios
-    .post("http://localhost:4000/change-key-value-time-out",data)
+    .post("https://back-end-services-soa.herokuapp.com/change-key-value-time-out",data)
     .then(res=>{
       return res.data
     })
