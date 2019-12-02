@@ -10,10 +10,10 @@
     color: #2281ff;
     text-decoration: underline;
 }
-h1{
+.overview-h1{
     color: rgba(6, 5, 5, 0.71) !important;
 }
-h2{
+.overview-h2{
     color: #447b97;
     margin-top: 60px;
 }
@@ -31,7 +31,7 @@ h2{
     list-style: none;
 
 }
-p{
+.over-p p{
     color: #000000e3 !important;
 }
 

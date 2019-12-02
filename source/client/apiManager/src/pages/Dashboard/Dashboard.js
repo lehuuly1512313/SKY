@@ -476,14 +476,14 @@ class Dashboard extends Component{
          if(this.state.length === 0)
          {
            return(
-            <section style = {{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
+            <section className = "over-p" style = {{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
                <div id="btn-sign">
                 <Link className="btnSign" to="/create-key" style = {{position:"absolute", top: "216px", right: "94px"}}>
                     <div className="btns btn1" style = {{textAlign: "center"}}>Get started</div>
                 </Link>
                 </div>
               <div id = "overview-dashboard">
-              <h1 className = "mr-l-50" style = {{color: "#202124"}}>Overview</h1>
+              <h1 className = "overview-h1 mr-l-50" style = {{color: "#202124"}}>Overview</h1>
               <div id = "overview-warning">
                 <div>
                 <p><strong style = {{color: "#1451a3"}}>New Users:</strong> Before you can start using the Google Maps Platform APIs and SDKs, you must sign up and create a billing account. To learn more, see <Link>Get Started with Google Maps Platform.</Link> </p>
@@ -565,7 +565,7 @@ class Dashboard extends Component{
               <input type="text" style={{width: "100%"}} class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search" onChange={this.handleSearch}/>
             </div>
              
-        <div style={{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
+        <div className = "over-p" style={{width: "90%", marginLeft: "5%", marginTop:"2%"}}>
             <table class="table table-striped table-inverse table-responsive" style={{width: "100%"}}>
                 <thead class="thead-inverse" style={{backgroundColor: "#3b5998", color: "white"}}>
                     <tr>
@@ -587,7 +587,7 @@ class Dashboard extends Component{
             </div>
 
             <div id = "overview-dashboard">
-              <h1 className = "mr-l-50" style = {{color: "#202124"}}>Overview</h1>
+              <h1 className = "overview-h1 mr-l-50" style = {{color: "#202124"}}>Overview</h1>
               <div id = "overview-warning">
                 <div>
                 <p><strong style = {{color: "#1451a3"}}>New Users:</strong> Before you can start using the Google Maps Platform APIs and SDKs, you must sign up and create a billing account. To learn more, see <Link>Get Started with Google Maps Platform.</Link> </p>
