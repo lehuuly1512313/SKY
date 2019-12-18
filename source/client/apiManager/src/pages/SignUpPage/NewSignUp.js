@@ -237,26 +237,26 @@ class NewSignUp extends Component{
                   </span>
                   <div className="wrap-input100 validate-input" data-validate="Name is required">
                     <span className="label-input100">Full Name</span>
-                    <input className="input100" type="text" name="name" placeholder="Name..."  onChange={this.handlefullname} value={this.state.lfullname}/>
+                    <input className="input100" type="text" name="name"   onChange={this.handlefullname} value={this.state.lfullname}/>
                     <span className="focus-input100" />
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <span className="label-input100">Email</span>
-                    <input className="input100" type="email" name="email" placeholder="abc@xyz.pqm"  onChange={this.handlemail} value={this.state.lemail}/>
+                    <input className="input100" type="email" name="email"   onChange={this.handlemail} value={this.state.lemail}/>
                     <span className="focus-input100" />
                   </div><div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <span className="label-input100">Phone</span>
-                    <input className="input100" type="number"  maxLength="11" name="quantity" min="0" max="9" placeholder="08xxxxxxx"  onChange={this.handlephone} value={this.state.lphone}/>
+                    <input className="input100" type="number"  maxLength="11" name="quantity" min="0" max="9"   onChange={this.handlephone} value={this.state.lphone}/>
                     <span className="focus-input100" />
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Password is required">
                     <span className="label-input100">Password</span>
-                    <input className="input100" type="password" name="pass" minLength="8" placeholder="Password must be over 6 characters"  onChange={this.handlePassword} value={this.state.lpassword}/>
+                    <input className="input100" type="password" name="pass" minLength="8"  onChange={this.handlePassword} value={this.state.lpassword}/>
                     <span className="focus-input100" />
                   </div>
                   <div className="wrap-input100 validate-input" data-validate="Repeat Password is required">
                     <span className="label-input100">Repeat Password</span>
-                    <input className="input100" type="password" name="repeat-pass" minLength="8" placeholder="Password must be over 6 characters"  onChange={this.handleUConfirmPassword} value={this.state.lrepassword}/>
+                    <input className="input100" type="password" name="repeat-pass" minLength="8"   onChange={this.handleUConfirmPassword} value={this.state.lrepassword}/>
                     <span className="focus-input100" />
                   </div>  
                   <div>
