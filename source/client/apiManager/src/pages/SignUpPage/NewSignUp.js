@@ -171,7 +171,7 @@ class NewSignUp extends Component{
     }
     else
     {
-      notifycation = "please check your mail to active account"
+      notifycation = "Please check your mail to active account"
     this.setState(
       {
         notifycation

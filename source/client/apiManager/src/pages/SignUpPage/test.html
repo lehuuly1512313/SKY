@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple SoA</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Set css for data */       
+      #showData{
+        color: green;
+        font-size: 50px;
+     }
+      /* Optional: Makes the sample page fill the window. */
+      html, body{
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body onload="getData()">
+    <div id="showData"></div>
+    <script>
+      var soa;
+      function getData() {
+        soa = new SOA() 
+          soa.CnnTrans('f59a2c22f5d5e9c62c4dbe942781b733cae974a065012e44157673955600424','hello').then(res =>{
+          document.getElementById('showData').innerHTML = res.vie;
+        });
+      }
+    </script>
+    <script src="https://back-end-services-soa.herokuapp.com/API.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body> 
