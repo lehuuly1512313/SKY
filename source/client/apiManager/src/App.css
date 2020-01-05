@@ -101,8 +101,9 @@ footer .copyright span {
   position: relative;
   display: inline-block;
   margin-left: 28%;
-  margin-right: 10px;
+  margin-right: 80px;
 }
+
 
 .dropdown-content {
   display: none;
