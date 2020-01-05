@@ -195,8 +195,9 @@ background-color: #32c766;
   z-index: 3;
   top:0;
   margin-top:-16px;
-  display: flex;
-  justify-content: space-between;
+
+
+
 }
 #padding-sticky::before{
   content: "";
@@ -1621,7 +1622,6 @@ to {
 }
 }
 @media (max-width: 1052px){
-
 .dropdown{
   margin-left: 5%;
 }
@@ -2184,9 +2184,6 @@ visibility: hidden;
   color: #274447;
     font-weight: bold;
     margin-left: -9px;
-}
-#sticky-header{
-  display: block;
 }
 }
 

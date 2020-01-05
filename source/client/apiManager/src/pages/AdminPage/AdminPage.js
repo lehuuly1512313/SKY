@@ -1,30 +1,13 @@
 import React, { Component } from 'react';
-import './style.css'
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import ProductItems from './../../components/KeyListItems/KeyListItems'
+import ProductList from './../../components/KeyLists/KeyLists'
+
+
 import { Link } from 'react-router-dom'
-import SideBar from '../../components/SideBar/SideBar';
-import TableBoxUser from '../../components/TableBoxUser/TableBoxUser';
-import RepMailBox from '../../components/RepMailBox/RepMailBox';
-import TableBoxKey from '../../components/TableBoxKey/TableBoxKey';
+import apiCall from './../../utilsApi/apiCall'
 
-const titleUser = {}, titleMail = {}, titleKey = {}
+
 class AdminPage extends Component {
-
-  routes=[
-    {
-      path: "/admin/managementuser",
-      main: ({match}) => <TableBoxUser match={match} data={this.props.data} title = {titleUser}/>
-    },
-    {
-      path: "/admin/managementkey",
-      main: ({match}) => <TableBoxKey match={match} data={this.props.data} title = {titleKey} />
-    },
-    {
-      path: "/admin/managementmail",
-      main: ({match}) => <RepMailBox match={match} data={this.props.data} title = {titleMail} />
-    }
-  ]
-  
 
   constructor(props) {
     super(props);
@@ -33,28 +16,82 @@ class AdminPage extends Component {
     };
   }
 
+  componentDidMount() {
+    apiCall('users', 'GET', null).then(res => {
+      this.setState({
+        products: res.data
+      })
+    })
+  }
+
+
+
+
+  findIndex = (products, id) => {
+    var result = -1;
+    products.forEach((product, index) => {
+      if (product.id === id) {
+        result = index;
+        console.log(result + 'index dell')
+      }
+    });
+    return result
+  }
+
+
+  onDelete = (id) => {
+    var { products } = this.state;
+    apiCall(`users/${id}`, 'DELETE', null).then(res => {
+      if (res.status === 200) {
+        // eslint-disable-next-line no-undef
+        var index = this.findIndex(products, id);
+        if (index !== -1) {
+          products.splice(index, 1);
+          this.setState({
+            products: products
+          })
+        }
+      }
+    })
+  }
+
   render() {
+    //var {products} = this.props;
+
+    var { products } = this.state;
+
     return (
-      <Router>
-        <div className = 'admin-page'>
-        <SideBar />
-        {this.showContentRouter(this.routes)}
-        </div>
-      </Router>
+      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <Link to='/product/add' className="btn btn-primary mb-10">Them san pham</Link>
+        <ProductList>
+          {this.showProducts(products)}
+        </ProductList>
+      </div>
+
     );
   }
 
-  showContentRouter=routes => {
-    let result=null;
-    if (routes.length > 0) {
-      result=routes.map((routes, index) => {
-        return <Route key={index} path={routes.path} component={routes.main} exact={routes.exact} />;
-      });
+  showProducts(products) {
+    var result = null;
+    if (products.length > 0) {
+      result = products.map((product, index) => {
+        return (
+          <ProductItems
+            key={index}
+            product={product}
+            index={index}
+            onDelete={this.onDelete}
+          />
+        )
+      })
     }
-    return <Switch>{result}</Switch>;
-  };
+    return result;
+  }
 }
 
- 
+
+
+
+
 
 export default AdminPage

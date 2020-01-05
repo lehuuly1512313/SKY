@@ -20,7 +20,6 @@ import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import Recreatekey from "./pages/Recreatekey/Recreatekey"
 import SDKPage from "./pages/SDKPage/SDKPage"
 import Guid from "./pages/Guid/Guid"
-import _ from 'lodash'
 
 class App extends Component {
 
@@ -56,7 +55,7 @@ class App extends Component {
     },
     {
       path: "/admin",
-      main: ({match}) => <AdminPage match={match} history={history} data={this.props.data}/>
+      main: ({match}) => <AdminPage data={this.props.data}/>
     },
     {
       path: "/resgister",
@@ -91,20 +90,16 @@ class App extends Component {
       path: "/:id",
       main: ({match}) => <ProfilePage  match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
     },
+    
 
 ]
 
 
   render() {
     var display="none";
-    var path = window.location.pathname
-
     if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") ||  localStorage.getItem("GoogleUser"))  
     {
       display= 'block';
-    }
-    if( _.includes(path, '/admin')){
-      display = 'none'
     }
     return (
         <Router>
