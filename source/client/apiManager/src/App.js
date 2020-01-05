@@ -12,7 +12,6 @@ import Contacts from "./pages/Contacts/Contacts"
 import About from "./pages/About/About"
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
 import CreateKey from "./pages/CreateKey/CreateKey"
-import Demo from "./pages/Demo/Demo";
 import NewSignUp from "./pages/SignUpPage/NewSignUp";
 import NewSignIn from "./pages/LoginPage/NewSignIn";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -20,6 +19,10 @@ import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import Recreatekey from "./pages/Recreatekey/Recreatekey"
 import SDKPage from "./pages/SDKPage/SDKPage"
 import Guid from "./pages/Guid/Guid"
+import UserMan from "./pages/UserManagement/UserMan"
+import KeyMan from "./pages/KeyManagement/KeyMan"
+import MailMan from "./pages/MailManagement/MailMan"
+import ReplyMail from "./pages/ReplyMail/ReplyMail"
 
 class App extends Component {
 
@@ -48,14 +51,6 @@ class App extends Component {
     {
       path: "/forgot-password",
       main: ({match, history}) => <ForgetPassword match={match} history={history} data={this.props.data}/>
-    },
-    {
-      path: "/demo",
-      main: ({match, history}) => <Demo match={match} history={history} data={this.props.data} />
-    },
-    {
-      path: "/admin",
-      main: ({match}) => <AdminPage data={this.props.data}/>
     },
     {
       path: "/resgister",
@@ -87,31 +82,59 @@ class App extends Component {
       main: () => <SDKPage />
     },
     {
+      path: "/UserManagement",
+      main: ({match}) => <UserMan  match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
+    },
+    {
+      path: "/KeyManagement",
+      main: ({match}) => <KeyMan  match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
+    },
+    {
+      path: "/MailManagement",
+      main: ({match}) => <MailMan  match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
+    },
+    {
+      path: "/ReplyMail",
+      main: ({match}) => <ReplyMail  match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
+    },
+    {
       path: "/:id",
       main: ({match}) => <ProfilePage  match={match} data={this.props.data} banks={this.props.banks} names={this.props.names}/>
     },
-    
+   
 
 ]
 
 
   render() {
-    var display="none";
-    if(localStorage.getItem("user") || localStorage.getItem("FacebookUser") ||  localStorage.getItem("GoogleUser"))  
+    var display_user="none";
+    var display_top_footer = "none";
+    var display_admin = "none";
+    var user = localStorage.getItem("user");
+    if(user)
     {
-      display= 'block';
+      if(user.includes("Admin"))
+      {
+        display_admin = "block"
+        display_top_footer = "block"
+      }
+      else
+      {
+        display_user = "block"
+        display_top_footer = "block"
+      }
     }
     return (
         <Router>
-           <TopHeader display={display} />
-            <MenuPage display={display} data={this.props.data}/>
-            
+           <TopHeader display={display_top_footer} />
+            <MenuPage display={display_user} data={this.props.data}/>
+            <AdminPage display={display_admin} data={this.props.data}></AdminPage>
           <div >
           <link  rel="stylesheet" href="./servicesStyle/css/style.css"/>
          
             {this.showContentMenu(this.routes)}
           </div>
-          <Footer display={display}/>
+          <Footer display={display_top_footer}/>
         </Router>
     );
   }

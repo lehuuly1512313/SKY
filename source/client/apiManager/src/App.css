@@ -144,3 +144,10 @@ footer .copyright span {
   background-color: #666;
   color: white;
 }
+
+#tbodymails tr:hover
+{
+  background-color: #5f5f5f48;
+  
+  cursor: pointer;
+}

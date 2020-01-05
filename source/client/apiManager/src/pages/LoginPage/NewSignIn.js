@@ -14,6 +14,7 @@ class NewSignIn extends Component{
       super(props);
       this.handlePassword=this.handlePassword.bind(this);
       this.handleUsername=this.handleUsername.bind(this);
+      this.handleAdminPublicKey = this.handleAdminPublicKey.bind(this);
       this.signIn=this.signIn.bind(this);
       this.state={
         laccount :JSON.parse(localStorage.getItem('laccount')) || [],
@@ -22,6 +23,8 @@ class NewSignIn extends Component{
         data: this.props.data,
         notifycation: "",
         src: "none",
+        Admin: false,
+        admin_public_key: "",
       };
     }
 
@@ -33,6 +36,23 @@ class NewSignIn extends Component{
     {
       e.preventDefault();
       this.setState({laccount: e.target.value});
+      if(e.target.value.includes("Admin"))
+      {
+        this.setState({
+          Admin: true
+        })
+      }
+      else
+      {
+        this.setState({
+          Admin: false
+        })
+      }
+    }
+
+    handleAdminPublicKey(e)
+    {
+      this.setState({admin_public_key: e.target.value})
     }
 
     handlePassword(e)
@@ -44,9 +64,68 @@ class NewSignIn extends Component{
     signIn=() =>{
       var id=null;
       var notifycation = "";
+      if(this.state.laccount.includes('Admin'))
+      {
       this.setState({
         src: 'block',
-       
+      })
+      if(this.state.laccount === localStorage.getItem("account")){
+        notifycation = "Please check your email to activate your account";
+        this.setState({
+          notifycation,
+          src: 'none'
+        })
+      }
+      else
+      {
+        this.setState({
+        src: 'block'
+      })
+
+        var data = {
+          account: this.state.laccount,
+          password: this.state.lpassword,
+          admin_public_key: this.state.admin_public_key
+        }
+        api.login_admin(data).then(res=>{
+          if(res.account)
+          {
+            id = res.id;
+            this.setState({
+              laccount: this.state.laccount,
+              redirect : true,
+              lpassword: this.state.lpassword,
+              lstate: this.state.lstate,
+              rec:true
+            },() => {
+              localStorage.setItem('user', this.state.laccount)
+            });
+            localStorage.setItem("logged", true);
+            localStorage.setItem("ID", id);
+            localStorage.setItem("name", res.name);
+            localStorage.setItem("avatar", "https://d29jd5m3t61t9.cloudfront.net/static/images/comprofiler/gallery/operator/operator_m.png");
+            window.location.reload();
+          }
+          else
+          {
+            notifycation = res;
+            this.setState({
+              notifycation,
+              src:'none'
+            })
+          }
+          
+          setTimeout(() => {
+            this.setState({notifycation: ""})
+          }, 3000);
+        })
+      }
+
+      }
+      else
+      {
+      this.setState({
+        src: 'block',
       })
       if(this.state.laccount === localStorage.getItem("account")){
         notifycation = "Please check your email to activate your account";
@@ -100,7 +179,7 @@ class NewSignIn extends Component{
         })
       }
 
-     
+    }
   }
 
   
@@ -108,6 +187,17 @@ class NewSignIn extends Component{
 
     render(){
       var logout=localStorage.getItem('logout');
+      var admin_public_key = null;
+      if(this.state.Admin)
+      {
+        admin_public_key = (
+          <div className="wrap-input100 validate-input" data-validate="Username is required">
+          <span className="label-input100">Admin public key</span>
+          <input className="input100" type="text" name="username" placeholder="Username..."  id='account' onChange={this.handleAdminPublicKey}/>
+          <span className="focus-input100" />
+        </div>
+        )
+      }
       if(localStorage.getItem("move"))
       {
         localStorage.removeItem("move");
@@ -119,7 +209,11 @@ class NewSignIn extends Component{
       }
       if(localStorage.getItem('user'))
       {
-        return <Redirect to='/dashboard'></Redirect>
+        if(localStorage.getItem('user').includes("Admin"))
+        {
+          return <Redirect to='/UserManagement'></Redirect>
+        }
+        else return <Redirect to='/dashboard'></Redirect>
       }
       else{
         return(
@@ -143,11 +237,8 @@ class NewSignIn extends Component{
                     <span className="label-input100">Password</span>
                     <input className="input100" type="password" name="pass" placeholder="*************" id='password' onChange={this.handlePassword}/>
                     <span className="focus-input100" />
-                  </div>
-                  
-                  
-                  
-
+                  </div>  
+                  {admin_public_key}
                   <div className="container-login100-form-btn">
                     <div className="wrap-login100-form-btn">
                       <div className="login100-form-bgbtn" />
