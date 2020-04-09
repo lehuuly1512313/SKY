@@ -281,7 +281,7 @@ app.post('/key',(req,res)=>{
     console.log(emp);
     key_validation = randomkey();
     console.log(key_validation);
-    const html = `https://validation-confirm-email.herokuapp.com/validation-key/${key_validation}`
+    const html = `http://localhost:3006/validation-key/${key_validation}`
     if(emp.msg === "waiting")
     {
         waiting = true;
@@ -405,7 +405,7 @@ app.post('/register-key-again',(req,res)=>{
     console.log(emp);
     key_validation = randomkey();
     console.log(key_validation);
-    const html = `https://validation-confirm-email.herokuapp.com/register-key-again/${key_validation}`
+    const html = `http://localhost:3006/register-key-again/${key_validation}`
     if(emp.msg === "waiting")
     {
         waiting = true;
@@ -501,7 +501,7 @@ app.post("/forgotpassword", (req,res)=>{
     console.log(emp);
     key_validation = randomkey();
     console.log(key_validation);
-    const html = `https://validation-confirm-email.herokuapp.com/forgotpassword/${key_validation}`
+    const html = `http://localhost:3006/forgotpassword/${key_validation}`
     if(emp.msg === "waiting")
     {
         waiting = true;
@@ -559,7 +559,7 @@ app.post('/users', (req,res)=>{
     console.log(emp);
     key_validation = randomkey();
     console.log(key_validation);
-    const html = `https://validation-confirm-email.herokuapp.com/register/${key_validation}`
+    const html = `http://localhost:3006/register/${key_validation}`
     if(emp.msg === "waiting")
     {
         waiting = true;
@@ -1004,7 +1004,7 @@ app.post('/register-key-again-time-out',(req,res)=>{
     {
         key_validation = randomkey();
         console.log(key_validation);
-        const html = `https://validation-confirm-email.herokuapp.com/register-key-again/${key_validation}`
+        const html = `http://localhost:3006/register-key-again/${key_validation}`
         waiting = true;
         let transporter = nodemailer.createTransport({
             host: "smtp.ethereal.email",
@@ -1068,7 +1068,7 @@ app.post("/forgotpassword-time-out",(req,res)=>{
     {
         key_validation = randomkey();
         console.log(key_validation);
-        const html = `https://validation-confirm-email.herokuapp.com/forgotpassword/${key_validation}`
+        const html = `http://localhost:3006/forgotpassword/${key_validation}`
         waiting = true;
         let transporter = nodemailer.createTransport({
             host: "smtp.ethereal.email",
@@ -1130,7 +1130,7 @@ app.post('/users-time-out', (req,res)=>{
     {
         key_validation = randomkey();
         console.log(key_validation);
-        const html = `https://validation-confirm-email.herokuapp.com/register/${key_validation}`
+        const html = `http://localhost:3006/register/${key_validation}`
         waiting = true;
         let transporter = nodemailer.createTransport({
             host: "smtp.ethereal.email",
@@ -1387,3 +1387,7 @@ app.post("/send-reply", (req,res)=>{
     }) 
     sendMail("Reply", req.body.content, '', req.body.email);
 })
+
+
+
+
