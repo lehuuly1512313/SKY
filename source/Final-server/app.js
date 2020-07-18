@@ -1388,6 +1388,189 @@ app.post("/send-reply", (req,res)=>{
     sendMail("Reply", req.body.content, '', req.body.email);
 })
 
+var googleTTS = require('google-tts-api');
+"use strict";
+require('es6-promise').polyfill();
 
+var fs = require('fs');
+var path = require('path');
+var http = require('http');
+var https = require('https');
+var urlParse  = require('url').parse;
+
+function downloadFile (url, dest) {
+  return new Promise(function (resolve, reject) {
+    var info = urlParse(url);
+    var httpClient = info.protocol === 'https:' ? https : http;
+    var options = {
+      host: info.host,
+      path: info.path,
+      headers: {
+        'user-agent': 'WHAT_EVER'
+      }
+    };
+
+    httpClient.get(options, function(res) {
+      // check status code
+      if (res.statusCode !== 200) {
+        reject(new Error('request to ' + url + ' failed, status code = ' + res.statusCode + ' (' + res.statusMessage + ')'));
+        return;
+      }
+
+      var file = fs.createWriteStream(dest);
+      file.on('finish', function() {
+        // close() is async, call resolve after close completes.
+        file.close(resolve);
+      });
+      file.on('error', function (err) {
+        // Delete the file async. (But we don't check the result)
+        fs.unlink(dest);
+        reject(err);
+      });
+
+      res.pipe(file);
+    })
+    .on('error', function(err) {
+      reject(err);
+    })
+    .end();
+  });
+}
+
+"use strict";
+require('es6-promise').polyfill();
+
+const key = require('./lib/key');
+const tts = require('./lib/api');
+const { getAvailableFilters } = require('fluent-ffmpeg');
+
+/*
+ * Google TTS API has the limitation with the length of characters (200).
+ * This example will show you how to cut the long characters into several small string and get multiple TTS urls.
+ */
+
+const multi_tts = (text, speed, timeout) => {
+  const MAX = 200;  // Max string length
+
+  const isSpace = (s, i) => /\s/.test(s.charAt(i));
+  const lastIndexOfSpace = (s, left, right) => {
+    for (let i = right; i >= left; i--) {
+      if (isSpace(s, i)) return i;
+    }
+    return -1;  // not found
+  };
+
+  return key(timeout).then(key => {
+    const result = [];
+    const addResult = (text, start, end) => {
+      const str = text.slice(start, end + 1);
+      result.push({
+        text: str,
+        url: tts(str, key, 'en', speed)
+      });
+    };
+
+    let start = 0;
+    for (;;) {
+
+      // check text's length
+      if (text.length - start <= MAX) {
+        addResult(text, start, text.length - 1);
+        break;  // end of text
+      }
+
+      // check whether the word is cut in the middle.
+      let end = start + MAX - 1;
+      if (isSpace(text, end) || isSpace(text, end + 1)) {
+        addResult(text, start, end);
+        start = end + 1;
+        continue;
+      }
+
+      // find last index of space
+      end = lastIndexOfSpace(text, start, end);
+      if (end === -1) {
+        throw new Error('the amount of single word is over that 200.');
+      }
+
+      // add result
+      addResult(text, start, end);
+      start = end + 1;
+    }
+
+    return result;
+  });
+};
+
+
+const article = `La-la-la-la-la-la-la-la-la-la-la-la (Yeah, yeah)
+La-la-la-la-la-la-la-la-la-la-la-la (Yeah, yeah)
+La-la-la-la-la-la-la-la-la-la-la-la, la (Yeah, yeah)
+(Good boy)
+Hình bóng ai đó nhẹ nhàng vụt qua nơi đây
+Quyến rũ ngây ngất loạn nhịp làm tim mê say
+Cuốn lấy áng mây theo cơn sóng xô dập dìu
+Nụ cười ngọt ngào cho ta tan vào phút giây miên man quên hết con đường về eh
+(Let me know your name)
+Chẳng thể tìm thấy lối về eh
+(Let me know your name)
+Điệu nhạc hòa quyện trong ánh mắt đôi môi
+Dẫn lối những bối rối rung động khẽ lên ngôi
+(Và rồi khẽ, và rồi khẽ khẽ)
+Chạm nhau mang vô vàn
+Đắm đuối vấn vương dâng tràn
+Lấp kín chốn nhân gian
+Làn gió hoá sắc hương mơ màng
+Một giây ngang qua đời
+Cất tiếng nói không nên lời
+Ấm áp đến trao tay ngàn sao trời lòng càng thêm chơi vơi
+Dịu êm không gian bừng sáng
+Đánh thức muôn hoa mừng
+Quấn quít hát ngân nga từng chút níu bước chân em dừng
+Bao ý thơ tương tư ngẩn ngơ
+Lưu dấu nơi mê cung đẹp thẫn thờ
+Hãy trao cho anh
+Hãy trao cho anh
+Hãy trao cho anh thứ anh đang mong chờ
+Hãy trao cho anh
+Hãy trao cho anh
+Hãy mau làm điều ta muốn vào khoảnh khắc này đê
+Hãy trao cho anh
+Hãy trao cho anh
+Hãy trao anh trao cho anh đi những yêu thương nồng cháy
+Trao anh ái ân nguyên vẹn đong đầy
+La-la, la-la-la-la-la
+La-la, la-la-la-la-la
+La-la, la-la-la-la-la
+La-la, la-la-la-la-la`;
+const exec = require('child_process').exec;
+var song = `concat:`
+app.post('/hear',  (req,res)=>{
+    
+    if(req.body.msg === 'part1'){
+        multi_tts(article)
+    .then(result => {
+    result.forEach((o, i) => {
+    song = song +  `wav/hello${i+1}.mp3|`
+    var dest = path.resolve(__dirname, `wav/hello${i+1}.mp3`); 
+    console.log('Download to ' + dest + ' ...');
+    downloadFile(o.url, dest)
+    });
+    res.send('part1_complete')
+    })
+    .catch(console.error);    
+    }
+    if(req.body.msg === 'part2')
+    {
+        const child = exec(`ffmpeg -i "${song}" -acodec copy wav/hello.mp3`)
+        res.send('part2_complete')
+        song = `concat:`
+    }
+    
+    if(req.body.msg === 'part3')
+    {
+        res.sendFile(__dirname + '/wav/hello.mp3')
+    }
+})
 
 
