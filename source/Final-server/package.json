@@ -15,7 +15,7 @@
     "configure": "0.0.1",
     "cors": "^2.8.5",
     "es6-promise": "^4.2.8",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fluent-ffmpeg": "^2.1.2",
     "google-tts-api": "0.0.4",
     "http-proxy": "^1.18.0",
